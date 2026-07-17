@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="xiaowo435">
+    
+    <title>
+        
+            异步编程 |
+        
+        さしぶりだね
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0099FF","title":"さしぶりだね","author":"xiaowo435","avatar":"/images/OIP-C.webp","logo":"/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg","favicon":"/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg","mode":"light"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"悟已往之不谏,知来者之可追.实迷途其未远,觉今是而昨非.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/xiaowo435","weixin":"H_K_Y_435","qq":"190789158@QQ.com","weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":"1907689158@qq.com"}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated created || fa-solid fa-star"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["炼气","筑基","结丹","元婴","化神"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":true,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               さしぶりだね
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        异步编程
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/OIP-C.webp">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">xiaowo435</span>
+                                
+                                    <span class="author-badge">Lv3</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2026-07-17 17:17:25</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Jul 17 2026 17:17:56 GMT+0800">2026-07-17 17:17:56</span>
+                </span>
+            
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/asyncio/">asyncio</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h1 id="Python-asyncio-模块"><a href="#Python-asyncio-模块" class="headerlink" title="Python asyncio 模块"></a>Python asyncio 模块</h1><p><code>asyncio</code> 是 Python 标准库中的一个模块，用于编写异步 I&#x2F;O 操作的代码。</p>
+<p>asyncio 提供了一种高效的方式来处理并发任务，特别适用于 I&#x2F;O 密集型操作，如网络请求、文件读写等。</p>
+<p>通过使用 <code>asyncio</code>，可以在单线程中同时处理多个任务，而无需使用多线程或多进程。</p>
+<h3 id="为什么需要-asyncio？"><a href="#为什么需要-asyncio？" class="headerlink" title="为什么需要 asyncio？"></a>为什么需要 asyncio？</h3><p>在传统的同步编程中，当一个任务需要等待 I&#x2F;O 操作（如网络请求）完成时，程序会阻塞，直到操作完成。这会导致程序的效率低下，尤其是在需要处理大量 I&#x2F;O 操作时。</p>
+<p><code>asyncio</code> 通过引入异步编程模型，允许程序在等待 I&#x2F;O 操作时继续执行其他任务，从而提高了程序的并发性和效率。</p>
+<blockquote>
+<p>想象一下你正在经营一家餐厅：</p>
+<ul>
+<li><p><strong>同步模式（普通函数）：</strong> 你只有一个厨师。客人 A 点了一份牛排，厨师开始煎牛排（这需要等待 5 分钟）。在煎牛排的这 5 分钟里，厨师完全被占用，不能做任何其他事，即使客人 B 只想点一杯水，也必须干等着。</p>
+</li>
+<li><p><strong>异步模式（asyncio）：</strong> 你有多个厨师（实际上还是一个，但非常聪明）。厨师开始煎客人 A 的牛排后，发现需要等待，他立刻把这份牛排标记为等待中，然后转头去给客人 B 倒水。倒完水回来，看看牛排是不是快好了，如果还没好，又可以去处理客人 C 的订单。这样，在等待 I&#x2F;O（如煎牛排、网络请求、读写文件）的时间里，厨师（CPU）一直在高效地工作。</p>
+</li>
+</ul>
+<p>asyncio 就是 Python 用来实现这种聪明工作模式的标准库，它允许你编写 单线程并发 的代码，特别适用于网络爬虫、Web 服务器、微服务等 I&#x2F;O 密集型场景。</p>
+</blockquote>
+<p>它的核心是 事件循环、协程 和 任务。</p>
+<hr>
+<h2 id="asyncio-的核心概念"><a href="#asyncio-的核心概念" class="headerlink" title="asyncio 的核心概念"></a>asyncio 的核心概念</h2><h3 id="1-协程（Coroutine）"><a href="#1-协程（Coroutine）" class="headerlink" title="1. 协程（Coroutine）"></a>1. 协程（Coroutine）</h3><p>协程是 <code>asyncio</code> 的核心概念之一。它是一个特殊的函数，可以在执行过程中暂停，并在稍后恢复执行。协程通过 <code>async def</code> 关键字定义，并通过 <code>await</code> 关键字暂停执行，等待异步操作完成。</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>import asyncio<br>​<br>async def say_hello():<br>    print(“Hello”)<br>    await asyncio.sleep(1)<br>    print(“World”)</p>
+<h3 id="2-事件循环（Event-Loop）"><a href="#2-事件循环（Event-Loop）" class="headerlink" title="2. 事件循环（Event Loop）"></a>2. 事件循环（Event Loop）</h3><p>事件循环是 <code>asyncio</code> 的核心组件，负责调度和执行协程。它不断地检查是否有任务需要执行，并在任务完成后调用相应的回调函数。</p>
+<h2 id="实例-1"><a href="#实例-1" class="headerlink" title="实例"></a>实例</h2><p>async def main():<br>    await say_hello()<br>​<br>asyncio.run(main())</p>
+<h3 id="3-任务（Task）"><a href="#3-任务（Task）" class="headerlink" title="3. 任务（Task）"></a>3. 任务（Task）</h3><p>任务是对协程的封装，表示一个正在执行或将要执行的协程。你可以通过 <code>asyncio.create_task()</code> 函数创建任务，并将其添加到事件循环中。</p>
+<h2 id="实例-2"><a href="#实例-2" class="headerlink" title="实例"></a>实例</h2><p>async def main():<br>    task &#x3D; asyncio.create_task(say_hello())<br>    await task</p>
+<h3 id="4-Future"><a href="#4-Future" class="headerlink" title="4. Future"></a>4. Future</h3><p><code>Future</code> 是一个表示异步操作结果的对象。它通常用于底层 API，表示一个尚未完成的操作。你可以通过 <code>await</code> 关键字等待 <code>Future</code> 完成。</p>
+<h2 id="实例-3"><a href="#实例-3" class="headerlink" title="实例"></a>实例</h2><p>async <strong>def</strong> main():<br>  future &#x3D; asyncio.Future()<br>  await future</p>
+<h3 id="基础用法与代码示例"><a href="#基础用法与代码示例" class="headerlink" title="基础用法与代码示例"></a>基础用法与代码示例</h3><p>让我们通过一个经典的并发访问多个网址的例子来理解上述概念。</p>
+<p>假设我们需要获取三个不同网址的内容。使用同步方式会顺序执行，总耗时是三次请求耗时的总和。使用 <code>asyncio</code>，我们可以让这三个请求同时发出，总耗时接近于最慢的那一次请求。</p>
+<h3 id="同步版本（作为对比）"><a href="#同步版本（作为对比）" class="headerlink" title="同步版本（作为对比）"></a>同步版本（作为对比）</h3><h2 id="实例-4"><a href="#实例-4" class="headerlink" title="实例"></a>实例</h2><p>import time<br>import requests<br>​<br>def fetch_url(url):<br>    “””模拟一个耗时的网络请求（同步版本）”””<br>    print(f”开始获取: {url}”)<br>    time.sleep(2)  # 模拟 2 秒网络延迟<br>    print(f”完成获取: {url}”)<br>    return f”来自 {url} 的数据”<br>​<br>def main_sync():<br>    urls &#x3D; [‘<a href="https://example.com/1">https://example.com/1</a>‘, ‘<a href="https://example.com/2">https://example.com/2</a>‘, ‘<a href="https://example.com/3']">https://example.com/3&#39;]</a><br>    results &#x3D; []<br>    start &#x3D; time.time()<br>    <br>    for url in urls:<br>        result &#x3D; fetch_url(url)  # 必须等上一个完成才能开始下一个<br>        results.append(result)<br>    <br>    end &#x3D; time.time()<br>    print(f”同步版本总耗时: {end - start:.2f} 秒”)<br>    print(f”结果: {results}”)<br>​<br>if <strong>name</strong> &#x3D;&#x3D; “<strong>main</strong>“:<br>    main_sync()</p>
+<p><strong>预期运行结果</strong>：</p>
+<p>开始获取: <a href="https://example.com/1">https://example.com/1</a><br>完成获取: <a href="https://example.com/1">https://example.com/1</a><br>开始获取: <a href="https://example.com/2">https://example.com/2</a><br>完成获取: <a href="https://example.com/2">https://example.com/2</a><br>开始获取: <a href="https://example.com/3">https://example.com/3</a><br>完成获取: <a href="https://example.com/3">https://example.com/3</a><br>同步版本总耗时: 6.00 秒<br>结果: [‘来自 <a href="https://example.com/1">https://example.com/1</a> 的数据‘, ‘来自 <a href="https://example.com/2">https://example.com/2</a> 的数据‘, ‘来自 <a href="https://example.com/2">https://example.com/2</a> 的数据‘]</p>
+<p>总共花了约 6 秒。</p>
+<h3 id="异步版本（使用-asyncio）"><a href="#异步版本（使用-asyncio）" class="headerlink" title="异步版本（使用 asyncio）"></a>异步版本（使用 asyncio）</h3><p>我们需要用 <code>aiohttp</code> 库来替代 <code>requests</code> 进行异步 HTTP 请求。首先安装它：<code>pip install aiohttp</code>。</p>
+<h2 id="实例-5"><a href="#实例-5" class="headerlink" title="实例"></a>实例</h2><p>import asyncio<br>import aiohttp<br>import time<br>​<br>async def fetch_url_async(session, url):<br>    “””模拟一个耗时的网络请求（异步版本）”””<br>    print(f”开始异步获取: {url}”)<br>    # 注意：这里我们使用 aiohttp 的异步 get 方法，并用 await 等待<br>    async with session.get(url) as response:<br>        # 模拟处理响应也需要时间<br>        await asyncio.sleep(2)  # 使用 asyncio.sleep 模拟 I&#x2F;O 等待，它不会阻塞线程<br>        text &#x3D; await response.text()<br>        print(f”完成异步获取: {url}”)<br>        return f”来自 {url} 的数据 (长度: {len(text)})”<br>​<br>async def main_async():<br>    urls &#x3D; [‘<a class="link"   target="_blank" rel="noopener" href="https://httpbin.org/get" >https://httpbin.org/get<i class="fas fa-external-link-alt"></i></a>‘, ‘<a class="link"   target="_blank" rel="noopener" href="https://httpbin.org/delay/1" >https://httpbin.org/delay/1<i class="fas fa-external-link-alt"></i></a>‘, ‘<a class="link"   target="_blank" rel="noopener" href="https://httpbin.org/headers']" >https://httpbin.org/headers&#39;]<i class="fas fa-external-link-alt"></i></a><br>    <br>    async with aiohttp.ClientSession() as session:  # 创建异步 HTTP 会话<br>        # 为每个 URL 创建一个任务（Task）<br>        tasks &#x3D; []<br>        for url in urls:<br>            # create_task 会将协程加入事件循环，立即开始调度<br>            task &#x3D; asyncio.create_task(fetch_url_async(session, url))<br>            tasks.append(task)<br>        <br>        print(“所有任务已创建，开始并发执行…”)<br>        <br>        # 使用 asyncio.gather 并发运行所有任务，并等待它们全部完成<br>        # gather 返回一个结果列表，顺序与传入的任务顺序一致<br>        results &#x3D; await asyncio.gather(*tasks)<br>        <br>        return results<br>​<br>if <strong>name</strong> &#x3D;&#x3D; “<strong>main</strong>“:<br>    start &#x3D; time.time()<br>    # asyncio.run() 是启动事件循环并运行顶层协程的简便方法<br>    final_results &#x3D; asyncio.run(main_async())<br>    end &#x3D; time.time()<br>    <br>    print(f”\n异步版本总耗时: {end - start:.2f} 秒”)<br>    for res in final_results:<br>        print(res)</p>
+<p><strong>预期运行结果</strong>：</p>
+<p>所有任务已创建，开始并发执行…<br>开始异步获取: <a class="link"   target="_blank" rel="noopener" href="https://httpbin.org/get" >https://httpbin.org/get<i class="fas fa-external-link-alt"></i></a><br>开始异步获取: <a class="link"   target="_blank" rel="noopener" href="https://httpbin.org/delay/1" >https://httpbin.org/delay/1<i class="fas fa-external-link-alt"></i></a><br>开始异步获取: <a class="link"   target="_blank" rel="noopener" href="https://httpbin.org/headers" >https://httpbin.org/headers<i class="fas fa-external-link-alt"></i></a><br>（大约 2 秒后，所有请求几乎同时完成）<br>完成异步获取: <a class="link"   target="_blank" rel="noopener" href="https://httpbin.org/headers" >https://httpbin.org/headers<i class="fas fa-external-link-alt"></i></a><br>完成异步获取: <a class="link"   target="_blank" rel="noopener" href="https://httpbin.org/get" >https://httpbin.org/get<i class="fas fa-external-link-alt"></i></a><br>完成异步获取: <a class="link"   target="_blank" rel="noopener" href="https://httpbin.org/delay/1" >https://httpbin.org/delay/1<i class="fas fa-external-link-alt"></i></a><br>​<br>异步版本总耗时: 2.10 秒  # 注意！总耗时远小于 6 秒<br>来自 <a class="link"   target="_blank" rel="noopener" href="https://httpbin.org/get" >https://httpbin.org/get<i class="fas fa-external-link-alt"></i></a> 的数据 (长度: 274)<br>来自 <a class="link"   target="_blank" rel="noopener" href="https://httpbin.org/delay/1" >https://httpbin.org/delay/1<i class="fas fa-external-link-alt"></i></a> 的数据 (长度: 392)<br>来自 <a class="link"   target="_blank" rel="noopener" href="https://httpbin.org/headers" >https://httpbin.org/headers<i class="fas fa-external-link-alt"></i></a> 的数据 (长度: 177)</p>
+<p><strong>代码解析</strong>：</p>
+<ul>
+<li><p><code>async def</code>：定义了协程函数 <code>fetch_url_async</code> 和 <code>main_async</code>。</p>
+</li>
+<li><p><code>await</code>：在 <code>fetch_url_async</code> 中，我们 <code>await session.get()</code> 和 <code>await response.text()</code>，这告诉事件循环：”这个网络请求需要时间，你先去执行其他就绪的任务吧”。</p>
+</li>
+<li><p><code>asyncio.create_task()</code>：将 <code>fetch_url_async</code> 协程包装成 <code>Task</code>，使其被事件循环调度，实现并发。</p>
+</li>
+<li><p><code>asyncio.gather(*tasks)</code>：一个非常实用的函数，它并发运行所有传入的协程&#x2F;任务，并等待它们全部完成，最后收集所有结果。</p>
+</li>
+<li><p><code>asyncio.run(main_async())</code>：Python 3.7+ 推荐的方式，它负责创建事件循环、运行协程并关闭循环。</p>
+</li>
+</ul>
+<h3 id="关键函数与参数说明"><a href="#关键函数与参数说明" class="headerlink" title="关键函数与参数说明"></a>关键函数与参数说明</h3><p>下面以表格形式列出 <code>asyncio</code> 中几个最常用的高级函数：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>主要作用</th>
+<th>常用参数说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>asyncio.run(coro, \*, debug=False)</code></strong></td>
+<td>运行一个顶层协程，管理事件循环的生命周期。是程序的主入口。</td>
+<td><code>coro</code>: 要运行的协程对象。 <code>debug</code>: 设为 <code>True</code> 可启用事件循环的调试模式。</td>
+</tr>
+<tr>
+<td><strong><code>asyncio.create_task(coro, \*, name=None)</code></strong></td>
+<td>将协程包装成一个 <strong>Task</strong> 对象，并排入事件循环等待调度。这是实现并发的主要方式。</td>
+<td><code>coro</code>: 要包装的协程对象。 <code>name</code>: （Python 3.8+）为任务指定一个名称，便于调试。</td>
+</tr>
+<tr>
+<td><strong><code>asyncio.gather(\*aws, return_exceptions=False)</code></strong></td>
+<td><strong>并发运行</strong>多个异步任务（<code>aws</code> 可接受协程、任务等），并等待所有完成，返回结果列表。</td>
+<td><code>*aws</code>: 可变参数，传入多个异步对象。 <code>return_exceptions</code>: 默认为 <code>False</code>，任何任务抛出异常都会立即传播给 <code>gather</code> 的调用者。设为 <code>True</code> 时，异常会作为结果的一部分返回。</td>
+</tr>
+<tr>
+<td><strong><code>asyncio.sleep(delay, result=None)</code></strong></td>
+<td><strong>异步地</strong>休眠指定秒数。这是与 <code>time.sleep</code>（阻塞）的关键区别。</td>
+<td><code>delay</code>: 休眠的秒数。 <code>result</code>: 休眠结束后返回的值。</td>
+</tr>
+<tr>
+<td><strong><code>asyncio.wait(aws, \*, timeout=None, return_when=ALL_COMPLETED)</code></strong></td>
+<td>并发运行任务，并等待满足指定条件。返回两个集合 <code>(done, pending)</code>，分别是已完成和未完成的任务。</td>
+<td><code>aws</code>: 异步对象集合。 <code>timeout</code>: 超时时间（秒）。 <code>return_when</code>: 决定何时返回，可选：<code>FIRST_COMPLETED</code>（第一个完成）、<code>FIRST_EXCEPTION</code>（第一个异常）、<code>ALL_COMPLETED</code>（全部完成，默认）。</td>
+</tr>
+<tr>
+<td><strong><code>asyncio.to_thread(func, /, \*args, \**kwargs)</code></strong></td>
+<td>（Python 3.9+）将一个普通的、可能阻塞的同步函数放到一个单独的线程中运行，并返回一个可 <code>await</code> 的协程。用于处理 CPU 密集型或阻塞式 I&#x2F;O。</td>
+<td><code>func</code>: 要在线程中运行的同步函数。 <code>*args, **kwargs</code>: 传递给函数的参数。</td>
+</tr>
+</tbody></table>
+<h3 id="可视化理解：异步任务调度流程"><a href="#可视化理解：异步任务调度流程" class="headerlink" title="可视化理解：异步任务调度流程"></a>可视化理解：异步任务调度流程</h3><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://www.runoob.com/wp-content/uploads/2025/04/asyncio-python-runoob12-scaled.jpg"
+                        alt="img"
+                 ></p>
+<p><strong>图解说明</strong>： 这个流程图展示了事件循环如何像调度员一样工作。它维护一个任务队列，当一个任务执行到 <code>await</code>（例如等待网络响应）时，它会被挂起，事件循环立即从队列中找出下一个可以运行（就绪）的任务来执行。当被挂起任务的 I&#x2F;O 操作完成后，事件循环会收到通知，将该任务状态改回就绪，并在未来某个时刻继续执行它。通过这种方式，在 I&#x2F;O 等待期间，CPU 被充分利用来执行其他任务，实现了单线程内的并发。</p>
+<hr>
+<h2 id="asyncio-的基本用法"><a href="#asyncio-的基本用法" class="headerlink" title="asyncio 的基本用法"></a>asyncio 的基本用法</h2><h3 id="1-运行协程"><a href="#1-运行协程" class="headerlink" title="1. 运行协程"></a>1. 运行协程</h3><p>要运行一个协程，你可以使用 <code>asyncio.run()</code> 函数。它会创建一个事件循环，并运行指定的协程。</p>
+<h2 id="实例-6"><a href="#实例-6" class="headerlink" title="实例"></a>实例</h2><p>import asyncio  </p>
+<p>async def main():<br>    print(“Start”)<br>    await asyncio.sleep(1)<br>    print(“End”)  </p>
+<p>asyncio.run(main())</p>
+<h3 id="2-并发执行多个任务"><a href="#2-并发执行多个任务" class="headerlink" title="2. 并发执行多个任务"></a>2. 并发执行多个任务</h3><p>你可以使用 <code>asyncio.gather()</code> 函数并发执行多个协程，并等待它们全部完成。</p>
+<h2 id="实例-7"><a href="#实例-7" class="headerlink" title="实例"></a>实例</h2><p>import asyncio  </p>
+<p>async def task1():<br>    print(“Task 1 started”)<br>    await asyncio.sleep(1)<br>    print(“Task 1 finished”)  </p>
+<p>async def task2():<br>    print(“Task 2 started”)<br>    await asyncio.sleep(2)<br>    print(“Task 2 finished”)  </p>
+<p>async def main():<br>    await asyncio.gather(task1(), task2())  </p>
+<p>asyncio.run(main())</p>
+<h3 id="3-超时控制"><a href="#3-超时控制" class="headerlink" title="3. 超时控制"></a>3. 超时控制</h3><p>你可以使用 <code>asyncio.wait_for()</code> 函数为协程设置超时时间。如果协程在指定时间内未完成，将引发 <code>asyncio.TimeoutError</code> 异常。</p>
+<h2 id="实例-8"><a href="#实例-8" class="headerlink" title="实例"></a>实例</h2><p>import asyncio  </p>
+<p>async def long_task():<br>    await asyncio.sleep(10)<br>    print(“Task finished”)  </p>
+<p>async def main():<br>    try:<br>        await asyncio.wait_for(long_task(), timeout&#x3D;5)<br>    except asyncio.TimeoutError:<br>        print(“Task timed out”)  </p>
+<p>asyncio.run(main())</p>
+<hr>
+<h2 id="asyncio-的应用场景"><a href="#asyncio-的应用场景" class="headerlink" title="asyncio 的应用场景"></a>asyncio 的应用场景</h2><p><code>asyncio</code> 特别适用于以下场景：</p>
+<ol>
+<li><p><strong>网络请求</strong>：如 HTTP 请求、WebSocket 通信等。</p>
+</li>
+<li><p><strong>文件 I&#x2F;O</strong>：如异步读写文件。</p>
+</li>
+<li><p><strong>数据库操作</strong>：如异步访问数据库。</p>
+</li>
+<li><p><strong>实时数据处理</strong>：如实时消息队列处理。</p>
+</li>
+</ol>
+<hr>
+<h2 id="常用类、方法和函数"><a href="#常用类、方法和函数" class="headerlink" title="常用类、方法和函数"></a>常用类、方法和函数</h2><h3 id="1-核心函数"><a href="#1-核心函数" class="headerlink" title="1. 核心函数"></a><strong>1. 核心函数</strong></h3><table>
+<thead>
+<tr>
+<th>方法&#x2F;函数</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>asyncio.run(coro)</code></strong></td>
+<td>运行异步主函数（Python 3.7+）</td>
+<td><code>asyncio.run(main())</code></td>
+</tr>
+<tr>
+<td><strong><code>asyncio.create_task(coro)</code></strong></td>
+<td>创建任务并加入事件循环</td>
+<td><code>task = asyncio.create_task(fetch_data())</code></td>
+</tr>
+<tr>
+<td><strong><code>asyncio.gather(\*coros)</code></strong></td>
+<td>并发运行多个协程</td>
+<td><code>await asyncio.gather(task1, task2)</code></td>
+</tr>
+<tr>
+<td><strong><code>asyncio.sleep(delay)</code></strong></td>
+<td>异步等待（非阻塞）</td>
+<td><code>await asyncio.sleep(1)</code></td>
+</tr>
+<tr>
+<td><strong><code>asyncio.wait(coros)</code></strong></td>
+<td>控制任务完成方式</td>
+<td><code>done, pending = await asyncio.wait([task1, task2])</code></td>
+</tr>
+</tbody></table>
+<h3 id="2-事件循环（Event-Loop）-1"><a href="#2-事件循环（Event-Loop）-1" class="headerlink" title="2. 事件循环（Event Loop）"></a><strong>2. 事件循环（Event Loop）</strong></h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>loop.run_until_complete(future)</code></strong></td>
+<td>运行直到任务完成</td>
+<td><code>loop.run_until_complete(main())</code></td>
+</tr>
+<tr>
+<td><strong><code>loop.run_forever()</code></strong></td>
+<td>永久运行事件循环</td>
+<td><code>loop.run_forever()</code></td>
+</tr>
+<tr>
+<td><strong><code>loop.stop()</code></strong></td>
+<td>停止事件循环</td>
+<td><code>loop.stop()</code></td>
+</tr>
+<tr>
+<td><strong><code>loop.close()</code></strong></td>
+<td>关闭事件循环</td>
+<td><code>loop.close()</code></td>
+</tr>
+<tr>
+<td><strong><code>loop.call_soon(callback)</code></strong></td>
+<td>安排回调函数立即执行</td>
+<td><code>loop.call_soon(print, &quot;Hello&quot;)</code></td>
+</tr>
+<tr>
+<td><strong><code>loop.call_later(delay, callback)</code></strong></td>
+<td>延迟执行回调</td>
+<td><code>loop.call_later(5, callback)</code></td>
+</tr>
+</tbody></table>
+<h3 id="3-协程（Coroutine）与任务（Task）"><a href="#3-协程（Coroutine）与任务（Task）" class="headerlink" title="3. 协程（Coroutine）与任务（Task）"></a><strong>3. 协程（Coroutine）与任务（Task）</strong></h3><table>
+<thead>
+<tr>
+<th>方法&#x2F;装饰器</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>@asyncio.coroutine</code></strong></td>
+<td>协程装饰器（旧版，Python 3.4-3.7）</td>
+<td><code>@asyncio.coroutine</code> <code>def old_coro():</code></td>
+</tr>
+<tr>
+<td><strong><code>async def</code></strong></td>
+<td>定义协程（Python 3.5+）</td>
+<td><code>async def fetch():</code></td>
+</tr>
+<tr>
+<td><strong><code>task.cancel()</code></strong></td>
+<td>取消任务</td>
+<td><code>task.cancel()</code></td>
+</tr>
+<tr>
+<td><strong><code>task.done()</code></strong></td>
+<td>检查任务是否完成</td>
+<td><code>if task.done():</code></td>
+</tr>
+<tr>
+<td><strong><code>task.result()</code></strong></td>
+<td>获取任务结果（需任务完成）</td>
+<td><code>data = task.result()</code></td>
+</tr>
+</tbody></table>
+<h3 id="4-同步原语（类似threading）"><a href="#4-同步原语（类似threading）" class="headerlink" title="4. 同步原语（类似threading）"></a><strong>4. 同步原语（类似<code>threading</code>）</strong></h3><table>
+<thead>
+<tr>
+<th>类</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>asyncio.Lock()</code></strong></td>
+<td>异步互斥锁</td>
+<td><code>lock = asyncio.Lock()</code> <code>async with lock:</code></td>
+</tr>
+<tr>
+<td><strong><code>asyncio.Event()</code></strong></td>
+<td>事件通知</td>
+<td><code>event = asyncio.Event()</code> <code>await event.wait()</code></td>
+</tr>
+<tr>
+<td><strong><code>asyncio.Queue()</code></strong></td>
+<td>异步队列</td>
+<td><code>queue = asyncio.Queue()</code> <code>await queue.put(item)</code></td>
+</tr>
+<tr>
+<td><strong><code>asyncio.Semaphore()</code></strong></td>
+<td>信号量</td>
+<td><code>sem = asyncio.Semaphore(5)</code> <code>async with sem:</code></td>
+</tr>
+</tbody></table>
+<h3 id="5-网络与子进程"><a href="#5-网络与子进程" class="headerlink" title="5. 网络与子进程"></a><strong>5. 网络与子进程</strong></h3><table>
+<thead>
+<tr>
+<th>方法&#x2F;类</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>asyncio.open_connection()</code></strong></td>
+<td>建立TCP连接</td>
+<td><code>reader, writer = await asyncio.open_connection(&#39;host&#39;, 80)</code></td>
+</tr>
+<tr>
+<td><strong><code>asyncio.start_server()</code></strong></td>
+<td>创建TCP服务器</td>
+<td><code>server = await asyncio.start_server(handle, &#39;0.0.0.0&#39;, 8888)</code></td>
+</tr>
+<tr>
+<td><strong><code>asyncio.create_subprocess_exec()</code></strong></td>
+<td>创建子进程</td>
+<td><code>proc = await asyncio.create_subprocess_exec(&#39;ls&#39;)</code></td>
+</tr>
+</tbody></table>
+<h3 id="6-实用工具"><a href="#6-实用工具" class="headerlink" title="6. 实用工具"></a><strong>6. 实用工具</strong></h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong><code>asyncio.current_task()</code></strong></td>
+<td>获取当前任务</td>
+<td><code>task = asyncio.current_task()</code></td>
+</tr>
+<tr>
+<td><strong><code>asyncio.all_tasks()</code></strong></td>
+<td>获取所有任务</td>
+<td><code>tasks = asyncio.all_tasks()</code></td>
+</tr>
+<tr>
+<td><strong><code>asyncio.shield(coro)</code></strong></td>
+<td>保护任务不被取消</td>
+<td><code>await asyncio.shield(critical_task)</code></td>
+</tr>
+<tr>
+<td><strong><code>asyncio.wait_for(coro, timeout)</code></strong></td>
+<td>带超时的等待</td>
+<td><code>try: await asyncio.wait_for(task, 5)</code></td>
+</tr>
+</tbody></table>
+<h3 id="实例-9"><a href="#实例-9" class="headerlink" title="实例"></a>实例</h3><ol>
+<li><strong>基本协程示例</strong></li>
+</ol>
+<h2 id="实例-10"><a href="#实例-10" class="headerlink" title="实例"></a>实例</h2><p>import asyncio  </p>
+<p>async def hello():<br>    print(“Hello”)<br>    await asyncio.sleep(1)<br>    print(“World”)  </p>
+<p>asyncio.run(hello())  # Python 3.7+</p>
+<ol start="2">
+<li><strong>并发执行任务</strong></li>
+</ol>
+<h2 id="实例-11"><a href="#实例-11" class="headerlink" title="实例"></a>实例</h2><p>async def fetch(url):<br>    print(f”Fetching {url}”)<br>    await asyncio.sleep(2)<br>    return f”Data from {url}”  </p>
+<p>async def main():<br>    results &#x3D; await asyncio.gather(<br>        fetch(“url1.com”),<br>        fetch(“url2.com”)<br>    )<br>    print(results)  </p>
+<p>asyncio.run(main())</p>
+<ol start="3">
+<li><strong>使用异步队列</strong></li>
+</ol>
+<h2 id="实例-12"><a href="#实例-12" class="headerlink" title="实例"></a>实例</h2><p>async def producer(queue):<br>    for i in range(5):<br>        await queue.put(i)<br>        await asyncio.sleep(0.1)<br>​<br>async def consumer(queue):<br>    while True:<br>        item &#x3D; await queue.get()<br>        print(f”Consumed {item}”)<br>        queue.task_done()<br>​<br>async def main():<br>    queue &#x3D; asyncio.Queue()<br>    await asyncio.gather(<br>        producer(queue),<br>        consumer(queue)<br>    )</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/asyncio/">asyncio</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2026/07/17/SQL%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"
+                                   title="SQL基础知识"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">SQL基础知识</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-asyncio-%E6%A8%A1%E5%9D%97"><span class="nav-text">Python asyncio 模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-asyncio%EF%BC%9F"><span class="nav-text">为什么需要 asyncio？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#asyncio-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-text">asyncio 的核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8D%8F%E7%A8%8B%EF%BC%88Coroutine%EF%BC%89"><span class="nav-text">1. 协程（Coroutine）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%EF%BC%88Event-Loop%EF%BC%89"><span class="nav-text">2. 事件循环（Event Loop）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-1"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BB%BB%E5%8A%A1%EF%BC%88Task%EF%BC%89"><span class="nav-text">3. 任务（Task）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-2"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Future"><span class="nav-text">4. Future</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-3"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95%E4%B8%8E%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-text">基础用法与代码示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E7%89%88%E6%9C%AC%EF%BC%88%E4%BD%9C%E4%B8%BA%E5%AF%B9%E6%AF%94%EF%BC%89"><span class="nav-text">同步版本（作为对比）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-4"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E7%89%88%E6%9C%AC%EF%BC%88%E4%BD%BF%E7%94%A8-asyncio%EF%BC%89"><span class="nav-text">异步版本（使用 asyncio）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-5"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="nav-text">关键函数与参数说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E7%90%86%E8%A7%A3%EF%BC%9A%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E6%B5%81%E7%A8%8B"><span class="nav-text">可视化理解：异步任务调度流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#asyncio-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-text">asyncio 的基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BF%90%E8%A1%8C%E5%8D%8F%E7%A8%8B"><span class="nav-text">1. 运行协程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-6"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C%E5%A4%9A%E4%B8%AA%E4%BB%BB%E5%8A%A1"><span class="nav-text">2. 并发执行多个任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-7"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%B6%85%E6%97%B6%E6%8E%A7%E5%88%B6"><span class="nav-text">3. 超时控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-8"><span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#asyncio-%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">asyncio 的应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%B1%BB%E3%80%81%E6%96%B9%E6%B3%95%E5%92%8C%E5%87%BD%E6%95%B0"><span class="nav-text">常用类、方法和函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A0%B8%E5%BF%83%E5%87%BD%E6%95%B0"><span class="nav-text">1. 核心函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%EF%BC%88Event-Loop%EF%BC%89-1"><span class="nav-text">2. 事件循环（Event Loop）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8D%8F%E7%A8%8B%EF%BC%88Coroutine%EF%BC%89%E4%B8%8E%E4%BB%BB%E5%8A%A1%EF%BC%88Task%EF%BC%89"><span class="nav-text">3. 协程（Coroutine）与任务（Task）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD%EF%BC%88%E7%B1%BB%E4%BC%BCthreading%EF%BC%89"><span class="nav-text">4. 同步原语（类似threading）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%AD%90%E8%BF%9B%E7%A8%8B"><span class="nav-text">5. 网络与子进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="nav-text">6. 实用工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-9"><span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-10"><span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-11"><span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-12"><span class="nav-text">实例</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">xiaowo435</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            This site is deployed on <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span>
+            
+        </div>
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Python-asyncio-%E6%A8%A1%E5%9D%97"><span class="nav-text">Python asyncio 模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-asyncio%EF%BC%9F"><span class="nav-text">为什么需要 asyncio？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#asyncio-%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-text">asyncio 的核心概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8D%8F%E7%A8%8B%EF%BC%88Coroutine%EF%BC%89"><span class="nav-text">1. 协程（Coroutine）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%EF%BC%88Event-Loop%EF%BC%89"><span class="nav-text">2. 事件循环（Event Loop）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-1"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BB%BB%E5%8A%A1%EF%BC%88Task%EF%BC%89"><span class="nav-text">3. 任务（Task）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-2"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Future"><span class="nav-text">4. Future</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-3"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95%E4%B8%8E%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="nav-text">基础用法与代码示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8C%E6%AD%A5%E7%89%88%E6%9C%AC%EF%BC%88%E4%BD%9C%E4%B8%BA%E5%AF%B9%E6%AF%94%EF%BC%89"><span class="nav-text">同步版本（作为对比）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-4"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E7%89%88%E6%9C%AC%EF%BC%88%E4%BD%BF%E7%94%A8-asyncio%EF%BC%89"><span class="nav-text">异步版本（使用 asyncio）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-5"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E5%87%BD%E6%95%B0%E4%B8%8E%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E"><span class="nav-text">关键函数与参数说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E7%90%86%E8%A7%A3%EF%BC%9A%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E6%B5%81%E7%A8%8B"><span class="nav-text">可视化理解：异步任务调度流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#asyncio-%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-text">asyncio 的基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BF%90%E8%A1%8C%E5%8D%8F%E7%A8%8B"><span class="nav-text">1. 运行协程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-6"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%B9%B6%E5%8F%91%E6%89%A7%E8%A1%8C%E5%A4%9A%E4%B8%AA%E4%BB%BB%E5%8A%A1"><span class="nav-text">2. 并发执行多个任务</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-7"><span class="nav-text">实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E8%B6%85%E6%97%B6%E6%8E%A7%E5%88%B6"><span class="nav-text">3. 超时控制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-8"><span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#asyncio-%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">asyncio 的应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%B1%BB%E3%80%81%E6%96%B9%E6%B3%95%E5%92%8C%E5%87%BD%E6%95%B0"><span class="nav-text">常用类、方法和函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%A0%B8%E5%BF%83%E5%87%BD%E6%95%B0"><span class="nav-text">1. 核心函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%EF%BC%88Event-Loop%EF%BC%89-1"><span class="nav-text">2. 事件循环（Event Loop）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8D%8F%E7%A8%8B%EF%BC%88Coroutine%EF%BC%89%E4%B8%8E%E4%BB%BB%E5%8A%A1%EF%BC%88Task%EF%BC%89"><span class="nav-text">3. 协程（Coroutine）与任务（Task）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%90%8C%E6%AD%A5%E5%8E%9F%E8%AF%AD%EF%BC%88%E7%B1%BB%E4%BC%BCthreading%EF%BC%89"><span class="nav-text">4. 同步原语（类似threading）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-%E7%BD%91%E7%BB%9C%E4%B8%8E%E5%AD%90%E8%BF%9B%E7%A8%8B"><span class="nav-text">5. 网络与子进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E5%AE%9E%E7%94%A8%E5%B7%A5%E5%85%B7"><span class="nav-text">6. 实用工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-9"><span class="nav-text">实例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-10"><span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-11"><span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B-12"><span class="nav-text">实例</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

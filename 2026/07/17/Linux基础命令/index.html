@@ -9,7 +9,7 @@
     
     <title>
         
-            RAG入门篇 |
+            Linux基础命令 |
         
         さしぶりだね
     </title>
@@ -179,7 +179,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        RAG入门篇
+                        Linux基础命令
                     </div>
                 
 
@@ -207,13 +207,13 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2026-03-09 16:04:28</span>
+                <span class="datetime">2026-07-17 17:09:01</span>
             </span>
 
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Mon Mar 09 2026 23:12:48 GMT+0800">2026-03-09 23:12:48</span>
+                    <span class="datetime" data-updated="Fri Jul 17 2026 17:13:55 GMT+0800">2026-07-17 17:13:55</span>
                 </span>
             
         
@@ -224,7 +224,7 @@
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/RAG/">RAG</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Linux/">Linux</a></li>
                         
                     
                 </ul>
@@ -249,75 +249,356 @@
                     
 
                     
-                         <h2 id="什么是RAG"><a href="#什么是RAG" class="headerlink" title="什么是RAG"></a>什么是RAG</h2><p>RAG，Retrieval-Augmented Generation，也被称作检索增强生成技术，最早在 Facebook AI（Meta AI）在 2020 年发表的论文《Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks》（ <a class="link"   target="_blank" rel="noopener" href="https://arxiv.org/abs/2005.11401" >https://arxiv.org/abs/2005.11401<i class="fas fa-external-link-alt"></i></a> ）中正式提出，这种方法的核心思想是借助一些文本检索策略，让大模型每次问答前都带入相关文本，以此来改善大模型回答时的准确性。</p>
-<h2 id="为什么需要RAG"><a href="#为什么需要RAG" class="headerlink" title="为什么需要RAG"></a>为什么需要RAG</h2><h3 id="问题一：大模型幻觉"><a href="#问题一：大模型幻觉" class="headerlink" title="问题一：大模型幻觉"></a>问题一：大模型幻觉</h3><p>在使用大模型的时候，都会遇到大模型无中生有胡编乱造答案的情况，例如胡乱生成一些概念、一些论文甚至是一些实时等，这就是所谓的大模型幻觉。<br>大型语言模型之所以会产生幻觉，主要是因为它们的训练方式和内在机制决定了它们并不具备真正理解和验证事实的能力。模型在训练过程中，通过分析大规模文本数据来学习不同词语和句子之间的概率关系，也就是在某种程度上掌握“在什么上下文中，什么样的回答听起来更合理”。然而，模型并没有接入实时的知识库或事实核查工具，当它遇到陌生的问题、模糊的描述或者上下文不完整的输入时，就会基于概率和语料库中似是而非的关联去“编造”一个看似正确的答案。由于这些输出往往语法流畅、逻辑连贯，人类读者很容易误以为它是真实可信的内容，这就是我们通常说的“模型幻觉”。</p>
-<h3 id="问题二：有限的最大上下文"><a href="#问题二：有限的最大上下文" class="headerlink" title="问题二：有限的最大上下文"></a>问题二：有限的最大上下文</h3><p>由于大模型的本质其实是一个算法，不管是让大模型“知道”有哪些外部工具，还是要给大模型进行“背景设置”，或者是要给模型添加历史对话消息，以及本次对话的输出，都需要占用这个上下文窗口。这就使得我们在一次对话中能够给大模型灌输的知识（文本）其实是有限的。</p>
-<p>大型语言模型还存在最大上下文限制，这是由它们的架构和计算方式决定的。每次生成回答时，模型需要把输入文本转换成固定长度的数字序列（称为token），并在内部一次性加载到模型的“上下文窗口”中进行处理。这个窗口的大小是有限的，不同模型一般在几千到几万token之间。如果输入内容超出这个长度，模型要么截断最前面的部分，要么丢弃部分信息，这就会造成对话历史、长文档或先前提到的重要细节的遗失。因为它无法跨越上下文窗口无限地保留信息，所以在面对长对话或者大量背景知识时，模型常常出现上下文断裂、回答不连贯或者忽略先前条件的情况。</p>
-<h3 id="问题三：模型专业知识与时效性知识不足"><a href="#问题三：模型专业知识与时效性知识不足" class="headerlink" title="问题三：模型专业知识与时效性知识不足"></a>问题三：模型专业知识与时效性知识不足</h3><p>大型语言模型虽然在通用领域展现出令人瞩目的语言理解和生成能力，但其在特定领域的专业知识掌握往往存在明显局限。其根本原因在于，模型的训练依赖于预先收集的大规模语料，这些语料覆盖面虽广，却很难保证在所有专业领域中具有足够的深度和准确性。某些领域，如医学、法律或前沿科技，知识更新速度快且门槛较高，公开可获取的高质量数据本身就有限，模型难以在此基础上形成系统性和权威性的认知。此外，模型训练通常在固定的时间点结束，因此其所掌握的知识具有天然的时效性，无法实时反映新近出现的研究成果、政策变化或行业动态。这种静态的知识存储模式，决定了大模型在面对最新或高度专业化的问题时，往往难以提供全面、精确的解答。</p>
-<h1 id="RAG技术实现流程"><a href="#RAG技术实现流程" class="headerlink" title="RAG技术实现流程"></a>RAG技术实现流程</h1><p>RAG技术的落地主要由以下几个步骤组成：</p>
-<p>（1）文档的收集</p>
-<p>（2）文档处理</p>
-<p>（3）文档数据向量化</p>
-<p>（4）文档数据相似性检索</p>
-<p>（5）构建提示词</p>
-<p>（6）大语言模型生成结果</p>
-<p><img  
-                       lazyload
-                       alt="image"
-                       data-src="https://cdn.jsdelivr.net/gh/xiaowo435/blog-images@main/img/%E4%B8%8B%E8%BD%BD.jpg"
-                       
-                 ></p>
-<p>我们需要围绕给定的文档（往往是非常长的文档）先进行<strong>切分</strong>，然后将切分的文档转化为计算机能识别的形式，也就是将其转化为一个数值型向量（也被称为<strong>词向量</strong>），然后当用户询问问题的时候，我们再将用户的问题转化为词向量，并和段落文档的词向量进行<strong>相似度匹配</strong>，借此找出和当前用户问题最相关的原始文档片段，然后将用户的问题和匹配的到的原文片段都带入大模型，进行最终的问答。由此便可实现一次完整的文档检索增强执行流程。</p>
-<h2 id="GraphRAG"><a href="#GraphRAG" class="headerlink" title="GraphRAG"></a>GraphRAG</h2><p>GraphRAG（Graph-enhanced Retrieval-Augmented Generation） 是一种在经典 RAG 基础上引入知识图谱&#x2F;图结构的新型检索生成方法 。其核心思想是通过将文档或数据转换成图的形式，从而捕捉实体与实体之间的语义关系，并在检索阶段利用图遍历、关系推理等机制来辅助上下文构建，这种结构化信息能够提升语义理解和多跳推理能力。</p>
-<p>具体来说，GraphRAG 的流程包括：</p>
-<ol>
-<li>图谱构建：将文本拆分为多个单元（TextUnit），提取实体与关系，构造知识图，并进行图社区检测与摘要；</li>
-<li>混合检索：用户提问既可以进行向量检索定位实体，也可以通过图查询（如 Cypher&#x2F;SPARQL）沿关系边扩展信息；</li>
-<li>图增强生成：将检索到的节点、路径、社区摘要等信息拼接进 Prompt，引导 LLM 生成更准确、结构清晰、并基于事实推理的回答。</li>
-</ol>
-<table>
+                         <h3 id="📂-文件与目录管理"><a href="#📂-文件与目录管理" class="headerlink" title="📂 文件与目录管理"></a>📂 文件与目录管理</h3><table>
 <thead>
 <tr>
-<th>对比维度</th>
-<th>传统 RAG</th>
-<th>GraphRAG</th>
+<th>命令</th>
+<th>作用</th>
+<th>示例</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>检索方式</td>
-<td>基于向量语义相似度</td>
-<td>向量+知识图遍历&#x2F;查询</td>
+<td><code>ls</code></td>
+<td>列出目录内容</td>
+<td><code>ls -lah</code> 以详细格式列出所有文件（包括隐藏文件），并显示人类可读的大小</td>
 </tr>
 <tr>
-<td>关系理解能力</td>
-<td>弱：只能匹配语义相近片段</td>
-<td>强：能理解实体之间的多跳关系与结构</td>
+<td><code>cd</code></td>
+<td>切换当前工作目录</td>
+<td><code>cd /var/log</code> 进入 <code>/var/log</code> 目录</td>
 </tr>
 <tr>
-<td>多跳推理支持</td>
-<td>弱：难以综合跨文档信息</td>
-<td>强：图结构天然支持推理路径遍历</td>
+<td><code>pwd</code></td>
+<td>显示当前工作目录的完整路径</td>
+<td><code>pwd</code> 输出类似 <code>/home/username</code></td>
 </tr>
 <tr>
-<td>语义上下文覆盖</td>
-<td>依赖检索片段</td>
-<td>可检索完整实体子图、社区摘要</td>
+<td><code>cp</code></td>
+<td>复制文件或目录</td>
+<td><code>cp -r /source /destination</code> 递归复制整个目录</td>
 </tr>
 <tr>
-<td>可解释性</td>
-<td>中：返回片段但缺关键信息结构</td>
-<td>高：能显示实体关系路径及社区结构</td>
+<td><code>mv</code></td>
+<td>移动或重命名文件&#x2F;目录</td>
+<td><code>mv old_name.txt new_name.txt</code> 重命名文件</td>
 </tr>
 <tr>
-<td>性能&#x2F;复杂度</td>
-<td>低：直接使用向量库</td>
-<td>高：需要图构建、遍历、摘要等pipeline</td>
+<td><code>rm</code></td>
+<td>删除文件或目录</td>
+<td><code>rm -rf /tmp/test</code> 强制递归删除 <code>/tmp/test</code> 目录（<strong>高危操作，慎用！</strong>）</td>
+</tr>
+<tr>
+<td><code>mkdir</code></td>
+<td>创建新目录</td>
+<td><code>mkdir -p /data/logs</code> 创建目录，如果父目录不存在则一并创建</td>
+</tr>
+<tr>
+<td><code>ln</code></td>
+<td>创建链接文件</td>
+<td><code>ln -s /usr/local/nginx /nginx</code> 为目录创建一个软链接（符号链接）</td>
+</tr>
+<tr>
+<td><code>find</code></td>
+<td>在目录树中查找文件</td>
+<td><code>find /var/log -name &quot;*.log&quot;</code> 在 <code>/var/log</code> 下查找所有以 <code>.log</code> 结尾的文件</td>
+</tr>
+<tr>
+<td><code>du</code></td>
+<td>查看文件或目录的磁盘使用情况</td>
+<td><code>du -sh /var/log</code> 统计 <code>/var/log</code> 目录的总大小</td>
+</tr>
+<tr>
+<td><code>tree</code></td>
+<td>以树形结构显示目录内容</td>
+<td><code>tree -L 2</code> 以树形结构显示当前目录，最多显示2层</td>
 </tr>
 </tbody></table>
-<p>传统 RAG 主要是“先检索语义近似片段，再生成回答”，适合简单查询与短对话。但当问题需要“连接多个事实”“推理关系链”和“洞察上下文结构”时，传统 RAG 会显得力不从心，而 GraphRAG 正是为复杂推理场景设计的增强机制。</p>
-<h2 id="Agentic-RAG"><a href="#Agentic-RAG" class="headerlink" title="Agentic RAG"></a>Agentic RAG</h2><p>Agentic RAG（Agentic Retrieval-Augmented Generation） 是一种在传统 RAG 基础上进一步扩展的增强范式，它将检索增强生成与Agent（智能体）能力有机结合，使大模型不仅能够基于外部知识库进行回答，还能够通过一系列自主决策和工具调用来完成复杂任务。与经典 RAG 的“检索+拼接+生成”线性流程不同，Agentic RAG 将 LLM 视为一个具备推理、规划和操作能力的智能体，它在对话过程中可以根据问题拆解子任务，先后执行多轮检索、知识整合、函数调用甚至外部API请求，再将结果动态组合成最终的答案。</p>
-<p>在这个模式下，大模型可以主动提出接下来的检索需求，或根据中间推理结果迭代获取更多信息，形成“循环式检索与生成”的闭环工作流。例如，当用户提出复杂查询时，Agentic RAG可以先调用检索工具定位候选内容，再使用工具对结果进行归纳或分类，必要时还会触发计算或外部查询操作，最后再汇总所有信息输出一个有依据的、分步骤的解答。</p>
-<p>相比传统RAG，Agentic RAG不仅提升了回答准确性和透明度，也为多轮推理和跨知识库整合提供了更强的灵活性，是近年来大模型产品中非常重要的能力演进方向。</p>
+<h3 id="🖥️-系统监控与性能分析"><a href="#🖥️-系统监控与性能分析" class="headerlink" title="🖥️ 系统监控与性能分析"></a>🖥️ 系统监控与性能分析</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>top</code> &#x2F; <code>htop</code></td>
+<td>实时查看系统进程和资源占用（CPU、内存）</td>
+<td><code>top -c</code> 显示完整的命令；<code>htop</code> 提供更友好的交互界面</td>
+</tr>
+<tr>
+<td><code>ps</code></td>
+<td>显示当前进程的快照</td>
+<td><code>ps aux</code> 查看所有运行中的进程；&#96;ps aux \</td>
+</tr>
+<tr>
+<td><code>free</code></td>
+<td>查看内存使用情况</td>
+<td><code>free -h</code> 以人类可读的格式显示内存和Swap使用情况</td>
+</tr>
+<tr>
+<td><code>df</code></td>
+<td>查看磁盘分区空间使用情况</td>
+<td><code>df -h</code> 以人类可读格式显示所有文件系统的磁盘空间</td>
+</tr>
+<tr>
+<td><code>vmstat</code></td>
+<td>报告虚拟内存、进程、CPU活动等系统整体情况</td>
+<td><code>vmstat 1 5</code> 每秒刷新一次，共显示5次，用于排查系统瓶颈</td>
+</tr>
+<tr>
+<td><code>iostat</code></td>
+<td>监控磁盘I&#x2F;O性能</td>
+<td><code>iostat -x 1</code> 显示扩展统计信息，每秒刷新一次，用于分析磁盘瓶颈</td>
+</tr>
+<tr>
+<td><code>uptime</code></td>
+<td>查看系统运行时间、用户数和平均负载</td>
+<td><code>uptime</code> 输出系统已运行时间、当前登录用户数和1、5、15分钟的平均负载</td>
+</tr>
+<tr>
+<td><code>uname</code></td>
+<td>显示系统信息</td>
+<td><code>uname -a</code> 显示内核版本、主机名、硬件架构等所有系统信息</td>
+</tr>
+<tr>
+<td><code>hostnamectl</code></td>
+<td>查看或修改主机名及操作系统版本</td>
+<td><code>hostnamectl</code> 显示当前主机名及系统详细信息</td>
+</tr>
+</tbody></table>
+<h3 id="🌐-网络诊断与管理"><a href="#🌐-网络诊断与管理" class="headerlink" title="🌐 网络诊断与管理"></a>🌐 网络诊断与管理</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>ping</code></td>
+<td>测试网络连通性和延迟</td>
+<td><code>ping -c 4 example.com</code> 向 <code>example.com</code> 发送4个ICMP包测试连通性</td>
+</tr>
+<tr>
+<td><code>ss</code> &#x2F; <code>netstat</code></td>
+<td>查看网络连接、路由表、接口统计等信息</td>
+<td><code>ss -tulnp</code> 查看所有TCP&#x2F;UDP监听端口及对应进程（比netstat更快）</td>
+</tr>
+<tr>
+<td><code>traceroute</code></td>
+<td>追踪数据包到达目标主机的路由路径</td>
+<td><code>traceroute example.com</code> 显示到 <code>example.com</code> 经过的每一跳路由</td>
+</tr>
+<tr>
+<td><code>dig</code></td>
+<td>查询DNS解析信息</td>
+<td><code>dig example.com</code> 查询 <code>example.com</code> 的DNS解析记录</td>
+</tr>
+<tr>
+<td><code>tcpdump</code></td>
+<td>网络抓包分析工具</td>
+<td><code>tcpdump -i eth0 port 80 -w capture.pcap</code> 抓取网卡 <code>eth0</code> 上80端口的流量并保存到文件</td>
+</tr>
+<tr>
+<td><code>iftop</code> &#x2F; <code>nethogs</code></td>
+<td>实时查看网络带宽占用</td>
+<td><code>iftop -i eth0</code> 按IP显示流量；<code>nethogs eth0</code> 按进程显示流量</td>
+</tr>
+<tr>
+<td><code>curl</code></td>
+<td>命令行HTTP客户端，用于测试接口或网页</td>
+<td><code>curl -I https://linux.org</code> 只获取HTTP头部信息，用于测试服务是否正常</td>
+</tr>
+<tr>
+<td><code>ip</code></td>
+<td>网络接口配置（推荐替代ifconfig）</td>
+<td><code>ip a</code> 查看所有网络接口及其IP地址</td>
+</tr>
+<tr>
+<td><code>scp</code></td>
+<td>跨服务器安全传输文件</td>
+<td><code>scp file.txt user@remote:/path/</code> 将本地文件复制到远程服务器</td>
+</tr>
+<tr>
+<td><code>rsync</code></td>
+<td>高效的文件同步工具（支持增量同步）</td>
+<td><code>rsync -avz --delete /data/ user@remote:/backup/</code> 将本地 <code>/data/</code> 同步到远程，并删除目标端多余文件</td>
+</tr>
+</tbody></table>
+<h3 id="⚙️-进程与服务管理"><a href="#⚙️-进程与服务管理" class="headerlink" title="⚙️ 进程与服务管理"></a>⚙️ 进程与服务管理</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>kill</code></td>
+<td>终止进程</td>
+<td><code>kill -9 PID</code> 强制终止指定PID的进程</td>
+</tr>
+<tr>
+<td><code>pkill</code></td>
+<td>按进程名终止任务</td>
+<td><code>pkill nginx</code> 终止所有名为nginx的进程</td>
+</tr>
+<tr>
+<td><code>systemctl</code></td>
+<td>管理系统服务（Systemd）</td>
+<td><code>systemctl status nginx</code> 查看nginx服务状态；<code>systemctl start nginx</code> 启动服务</td>
+</tr>
+<tr>
+<td><code>crontab</code></td>
+<td>管理定时任务</td>
+<td><code>crontab -e</code> 编辑当前用户的定时任务列表</td>
+</tr>
+</tbody></table>
+<h3 id="📝-日志与文本处理"><a href="#📝-日志与文本处理" class="headerlink" title="📝 日志与文本处理"></a>📝 日志与文本处理</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>cat</code></td>
+<td>查看文件内容</td>
+<td><code>cat /var/log/auth.log</code> 查看认证日志文件内容</td>
+</tr>
+<tr>
+<td><code>tail</code></td>
+<td>查看文件末尾部分，常用于查看最新日志</td>
+<td><code>tail -f /var/log/nginx/access.log</code> 实时跟踪nginx访问日志的更新</td>
+</tr>
+<tr>
+<td><code>grep</code></td>
+<td>在文件中搜索文本</td>
+<td><code>grep &quot;ERROR&quot; /var/log/syslog</code> 在系统日志中搜索包含”ERROR”的行</td>
+</tr>
+<tr>
+<td><code>awk</code></td>
+<td>强大的文本分析工具</td>
+<td><code>awk &#39;{print $1}&#39; access.log</code> 提取日志文件的第一列（如IP地址）</td>
+</tr>
+<tr>
+<td><code>sed</code></td>
+<td>流编辑器，用于文本替换等</td>
+<td><code>sed &#39;s/old/new/g&#39; file.txt</code> 将文件中的所有”old”替换为”new”</td>
+</tr>
+<tr>
+<td><code>journalctl</code></td>
+<td>查看systemd管理的日志</td>
+<td><code>journalctl -u nginx -f</code> 实时查看nginx服务的日志</td>
+</tr>
+<tr>
+<td><code>dmesg</code></td>
+<td>显示内核环缓冲区信息，用于查看硬件相关日志</td>
+<td>&#96;dmesg \</td>
+</tr>
+</tbody></table>
+<h3 id="👥-用户与权限管理"><a href="#👥-用户与权限管理" class="headerlink" title="👥 用户与权限管理"></a>👥 用户与权限管理</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>chmod</code></td>
+<td>修改文件或目录的权限</td>
+<td><code>chmod 755 script.sh</code> 设置脚本权限为所有者读写执行，组和其他用户读和执行</td>
+</tr>
+<tr>
+<td><code>chown</code></td>
+<td>修改文件或目录的所有者和所属组</td>
+<td><code>chown user:group file.txt</code> 将文件的所有者改为<code>user</code>，组改为<code>group</code></td>
+</tr>
+<tr>
+<td><code>useradd</code></td>
+<td>创建新用户</td>
+<td><code>useradd newuser</code> 创建一个名为<code>newuser</code>的新用户</td>
+</tr>
+<tr>
+<td><code>passwd</code></td>
+<td>修改用户密码</td>
+<td><code>passwd newuser</code> 为<code>newuser</code>设置或修改密码</td>
+</tr>
+<tr>
+<td><code>id</code></td>
+<td>查看用户的UID、GID和所属组</td>
+<td><code>id username</code> 显示指定用户的ID信息</td>
+</tr>
+</tbody></table>
+<h3 id="📦-软件包与压缩管理"><a href="#📦-软件包与压缩管理" class="headerlink" title="📦 软件包与压缩管理"></a>📦 软件包与压缩管理</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>yum</code> &#x2F; <code>apt</code></td>
+<td>Linux软件包管理器（不同发行版）</td>
+<td><code>yum install nginx</code> (CentOS&#x2F;RHEL) 或 <code>apt install nginx</code> (Ubuntu&#x2F;Debian) 安装nginx</td>
+</tr>
+<tr>
+<td><code>tar</code></td>
+<td>打包、压缩和解压文件</td>
+<td><code>tar -czvf backup.tar.gz /data</code> 将 <code>/data</code> 目录压缩为 <code>backup.tar.gz</code></td>
+</tr>
+<tr>
+<td><code>zip</code> &#x2F; <code>unzip</code></td>
+<td>处理 <code>.zip</code> 格式的压缩文件</td>
+<td><code>zip -r archive.zip folder</code> 将 <code>folder</code> 目录压缩为 <code>archive.zip</code></td>
+</tr>
+</tbody></table>
+<h3 id="🛠️-其他高频工具"><a href="#🛠️-其他高频工具" class="headerlink" title="🛠️ 其他高频工具"></a>🛠️ 其他高频工具</h3><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>history</code></td>
+<td>显示历史命令记录</td>
+<td>&#96;history \</td>
+</tr>
+<tr>
+<td><code>alias</code></td>
+<td>为长命令创建别名</td>
+<td><code>alias ll=&#39;ls -lah&#39;</code> 之后输入<code>ll</code>即相当于执行<code>ls -lah</code></td>
+</tr>
+<tr>
+<td><code>ssh</code></td>
+<td>远程连接到另一台计算机</td>
+<td><code>ssh user@192.168.1.100</code> 以<code>user</code>身份远程登录到IP为<code>192.168.1.100</code>的服务器</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="实战组合技巧"><a href="#实战组合技巧" class="headerlink" title="实战组合技巧"></a>实战组合技巧</h3><ul>
+<li><p><strong>管道 (<code>|</code>)</strong>：将前一个命令的输出作为后一个命令的输入。</p>
+<ul>
+<li><code>cat access.log | grep &quot;ERROR&quot; | wc -l</code>：统计<code>access.log</code>中”ERROR”出现的次数。</li>
+</ul>
+</li>
+<li><p><strong>重定向 (<code>&gt;</code> <code>&gt;&gt;</code>)</strong>：将命令输出保存到文件。</p>
+<ul>
+<li><code>ls -lh &gt; file_list.txt</code>：将当前目录的列表信息覆盖写入到<code>file_list.txt</code>文件。</li>
+</ul>
+</li>
+<li><p><strong>查找并批量处理</strong>：</p>
+<ul>
+<li><code>find /var/log -type f -name &quot;*.log&quot; -mtime +7 -delete</code>：删除<code>/var/log</code>下所有7天前修改的<code>.log</code>文件。</li>
+</ul>
+</li>
+</ul>
 
                     
                 </div>
@@ -330,7 +611,7 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/RAG/">RAG</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Linux/">Linux</a>
                                     </li>
                                 
                             </ul>
@@ -349,14 +630,14 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2026/03/19/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE-1/"
-                                   title="面试题目-1"
+                                   href="/2026/07/17/%E5%B8%B8%E7%94%A8shell%E8%84%9A%E6%9C%AC/"
+                                   title="常用shell脚本"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">面试题目-1</span>
+                                        <span class="post-nav-title-item text-ellipsis">常用shell脚本</span>
                                         <span class="post-nav-item">Prev posts</span>
                                     </span>
                                 </a>
@@ -366,11 +647,11 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2026/03/09/Embedding%E7%AF%87/"
-                                   title="Embedding篇"
+                                   href="/2026/07/17/Docker%E5%AE%B9%E5%99%A8%E5%9F%BA%E7%A1%80/"
+                                   title="Docker容器基础"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Embedding篇</span>
+                                        <span class="post-nav-title-item text-ellipsis">Docker容器基础</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -398,7 +679,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFRAG"><span class="nav-text">什么是RAG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81RAG"><span class="nav-text">为什么需要RAG</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B9%BB%E8%A7%89"><span class="nav-text">问题一：大模型幻觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%EF%BC%9A%E6%9C%89%E9%99%90%E7%9A%84%E6%9C%80%E5%A4%A7%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-text">问题二：有限的最大上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%89%EF%BC%9A%E6%A8%A1%E5%9E%8B%E4%B8%93%E4%B8%9A%E7%9F%A5%E8%AF%86%E4%B8%8E%E6%97%B6%E6%95%88%E6%80%A7%E7%9F%A5%E8%AF%86%E4%B8%8D%E8%B6%B3"><span class="nav-text">问题三：模型专业知识与时效性知识不足</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RAG%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B"><span class="nav-text">RAG技术实现流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GraphRAG"><span class="nav-text">GraphRAG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Agentic-RAG"><span class="nav-text">Agentic RAG</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%82-%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86"><span class="nav-text">📂 文件与目录管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%96%A5%EF%B8%8F-%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%E4%B8%8E%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="nav-text">🖥️ 系统监控与性能分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8C%90-%E7%BD%91%E7%BB%9C%E8%AF%8A%E6%96%AD%E4%B8%8E%E7%AE%A1%E7%90%86"><span class="nav-text">🌐 网络诊断与管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9A%99%EF%B8%8F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86"><span class="nav-text">⚙️ 进程与服务管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%9D-%E6%97%A5%E5%BF%97%E4%B8%8E%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86"><span class="nav-text">📝 日志与文本处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%91%A5-%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="nav-text">👥 用户与权限管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%A6-%E8%BD%AF%E4%BB%B6%E5%8C%85%E4%B8%8E%E5%8E%8B%E7%BC%A9%E7%AE%A1%E7%90%86"><span class="nav-text">📦 软件包与压缩管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E5%85%B6%E4%BB%96%E9%AB%98%E9%A2%91%E5%B7%A5%E5%85%B7"><span class="nav-text">🛠️ 其他高频工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E7%BB%84%E5%90%88%E6%8A%80%E5%B7%A7"><span class="nav-text">实战组合技巧</span></a></li></ol>
     </div>
 </div>
 
@@ -561,7 +842,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFRAG"><span class="nav-text">什么是RAG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81RAG"><span class="nav-text">为什么需要RAG</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B9%BB%E8%A7%89"><span class="nav-text">问题一：大模型幻觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%EF%BC%9A%E6%9C%89%E9%99%90%E7%9A%84%E6%9C%80%E5%A4%A7%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-text">问题二：有限的最大上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%89%EF%BC%9A%E6%A8%A1%E5%9E%8B%E4%B8%93%E4%B8%9A%E7%9F%A5%E8%AF%86%E4%B8%8E%E6%97%B6%E6%95%88%E6%80%A7%E7%9F%A5%E8%AF%86%E4%B8%8D%E8%B6%B3"><span class="nav-text">问题三：模型专业知识与时效性知识不足</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RAG%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B"><span class="nav-text">RAG技术实现流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GraphRAG"><span class="nav-text">GraphRAG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Agentic-RAG"><span class="nav-text">Agentic RAG</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%82-%E6%96%87%E4%BB%B6%E4%B8%8E%E7%9B%AE%E5%BD%95%E7%AE%A1%E7%90%86"><span class="nav-text">📂 文件与目录管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%96%A5%EF%B8%8F-%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%E4%B8%8E%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="nav-text">🖥️ 系统监控与性能分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%8C%90-%E7%BD%91%E7%BB%9C%E8%AF%8A%E6%96%AD%E4%B8%8E%E7%AE%A1%E7%90%86"><span class="nav-text">🌐 网络诊断与管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%9A%99%EF%B8%8F-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86"><span class="nav-text">⚙️ 进程与服务管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%9D-%E6%97%A5%E5%BF%97%E4%B8%8E%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86"><span class="nav-text">📝 日志与文本处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%91%A5-%E7%94%A8%E6%88%B7%E4%B8%8E%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86"><span class="nav-text">👥 用户与权限管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%93%A6-%E8%BD%AF%E4%BB%B6%E5%8C%85%E4%B8%8E%E5%8E%8B%E7%BC%A9%E7%AE%A1%E7%90%86"><span class="nav-text">📦 软件包与压缩管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9B%A0%EF%B8%8F-%E5%85%B6%E4%BB%96%E9%AB%98%E9%A2%91%E5%B7%A5%E5%85%B7"><span class="nav-text">🛠️ 其他高频工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E7%BB%84%E5%90%88%E6%8A%80%E5%B7%A7"><span class="nav-text">实战组合技巧</span></a></li></ol>
     </div>
 </div>
 

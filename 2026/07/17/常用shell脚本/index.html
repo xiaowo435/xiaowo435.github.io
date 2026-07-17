@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="xiaowo435">
+    
+    <title>
+        
+            常用shell脚本 |
+        
+        さしぶりだね
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0099FF","title":"さしぶりだね","author":"xiaowo435","avatar":"/images/OIP-C.webp","logo":"/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg","favicon":"/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg","mode":"light"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"悟已往之不谏,知来者之可追.实迷途其未远,觉今是而昨非.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/xiaowo435","weixin":"H_K_Y_435","qq":"190789158@QQ.com","weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":"1907689158@qq.com"}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated created || fa-solid fa-star"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["炼气","筑基","结丹","元婴","化神"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":true,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               さしぶりだね
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        常用shell脚本
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/OIP-C.webp">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">xiaowo435</span>
+                                
+                                    <span class="author-badge">Lv3</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2026-07-17 17:09:20</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Jul 17 2026 17:12:42 GMT+0800">2026-07-17 17:12:42</span>
+                </span>
+            
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/shell/">shell</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h3 id="🖥️-系统监控与告警类"><a href="#🖥️-系统监控与告警类" class="headerlink" title="🖥️ 系统监控与告警类"></a>🖥️ 系统监控与告警类</h3><p>这类脚本是运维的“眼睛”，用来时刻盯着服务器的健康状况。</p>
+<h4 id="1-检查系统负载"><a href="#1-检查系统负载" class="headerlink" title="1. 检查系统负载"></a>1. 检查系统负载</h4><p>当系统负荷过高时自动发邮件告警。</p>
+<p>#!&#x2F;bin&#x2F;bash  </p>
+<h1 id="设置负载阈值"><a href="#设置负载阈值" class="headerlink" title="设置负载阈值"></a>设置负载阈值</h1><p>threshold&#x3D;1.0  </p>
+<h1 id="获取系统最近1分钟的平均负载"><a href="#获取系统最近1分钟的平均负载" class="headerlink" title="获取系统最近1分钟的平均负载"></a>获取系统最近1分钟的平均负载</h1><p>load&#x3D;$(uptime | awk -F’[, ]+’ ‘{print $(NF-2)}’)  </p>
+<h1 id="判断是否超过阈值"><a href="#判断是否超过阈值" class="headerlink" title="判断是否超过阈值"></a>判断是否超过阈值</h1><p>if (( $(echo “$load &gt; $threshold” | bc -l) )); then<br>    echo “系统负载过高: $load” | mail -s “系统负载警报” <a class="link"   href="mailto:&#97;&#x64;&#x6d;&#105;&#x6e;&#x40;&#101;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#101;&#x2e;&#99;&#111;&#109;" >admin@example.com<i class="fas fa-external-link-alt"></i></a><br>fi</p>
+<p><strong>知识点</strong>：<code>uptime</code>查看负载，<code>awk</code>提取数据，<code>bc</code>进行浮点数比较。</p>
+<h4 id="2-监控磁盘使用率"><a href="#2-监控磁盘使用率" class="headerlink" title="2. 监控磁盘使用率"></a>2. 监控磁盘使用率</h4><p>当磁盘分区使用率超过80%时发送邮件报警。</p>
+<p>#!&#x2F;bin&#x2F;bash<br>THRESHOLD&#x3D;80<br>EMAIL&#x3D;”<a class="link"   href="mailto:&#97;&#100;&#x6d;&#105;&#110;&#64;&#101;&#x78;&#97;&#109;&#x70;&#x6c;&#x65;&#46;&#99;&#111;&#x6d;" >admin@example.com<i class="fas fa-external-link-alt"></i></a>“  </p>
+<h1 id="获取磁盘使用率，排除不需要的文件系统"><a href="#获取磁盘使用率，排除不需要的文件系统" class="headerlink" title="获取磁盘使用率，排除不需要的文件系统"></a>获取磁盘使用率，排除不需要的文件系统</h1><p>df -H | grep -vE ‘^Filesystem|tmpfs|cdrom’ | awk ‘{ print $5 “ “ $1 }’ | while read output; do<br>    usep&#x3D;$(echo $output | awk ‘{ print $1 }’ | cut -d’%’ -f1)<br>    partition&#x3D;$(echo $output | awk ‘{ print $2 }’)<br>    if [ $usep -ge $THRESHOLD ]; then<br>        echo “分区 &quot;$partition&quot; 已使用 ${usep}%，请及时处理！” | mail -s “磁盘空间告警: $partition” $EMAIL<br>    fi<br>done</p>
+<p><strong>知识点</strong>：<code>df -H</code>查看磁盘空间，<code>grep -vE</code>过滤不需要的行，<code>while read</code>循环处理每一行输出。</p>
+<h4 id="3-监控服务状态并自动重启"><a href="#3-监控服务状态并自动重启" class="headerlink" title="3. 监控服务状态并自动重启"></a>3. 监控服务状态并自动重启</h4><p>检查Nginx服务是否运行，如果挂了就尝试重启，并发送通知。</p>
+<p>#!&#x2F;bin&#x2F;bash<br>SERVICE&#x3D;”nginx”<br>EMAIL&#x3D;”<a class="link"   href="mailto:&#x61;&#100;&#109;&#105;&#x6e;&#x40;&#x65;&#120;&#x61;&#109;&#112;&#108;&#101;&#x2e;&#99;&#x6f;&#109;" >admin@example.com<i class="fas fa-external-link-alt"></i></a>“  </p>
+<h1 id="检查服务是否运行"><a href="#检查服务是否运行" class="headerlink" title="检查服务是否运行"></a>检查服务是否运行</h1><p>if ! systemctl is-active –quiet $SERVICE; then<br>    echo “$SERVICE 服务已停止，正在尝试重启…” | mail -s “$SERVICE 服务告警” $EMAIL<br>    systemctl restart $SERVICE<br>    # 检查重启是否成功<br>    if systemctl is-active –quiet $SERVICE; then<br>        echo “$SERVICE 服务已成功重启” | mail -s “$SERVICE 服务恢复” $EMAIL<br>    else<br>        echo “重启 $SERVICE 服务失败，请立即人工介入！” | mail -s “$SERVICE 重启失败” $EMAIL<br>    fi<br>fi</p>
+<p><strong>知识点</strong>：<code>systemctl is-active --quiet</code>静默检查服务状态。</p>
+<h3 id="💾-数据备份与清理类"><a href="#💾-数据备份与清理类" class="headerlink" title="💾 数据备份与清理类"></a>💾 数据备份与清理类</h3><p>备份是“后悔药”，而清理是防止磁盘被日志“撑爆”的必要手段。</p>
+<h4 id="4-定期备份MySQL数据库"><a href="#4-定期备份MySQL数据库" class="headerlink" title="4. 定期备份MySQL数据库"></a>4. 定期备份MySQL数据库</h4><p>将指定数据库导出为<code>.sql</code>文件，并自动删除7天前的旧备份。</p>
+<p>#!&#x2F;bin&#x2F;bash<br>BACKUP_DIR&#x3D;”&#x2F;backup&#x2F;mysql”<br>MYSQL_USER&#x3D;”root”<br>MYSQL_PASSWORD&#x3D;”your_password”<br>DATABASE_NAME&#x3D;”mydatabase”<br>​  </p>
+<h1 id="创建备份目录（如果不存在）"><a href="#创建备份目录（如果不存在）" class="headerlink" title="创建备份目录（如果不存在）"></a>创建备份目录（如果不存在）</h1><p>mkdir -p $BACKUP_DIR  </p>
+<h1 id="执行备份，文件名包含当前日期"><a href="#执行备份，文件名包含当前日期" class="headerlink" title="执行备份，文件名包含当前日期"></a>执行备份，文件名包含当前日期</h1><p>mysqldump -u $MYSQL_USER -p$MYSQL_PASSWORD $DATABASE_NAME &gt; $BACKUP_DIR&#x2F;${DATABASE_NAME}-$(date +%Y%m%d).sql  </p>
+<h1 id="删除7天前的备份文件"><a href="#删除7天前的备份文件" class="headerlink" title="删除7天前的备份文件"></a>删除7天前的备份文件</h1><p>find $BACKUP_DIR -type f -mtime +7 -exec rm {} ;</p>
+<p><strong>知识点</strong>：<code>mysqldump</code>是MySQL的备份命令，<code>find ... -mtime +7</code>查找7天前修改的文件并删除。</p>
+<h4 id="5-清理过期日志文件"><a href="#5-清理过期日志文件" class="headerlink" title="5. 清理过期日志文件"></a>5. 清理过期日志文件</h4><p>删除指定目录下7天前的所有<code>.log</code>文件。</p>
+<p>#!&#x2F;bin&#x2F;bash<br>log_dir&#x3D;”&#x2F;var&#x2F;log&#x2F;myapp”<br>days_to_keep&#x3D;7<br>find “$log_dir” -type f -name “*.log” -mtime +$days_to_keep -delete</p>
+<p><strong>知识点</strong>：<code>find</code>命令功能强大，可以按文件名(<code>-name</code>)、类型(<code>-type</code>)、修改时间(<code>-mtime</code>)查找文件并执行操作(<code>-delete</code>)。</p>
+<h3 id="🚀-自动化部署与批量操作类"><a href="#🚀-自动化部署与批量操作类" class="headerlink" title="🚀 自动化部署与批量操作类"></a>🚀 自动化部署与批量操作类</h3><p>当需要管理几十上百台服务器时，手动操作一台台去配置几乎是不可能的。</p>
+<h4 id="6-批量部署SSH密钥"><a href="#6-批量部署SSH密钥" class="headerlink" title="6. 批量部署SSH密钥"></a>6. 批量部署SSH密钥</h4><p>将管理机的公钥自动复制到多台服务器上，实现免密登录。</p>
+<p>#!&#x2F;bin&#x2F;bash  </p>
+<h1 id="定义服务器列表"><a href="#定义服务器列表" class="headerlink" title="定义服务器列表"></a>定义服务器列表</h1><p>SERVERS&#x3D;(“server1” “server2” “server3”)<br>USER&#x3D;”root”<br>KEY_FILE&#x3D;”&#x2F;home&#x2F;$USER&#x2F;.ssh&#x2F;id_rsa.pub”<br>​<br>for server in “${SERVERS[@]}”; do<br>    echo “正在部署密钥到 $server …”<br>    ssh-copy-id -i $KEY_FILE $USER@$server &amp;&amp; echo “成功” || echo “失败”<br>done</p>
+<p><strong>知识点</strong>：<code>for</code>循环遍历服务器列表，<code>ssh-copy-id</code>是专门用于部署SSH密钥的命令。</p>
+<h4 id="7-多服务器文件同步"><a href="#7-多服务器文件同步" class="headerlink" title="7. 多服务器文件同步"></a>7. 多服务器文件同步</h4><p>将本地目录同步到多台服务器的指定目录。</p>
+<p>#!&#x2F;bin&#x2F;bash<br>servers&#x3D;(“server1” “server2” “server3”)<br>source_dir&#x3D;”&#x2F;path&#x2F;to&#x2F;your&#x2F;app”<br>destination_dir&#x3D;”&#x2F;path&#x2F;on&#x2F;server”<br>​<br>for server in “${servers[@]}”; do<br>    rsync -avz “$source_dir” “$server:$destination_dir”<br>done</p>
+<p><strong>知识点</strong>：<code>rsync</code>是一个高效的文件同步工具，<code>-avz</code>是归档、详细输出、传输时压缩的常用组合。</p>
+<h3 id="🆘-应急处理类"><a href="#🆘-应急处理类" class="headerlink" title="🆘 应急处理类"></a>🆘 应急处理类</h3><p>这类脚本用于快速排查和解决突发的线上问题。</p>
+<h4 id="8-检查端口占用"><a href="#8-检查端口占用" class="headerlink" title="8. 检查端口占用"></a>8. 检查端口占用</h4><p>快速查看某个端口是否被占用，以及被哪个进程占用。</p>
+<p>#!&#x2F;bin&#x2F;bash<br>if [ -z “$1” ]; then<br>    echo “用法: $0 &lt;端口号&gt;”<br>    exit 1<br>fi<br>PORT&#x3D;$1<br>echo “&gt;&gt;&gt; 正在检查端口 $PORT …”<br>lsof -i:$PORT || echo “端口 $PORT 未被占用”</p>
+<p><strong>知识点</strong>：<code>lsof -i:端口号</code>是查看端口占用的标准方法，<code>$0</code>代表脚本本身。</p>
+<h4 id="9-清理僵尸进程"><a href="#9-清理僵尸进程" class="headerlink" title="9. 清理僵尸进程"></a>9. 清理僵尸进程</h4><p>查找并强制清理系统中的僵尸进程。</p>
+<p>#!&#x2F;bin&#x2F;bash<br>echo “&gt;&gt;&gt; 正在查找僵尸进程…”<br>ZOMBIE&#x3D;$(ps -ef | grep defunct | grep -v grep | awk ‘{print $2}’)<br>if [ -n “$ZOMBIE” ]; then<br>    echo “&gt;&gt;&gt; 尝试杀死僵尸进程: $ZOMBIE”<br>    kill -9 $ZOMBIE<br>else<br>    echo “&gt;&gt;&gt; 未发现僵尸进程”<br>fi</p>
+<p><strong>知识点</strong>：<code>ps -ef | grep defunct</code>用于查找僵尸进程，<code>kill -9</code>是强制终止进程的信号。</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/shell/">shell</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2026/07/17/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"
+                                   title="nginx反向代理"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">nginx反向代理</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2026/07/17/Linux%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4/"
+                                   title="Linux基础命令"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Linux基础命令</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%96%A5%EF%B8%8F-%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%E4%B8%8E%E5%91%8A%E8%AD%A6%E7%B1%BB"><span class="nav-text">🖥️ 系统监控与告警类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A3%80%E6%9F%A5%E7%B3%BB%E7%BB%9F%E8%B4%9F%E8%BD%BD"><span class="nav-text">1. 检查系统负载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%B4%9F%E8%BD%BD%E9%98%88%E5%80%BC"><span class="nav-text">设置负载阈值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E6%9C%80%E8%BF%911%E5%88%86%E9%92%9F%E7%9A%84%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD"><span class="nav-text">获取系统最近1分钟的平均负载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E8%B6%85%E8%BF%87%E9%98%88%E5%80%BC"><span class="nav-text">判断是否超过阈值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%9B%91%E6%8E%A7%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%8E%87"><span class="nav-text">2. 监控磁盘使用率</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%8E%87%EF%BC%8C%E6%8E%92%E9%99%A4%E4%B8%8D%E9%9C%80%E8%A6%81%E7%9A%84%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-text">获取磁盘使用率，排除不需要的文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E7%9B%91%E6%8E%A7%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81%E5%B9%B6%E8%87%AA%E5%8A%A8%E9%87%8D%E5%90%AF"><span class="nav-text">3. 监控服务状态并自动重启</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E6%9C%8D%E5%8A%A1%E6%98%AF%E5%90%A6%E8%BF%90%E8%A1%8C"><span class="nav-text">检查服务是否运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%BE-%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%B8%85%E7%90%86%E7%B1%BB"><span class="nav-text">💾 数据备份与清理类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%AE%9A%E6%9C%9F%E5%A4%87%E4%BB%BDMySQL%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4. 定期备份MySQL数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%A4%87%E4%BB%BD%E7%9B%AE%E5%BD%95%EF%BC%88%E5%A6%82%E6%9E%9C%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%89"><span class="nav-text">创建备份目录（如果不存在）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%A4%87%E4%BB%BD%EF%BC%8C%E6%96%87%E4%BB%B6%E5%90%8D%E5%8C%85%E5%90%AB%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F"><span class="nav-text">执行备份，文件名包含当前日期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A0%E9%99%A47%E5%A4%A9%E5%89%8D%E7%9A%84%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6"><span class="nav-text">删除7天前的备份文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%B8%85%E7%90%86%E8%BF%87%E6%9C%9F%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6"><span class="nav-text">5. 清理过期日志文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9A%80-%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E4%B8%8E%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E7%B1%BB"><span class="nav-text">🚀 自动化部署与批量操作类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E6%89%B9%E9%87%8F%E9%83%A8%E7%BD%B2SSH%E5%AF%86%E9%92%A5"><span class="nav-text">6. 批量部署SSH密钥</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%97%E8%A1%A8"><span class="nav-text">定义服务器列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E5%A4%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5"><span class="nav-text">7. 多服务器文件同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%86%98-%E5%BA%94%E6%80%A5%E5%A4%84%E7%90%86%E7%B1%BB"><span class="nav-text">🆘 应急处理类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E6%A3%80%E6%9F%A5%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8"><span class="nav-text">8. 检查端口占用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-%E6%B8%85%E7%90%86%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B"><span class="nav-text">9. 清理僵尸进程</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">xiaowo435</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            This site is deployed on <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span>
+            
+        </div>
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%96%A5%EF%B8%8F-%E7%B3%BB%E7%BB%9F%E7%9B%91%E6%8E%A7%E4%B8%8E%E5%91%8A%E8%AD%A6%E7%B1%BB"><span class="nav-text">🖥️ 系统监控与告警类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%A3%80%E6%9F%A5%E7%B3%BB%E7%BB%9F%E8%B4%9F%E8%BD%BD"><span class="nav-text">1. 检查系统负载</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%B4%9F%E8%BD%BD%E9%98%88%E5%80%BC"><span class="nav-text">设置负载阈值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E6%9C%80%E8%BF%911%E5%88%86%E9%92%9F%E7%9A%84%E5%B9%B3%E5%9D%87%E8%B4%9F%E8%BD%BD"><span class="nav-text">获取系统最近1分钟的平均负载</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E8%B6%85%E8%BF%87%E9%98%88%E5%80%BC"><span class="nav-text">判断是否超过阈值</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%9B%91%E6%8E%A7%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%8E%87"><span class="nav-text">2. 监控磁盘使用率</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E7%A3%81%E7%9B%98%E4%BD%BF%E7%94%A8%E7%8E%87%EF%BC%8C%E6%8E%92%E9%99%A4%E4%B8%8D%E9%9C%80%E8%A6%81%E7%9A%84%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-text">获取磁盘使用率，排除不需要的文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E7%9B%91%E6%8E%A7%E6%9C%8D%E5%8A%A1%E7%8A%B6%E6%80%81%E5%B9%B6%E8%87%AA%E5%8A%A8%E9%87%8D%E5%90%AF"><span class="nav-text">3. 监控服务状态并自动重启</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5%E6%9C%8D%E5%8A%A1%E6%98%AF%E5%90%A6%E8%BF%90%E8%A1%8C"><span class="nav-text">检查服务是否运行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%92%BE-%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%B8%85%E7%90%86%E7%B1%BB"><span class="nav-text">💾 数据备份与清理类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%AE%9A%E6%9C%9F%E5%A4%87%E4%BB%BDMySQL%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">4. 定期备份MySQL数据库</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%A4%87%E4%BB%BD%E7%9B%AE%E5%BD%95%EF%BC%88%E5%A6%82%E6%9E%9C%E4%B8%8D%E5%AD%98%E5%9C%A8%EF%BC%89"><span class="nav-text">创建备份目录（如果不存在）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E5%A4%87%E4%BB%BD%EF%BC%8C%E6%96%87%E4%BB%B6%E5%90%8D%E5%8C%85%E5%90%AB%E5%BD%93%E5%89%8D%E6%97%A5%E6%9C%9F"><span class="nav-text">执行备份，文件名包含当前日期</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%A0%E9%99%A47%E5%A4%A9%E5%89%8D%E7%9A%84%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6"><span class="nav-text">删除7天前的备份文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%B8%85%E7%90%86%E8%BF%87%E6%9C%9F%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6"><span class="nav-text">5. 清理过期日志文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%9A%80-%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2%E4%B8%8E%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E7%B1%BB"><span class="nav-text">🚀 自动化部署与批量操作类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E6%89%B9%E9%87%8F%E9%83%A8%E7%BD%B2SSH%E5%AF%86%E9%92%A5"><span class="nav-text">6. 批量部署SSH密钥</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%97%E8%A1%A8"><span class="nav-text">定义服务器列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-%E5%A4%9A%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%96%87%E4%BB%B6%E5%90%8C%E6%AD%A5"><span class="nav-text">7. 多服务器文件同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%F0%9F%86%98-%E5%BA%94%E6%80%A5%E5%A4%84%E7%90%86%E7%B1%BB"><span class="nav-text">🆘 应急处理类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-%E6%A3%80%E6%9F%A5%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8"><span class="nav-text">8. 检查端口占用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-%E6%B8%85%E7%90%86%E5%83%B5%E5%B0%B8%E8%BF%9B%E7%A8%8B"><span class="nav-text">9. 清理僵尸进程</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

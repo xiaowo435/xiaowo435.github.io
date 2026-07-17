@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="xiaowo435">
+    
+    <title>
+        
+            LangGraph和Multi-Agent |
+        
+        さしぶりだね
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0099FF","title":"さしぶりだね","author":"xiaowo435","avatar":"/images/OIP-C.webp","logo":"/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg","favicon":"/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg","mode":"light"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"悟已往之不谏,知来者之可追.实迷途其未远,觉今是而昨非.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/xiaowo435","weixin":"H_K_Y_435","qq":"190789158@QQ.com","weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":"1907689158@qq.com"}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated created || fa-solid fa-star"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["炼气","筑基","结丹","元婴","化神"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":true,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               さしぶりだね
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        LangGraph和Multi-Agent
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/OIP-C.webp">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">xiaowo435</span>
+                                
+                                    <span class="author-badge">Lv3</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2026-07-17 17:11:00</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Jul 17 2026 17:16:06 GMT+0800">2026-07-17 17:16:06</span>
+                </span>
+            
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/LnagGraph/">LnagGraph</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h2 id="LangChain-是构建-LLM-应用的基础工具箱，而-LangGraph-是在其基础上构建复杂、有状态工作流的图形化框架。"><a href="#LangChain-是构建-LLM-应用的基础工具箱，而-LangGraph-是在其基础上构建复杂、有状态工作流的图形化框架。" class="headerlink" title="LangChain 是构建 LLM 应用的基础工具箱，而 LangGraph 是在其基础上构建复杂、有状态工作流的图形化框架。"></a><strong>LangChain 是构建 LLM 应用的基础工具箱，而 LangGraph 是在其基础上构建复杂、有状态工作流的图形化框架。</strong></h2><h2 id="核心定位"><a href="#核心定位" class="headerlink" title="核心定位"></a>核心定位</h2><p><strong>LangChain</strong> 是一个用于快速构建大语言模型应用的开发框架，提供标准化组件和接口，包括模型调用、Prompt 模板、Chains（链式组合）、Memory（记忆管理）、Tools（工具调用）和 Agents（自主决策）。它的核心价值在于封装重复性代码，让开发者能够快速搭建简单或中等复杂度的应用，适合线性流程或简单分支逻辑 。 <strong>LangGraph</strong> 则是建立在 LangChain 之上的框架，专门用于构建<strong>有状态、多步骤、复杂工作流</strong>，尤其擅长处理循环、条件分支、并行执行和反馈循环。它通过图（Graph）结构组织工作流，每个节点可独立定义、读写共享状态，节点间通过边（Edge)控制流转规则，天然支持“规划-执行-反思-重规划”的自主推理循环</p>
+<p><strong>1.1 什么是LangGraph</strong></p>
+<p>LangGraph 是LangChain 生态的一部分，专门用于构建基于大模型（LLM）的复杂、有状态、多智能体应用的框架，核心思想是**将应用的工作流程抽象为一个有向图结构，通过节点和边来定义任务的执行步骤和逻辑流，**从而提供了远超传统线性链式调用的灵活性和控制力。相比传统的线性执行模式，**LangGraph 支持条件分支、循环、并行等复杂控制流，能够实现状态持久化、断点续跑、时间旅行、人机协作等高级功能，并提供了多智能体协作、层级架构等多种架构模式。**在实际应用中，LangGraph已成功应用于智能客服、自动化运维、研究 Agent 等场景，展现出卓越的适应性和扩展性。</p>
+<p><strong>1.2 为什么使用LangGraph</strong></p>
+<p>LangGraph 相比传统的线性执行模式具有显著的技术优势。</p>
+<ol>
+<li><p>LangGraph 提供了强大的状态管理机制，允许 Agent 在不同节点之间传递和维护信息，从而实现长期的记忆和多轮对话能力。这种集中式的状态管理避免了传统方法中状态分散在多个变量中的问题，提高了系统的可维护性和可观测性。</p>
+</li>
+<li><p>通过定义节点和边，可以精确控制 Agent 的执行逻辑，包括条件分支、循环和并行执行等</p>
+</li>
+<li><p>LangGraph 能够无缝集成各种外部工具（如搜索引擎、数据库、API 等），让 Agent 能够获取实时信息、执行特定操作，极大地扩展了 LLM 的能力边界。</p>
+</li>
+<li><p>图结构使得 Agent 的运行路径清晰可见，便于理解 Agent 的决策过程，并在出现问题时进行快速定位和调试。</p>
+</li>
+<li><p>模块化与可复用性。每个节点都可以是一个独立的、可复用的组件，维护性高且易于扩展。通过子图机制，复杂的工作流可以被分解为多个可独立开发和测试的模块，提高了开发和测试效率。</p>
+</li>
+</ol>
+<p><strong>1.3 安装使用</strong></p>
+<p>安装LangGraph</p>
+<p>pip install -U langgraph</p>
+<p>使用LangGraph创建一个简单的Agent</p>
+<p>def get_weather(city: str) -&gt; str:<br>    “””获取指定城市的天气信息。<br>    Args:<br>        city: 城市名称<br>    Returns:<br>        返回该城市的天气描述<br>    “””<br>    return f”今天{city}是晴天”  </p>
+<h1 id="创建模型"><a href="#创建模型" class="headerlink" title="创建模型"></a>创建模型</h1><p>model &#x3D; ChatOpenAI(<br>    model_name&#x3D;model_name,<br>    base_url&#x3D;base_url,<br>    api_key&#x3D;api_key<br>)<br>​  </p>
+<h1 id="使用LangGraph提供的API创建Agent"><a href="#使用LangGraph提供的API创建Agent" class="headerlink" title="使用LangGraph提供的API创建Agent"></a>使用LangGraph提供的API创建Agent</h1><p>agent &#x3D; create_react_agent(<br>    model&#x3D;model,          # 添加模型<br>    tools&#x3D;[get_weather],  # 添加工具<br>    prompt&#x3D;”你是一个天气助手”<br>)<br>human_message &#x3D; HumanMessage(content&#x3D;”今天深圳天气怎么样？”)<br>response &#x3D; agent.invoke(<br>    {“messages”: [human_message]}<br>)<br>print(response) </p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe94aibQ031YG2lGtvdA6k1XfIgycHmZKK9jZBCZAxgqEEM07OAfjpDurwEYsXCbjfxEoMXZerKtG1Vw/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=4"
+                        alt="图片"
+                 ></p>
+<p>**运行模式：**Agent可以通过两种主要模式执行</p>
+<ol>
+<li><p>**同步：**使用 .invoke() 或 .stream()</p>
+</li>
+<li><p>**异步：**使用 await .ainvoke() 或 async for 配合 .astream()</p>
+</li>
+</ol>
+<p>**最大迭代次数：**为了避免Agent无限循环执行，可以设置一个递归限制</p>
+<p>response &#x3D; agent.invoke(<br>    {“messages”: [{“role”: “user”, “content”: “预定一个深圳到北京的机票”}]},<br>    {“recursion_limit”: 10}   # 指定最大迭代次数<br>)</p>
+<h1 id="02-LangGraph核心"><a href="#02-LangGraph核心" class="headerlink" title="02 LangGraph核心"></a>02 LangGraph核心</h1><p><strong>2.1 Graph（图）</strong></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRx8iaBlObJPlyANoa4ZkvnWZwtswRNDwGkPDwB1zhtDIMJ7yRPtTYibBIA/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=5"
+                        alt="图片"
+                 ></p>
+<p>图是一种由节点和边组成的用于描述节点之间关系的数据结构，分为无向图和有向图，有向图是带有方向的图。LangGraph通过有向图定义AI工作流中的执行步骤和执行顺序，从而实现复杂、有状态、可循环的应用程序逻辑。</p>
+<p><strong>2.2 LangGraph核心要素（State、Edge、Node）</strong></p>
+<p><strong>1、State（状态）</strong></p>
+<p>在LangGraph中，<strong>State是一个贯穿整个工作流执行过程中的共享数据的结构</strong>，代表当前快照，它存储了从工作流开始到结束的所有必要的信息（历史对话、检索到的文档、工具执行结果等），在各个节点中共享，且每个节点都可以修改。State可以是TypedDict类型，也可以是pydantic中的BaseModel类型。</p>
+<h1 id="定义状态"><a href="#定义状态" class="headerlink" title="定义状态"></a>定义状态</h1><p>class GraphState(TypedDict):<br>    process_data: dict # 默认更新策略为替换（后续会讲更新策略）  </p>
+<h1 id="创建一个状态图，并指定状态"><a href="#创建一个状态图，并指定状态" class="headerlink" title="创建一个状态图，并指定状态"></a>创建一个状态图，并指定状态</h1><p>graph &#x3D; StateGraph(GraphState)</p>
+<p><strong>2、Node（节点）</strong></p>
+<p>Node是LangGraph中的一个基本处理单元，代表工作流中的一个操作步骤，可以是一个Agent、调用大模型、工具或一个函数（说白了就是绑定一个函数，具体逻辑可以干任何事情）。</p>
+<p><strong>Node的设计原则：</strong></p>
+<ul>
+<li><p>**单一职责原则：**每个节点应该只负责一项职责，避免功能过于复杂</p>
+</li>
+<li><p>**无状态设计：**节点本身不应该保存状态，所有数据都通过输入状态传递</p>
+</li>
+<li><p>**幂等性：**相同的输入应该产生相同的输出，确保可重试性</p>
+</li>
+<li><p>**可测试性：**节点逻辑应该易于单元测试</p>
+</li>
+</ul>
+<p>如下是添加一个节点的例子：</p>
+<h1 id="定义一个节点，入参为state"><a href="#定义一个节点，入参为state" class="headerlink" title="定义一个节点，入参为state"></a>定义一个节点，入参为state</h1><p>def input_node(state: GraphState) -&gt; GraphState:<br>    print(state)<br>    return {“process_data”: {“input”: “input_value”}}  </p>
+<h1 id="定义带参数的node节点"><a href="#定义带参数的node节点" class="headerlink" title="定义带参数的node节点"></a>定义带参数的node节点</h1><p>def process_node(state: dict, param1: int, param2: str) -&gt; dict:<br>    print(state, param1, param2)<br>    return {“process_data”: {“process”: “process_value”}}<br>graph &#x3D; StateGraph(GraphState)  </p>
+<h1 id="添加inpu节点"><a href="#添加inpu节点" class="headerlink" title="添加inpu节点"></a>添加inpu节点</h1><p>graph.add_node(“input”, input_node)  </p>
+<h1 id="给process-node节点绑定参数"><a href="#给process-node节点绑定参数" class="headerlink" title="给process_node节点绑定参数"></a>给process_node节点绑定参数</h1><p>process_with_params &#x3D; partial(process_node, param1&#x3D;100, param2&#x3D;”test”)  </p>
+<h1 id="添加带参数的node节点"><a href="#添加带参数的node节点" class="headerlink" title="添加带参数的node节点"></a>添加带参数的node节点</h1><p>graph.add_node(“process”, process_with_params)</p>
+<p><strong>特殊节点：</strong></p>
+<p>在LangGraph中有两个特殊的节点 <strong>START</strong> （开始节点）和 <strong>END</strong>（结束节点）</p>
+<p>**<strong>START</strong>节点：**开始节点，确定应该首先调用哪些节点。</p>
+<p>from langgraph.graph import START<br>​  </p>
+<h1 id="第一个执行的节点是-node-start"><a href="#第一个执行的节点是-node-start" class="headerlink" title="第一个执行的节点是 node_start"></a>第一个执行的节点是 node_start</h1><p>graph.add_edge(START, “node_start”)</p>
+<p>也可以通过graph.set_entry_point(“node_start”) 函数设置起始节点，等价于graph.add_edge(START, “node_start”)</p>
+<p>**<strong>END</strong>节点：**终止节点，表示后续没有其他节点可以继续执行了（非必须）。</p>
+<p>from langgraph.graph import END<br>​  </p>
+<h1 id="node-end-节点执行后，没有后续节点了"><a href="#node-end-节点执行后，没有后续节点了" class="headerlink" title="node_end 节点执行后，没有后续节点了"></a>node_end 节点执行后，没有后续节点了</h1><p>graph.add_edge(“node_a”, END)</p>
+<p>也可以通过graph.set_finish_point(“node_end”) 函数设置结束节点，等价于graph.add_edge(“node_start”， END)</p>
+<p><strong>错误处理和重试机制：</strong></p>
+<p>LangGraph还提供了错误处理和重试机制来指定重试次数、重试间隔、重试异常等，用于保证系统的可靠性。</p>
+<h1 id="重试策略"><a href="#重试策略" class="headerlink" title="重试策略"></a>重试策略</h1><p>retry_policy &#x3D; RetryPolicy(<br>    max_attempts&#x3D;3,                       # 最大重试次数<br>    initial_interval&#x3D;1,                   # 初始间隔<br>    jitter&#x3D;True,                          # 抖动（添加随机性避免重试风暴）<br>    backoff_factor&#x3D;2,                     # 退避乘数（每次重试间隔时间的增长倍数）<br>    retry_on&#x3D;[RequestException, Timeout]  # 只重试这些异常<br>)<br>graph.add_node(“process”, process_node, retry&#x3D;retry_policy)</p>
+<p><strong>节点缓存：</strong></p>
+<p>LangGraph 支持根据节点输入对节点进行缓存，用于加快节点的响应速度</p>
+<ol>
+<li><p>**缓存键与命中：**当一个节点开始执行时，系统会使用其配置的 key_func 根据当前节点的输入数据生成一个唯一的键。LangGraph 会检查缓存中是否存在这个键。如果存在（缓存命中），则直接返回之前存储的结果，跳过该节点的实际执行。如果不存在（缓存未命中），则正常执行节点函数，并将结果与缓存键关联后存入缓存。</p>
+</li>
+<li><p>**缓存有效期：**ttl 参数能控制缓存的有效期。例如，对于依赖实时数据的天气查询节点，可以设置较短的 ttl（如60秒）。而对于处理静态信息或变化不频繁数据的节点，则可以设置较长的 ttl甚至不设置（None），让缓存永久有效，直到手动清除</p>
+</li>
+</ol>
+<p>class State(TypedDict):<br>    x: int<br>    result: int  </p>
+<p>builder &#x3D; StateGraph(State)<br>def expensive_node(state: State) -&gt; dict[str, int]:<br>    # 模拟耗时<br>    time.sleep(2)<br>    return {“result”: state[“x”] * 2}<br>#添加节点，并指定缓存策略<br>builder.add_node(“expensive_node”, expensive_node, cache_policy&#x3D;CachePolicy(ttl&#x3D;3))<br>builder.set_entry_point(“expensive_node”)<br>builder.set_finish_point(“expensive_node”)<br>graph &#x3D; builder.compile(cache&#x3D;InMemoryCache())</p>
+<p><strong>3、Edge（边）</strong></p>
+<p>Edge定义了节点之间的连接和执行顺序，以及不同节点之间是如何通讯的，一个节点可以有多个出边（指向多个节点），多个节点也可以指向同一个节点（Map-Reduce），如下是添加边的代码：</p>
+<h1 id="添加固定边，执行顺序：start-input-process-output-end"><a href="#添加固定边，执行顺序：start-input-process-output-end" class="headerlink" title="添加固定边，执行顺序：start -&gt; input -&gt; process -&gt; output -&gt; end"></a>添加固定边，执行顺序：start -&gt; input -&gt; process -&gt; output -&gt; end</h1><p>graph.add_edge(START, “input”)<br>graph.add_edge(“input”, “process”)<br>graph.add_edge(“process”, “output”)<br>graph.add_edge(“output”, END)  </p>
+<h1 id="编译图，保证生成的图是正确的，如果添加了边，没添加节点，会报错"><a href="#编译图，保证生成的图是正确的，如果添加了边，没添加节点，会报错" class="headerlink" title="编译图，保证生成的图是正确的，如果添加了边，没添加节点，会报错"></a>编译图，保证生成的图是正确的，如果添加了边，没添加节点，会报错</h1><p>app &#x3D; graph.compile()<br>app.invoke({})</p>
+<p><strong>4、构建一个完整的图</strong></p>
+<p>图的构建流程：1、初始化一个StateGraph实例。2、添加节点。3、定义边，将所有的节点连接起来。4、设置特殊节点，入口和出口（可选）。5、编译图。6、执行工作流。</p>
+<h1 id="定义状态-1"><a href="#定义状态-1" class="headerlink" title="定义状态"></a>定义状态</h1><p>class GraphState(TypedDict):<br>    process_data: dict<br>def input_node(state: GraphState) -&gt; GraphState:<br>    print(state)<br>    return {“process_data”: {“input”: “input_value”}}<br>def output_node(state: GraphState) -&gt; GraphState:<br>    print(state)<br>    return {“process_data”: {“output”: “output_value”}}<br>def process_node(state: dict) -&gt; dict:<br>    print(state)<br>    return {“process_data”: {“process”: “process_value”}}  </p>
+<h1 id="创建一个状态图，并指定状态-1"><a href="#创建一个状态图，并指定状态-1" class="headerlink" title="创建一个状态图，并指定状态"></a>创建一个状态图，并指定状态</h1><p>graph &#x3D; StateGraph(GraphState)  </p>
+<h1 id="添加input、process、output节点"><a href="#添加input、process、output节点" class="headerlink" title="添加input、process、output节点"></a>添加input、process、output节点</h1><p>graph.add_node(“input”, input_node)<br>graph.add_node(“process”, process_node)<br>graph.add_node(“output”, output_node)  </p>
+<h1 id="添加固定边，执行顺序：start-input-process-output-end-1"><a href="#添加固定边，执行顺序：start-input-process-output-end-1" class="headerlink" title="添加固定边，执行顺序：start -&gt; input -&gt; process -&gt; output -&gt; end"></a>添加固定边，执行顺序：start -&gt; input -&gt; process -&gt; output -&gt; end</h1><p>graph.add_edge(START, “input”)<br>graph.add_edge(“input”, “process”)<br>graph.add_edge(“process”, “output”)<br>graph.add_edge(“output”, END)  </p>
+<h1 id="编译图，保证生成的图是正确的，如果添加了边，没添加节点，会报错-1"><a href="#编译图，保证生成的图是正确的，如果添加了边，没添加节点，会报错-1" class="headerlink" title="编译图，保证生成的图是正确的，如果添加了边，没添加节点，会报错"></a>编译图，保证生成的图是正确的，如果添加了边，没添加节点，会报错</h1><p>app &#x3D; graph.compile()# 执行<br>app.invoke({})</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe94aibQ031YG2lGtvdA6k1XfIoL2GhTic9yRTJN6QXfzjiagL6nBOZkbC0LmFbAQc8FFn8SG41hOheHyQ/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=6"
+                        alt="图片"
+                 ></p>
+<p><strong>2.3 状态合并策略（Reducers）</strong></p>
+<p>LangGraph工作流中，State作为贯穿整个节点之间共享数据的结构，每一个节点都可以读取当前State的数据，并且可以更新。<strong>Reducer是定义多个节点之间State如何更新的（覆盖、合并、添加等）。</strong></p>
+<p>**1、直接覆盖：**如果没有为状态字段指定 Reducer，默认会覆盖更新。也就是说，后执行的节点返回的值会直接覆盖先执行节点的值，即下一个节点的State数据是上一个节点的返回。</p>
+<p>class OverrideState(TypedDict):<br>	process_data : dict  # 未指定合并策略，默认覆盖，上一个节点的返回是下一个节点的值</p>
+<p><strong>2、Annotated：使用类型注解指定合并策略</strong></p>
+<p>class AddState(TypedDict):<br>    data_int: Annotated[int, add]   # 数字相加<br>    data_list: Annotated[list, add] # 合并两个列表<br>    data_str: Annotated[str, add]   # 字符串拼接<br>def add_node1(state: AddState) -&gt; AddState:<br>    print(state)<br>    return {“data_int”: 1, “data_list”: [1], “data_str”: “hello “}<br>def add_node2(state: AddState) -&gt; AddState:<br>    print(state)<br>    return {“data_int”: 2, “data_list”: [2], “data_str”: “world”}</p>
+<p><strong>3、内置Reducer：add_messages（消息列表合并）</strong></p>
+<p>LangGraph提供的专用Reducer函数，能智能的合并消息列表，不只是简单的追加，add_messages能够保证消息列表正确被累计，常用在多轮对话系统中，主要逻辑包括：</p>
+<ul>
+<li><p>**追加新消息：**如果新消息的 ID 不在现有列表中，则将其追加到列表末尾。</p>
+</li>
+<li><p>**覆盖旧消息：**如果新消息的 ID 与列表中某条现有消息的 ID 相同，则用新消息替换掉旧消息。用于处理工具调用中间结果或更新流式生成的临时消息。</p>
+</li>
+<li><p>**自动类型转换：**如果传入一个字符串（如 “Hello World”），add_messages会自动将其转换为HumanMessage（用户消息）</p>
+</li>
+</ul>
+<p>class MessageState(TypedDict):<br>    # 消息列表,使用add_messages合并消息列表<br>    messages: Annotated[list, add_messages]  </p>
+<p>def system_node(state: MessageState) -&gt; dict:<br>    return {“messages”: [SystemMessage(content&#x3D;”你是一个精通LangGraph的专家工程师.”)]}  </p>
+<p>def user_input_node(state: MessageState) -&gt; dict:<br>    return {“messages”: [HumanMessage(content&#x3D;”什么是LangGraph?”)]}  </p>
+<p>def ai_response_node(state: MessageState) -&gt; dict:<br>    return {“messages”: [AIMessage(content&#x3D;”LangGraph是一个…”)]}  </p>
+<p>def tool_node(state: MessageState) -&gt; dict:<br>    return {“messages”: [ToolMessage(content&#x3D;”工具调用参数params1”, tool_call_id&#x3D;”tool_call_id”)]}</p>
+<p>**4、**<strong>自定义Reducer：实现自定义合并逻辑</strong></p>
+<p>def merge_dict_reducer(source: dict, new: dict) -&gt; dict:<br>    # 自定义合并逻辑<br>    result &#x3D; source.copy()<br>    result.update(new)<br>    return result  </p>
+<p>def max_reducer(source: int, new: int) -&gt; int:<br>    # 自定义合并逻辑<br>    return max(source, new)  </p>
+<p>class CustomReducerState(TypedDict):<br>    # 使用自定义Reducer的状态<br>    max_score: Annotated[int, max_reducer]  # 保留最大值<br>    metadata: Annotated[dict, merge_dict_reducer]  # 字典合并</p>
+<p><strong>2.4 条件边（Conditional Edge）</strong></p>
+<p>实际应用中，工作流的下一个节点可能并不是固定的，需要根据当前的执行状态去确定需要路由到哪一个节点。**条件边可以动态控制执行流程，**LangGraph中可以指定路由函数，来选择具体要执行的节点（可以是多个节点）</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxQzGXHo28XgRddmADG0l05YGLmiabGd37Z4mibSWib7ib4iasicysGYCvXjAw/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=7"
+                        alt="图片"
+                 ></p>
+<p>def route_by_sentiment(state: GraphState) -&gt; str:<br>    # 路由逻辑…返回最终的条件<br>    return “condition_1”  </p>
+<p>graph &#x3D; StateGraph(GraphState)<br>graph.add_node(“node1”, node1)<br>graph.add_node(“node2”, node2)<br>graph.add_node(“node3”, node3)  </p>
+<h1 id="添加路由函数，参数：当前节点，路由函数，路由函数返回的条件与node的映射"><a href="#添加路由函数，参数：当前节点，路由函数，路由函数返回的条件与node的映射" class="headerlink" title="添加路由函数，参数：当前节点，路由函数，路由函数返回的条件与node的映射"></a>添加路由函数，参数：当前节点，路由函数，路由函数返回的条件与node的映射</h1><p>graph.add_conditional_edges(<br>    START,<br>    route_by_sentiment,<br>    {<br>        “condition_1”: “node1”,<br>        “condition_2”: “node2”,<br>        “condition_3”: “node3”<br>    }<br>)  </p>
+<h1 id="所有处理节点都连接到END"><a href="#所有处理节点都连接到END" class="headerlink" title="所有处理节点都连接到END"></a>所有处理节点都连接到END</h1><p>graph.add_edge(“node1”, END)<br>graph.add_edge(“node2”, END)<br>graph.add_edge(“node3”, END)<br>app &#x3D; graph.compile()</p>
+<p>LangGraph 提供了图的可视化，可以通过调用函数保存图，用于查看工作流是否与预期定义的规则一致。</p>
+<p>png_data &#x3D; app.get_graph().draw_mermaid_png()<br>with open(“graph.png”, “wb”) as f:<br>    f.write(png_data)</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxkQNnF7cLxnmjUicgAxKE9ibk78LTpQ6AtpGN1ePovR46cuvPmib36XWcw/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=8"
+                        alt="图片"
+                 ></p>
+<p><strong>2.5 Send 和 Command</strong></p>
+<p>Send和Command是两种用于实现高级工作流控制的核心机制，用于支持动态地决定下一步执行哪个节点</p>
+<p>**1、Send：**动态创建多个执行分支，实现并行处理，**每个Send对象都指定了一个执行目标节点和传递给该节点的参数，LangGraph会并行执行所有的这些任务。**比如可以用在Map-Reduce的场景，并行执行多个子节点并最终汇总到一个总节点。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxRJjFhj1WAkvpFyBgiacAxaVsBauWmr2rWsY8NsfIfTV0GgsK7HBiakXA/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=9"
+                        alt="图片"
+                 ></p>
+<p>def route_tasks(state: MapReduceState) -&gt; list[Send]:<br>    # 为每个任务创建一个Send对象<br>    sends &#x3D; []<br>    for idx, task in enumerate(state[‘tasks’]):<br>        # 创建node任务及相应的参数<br>        send &#x3D; Send(“process_task”,{“task_id”: idx,”task_name”: task})<br>        sends.append(send)<br>    # 返回所有的目标节点<br>    return sends  </p>
+<h1 id="路由函数，返回-Send-列表"><a href="#路由函数，返回-Send-列表" class="headerlink" title="路由函数，返回 Send 列表"></a>路由函数，返回 Send 列表</h1><p>graph.add_conditional_edges(“generate_tasks”, route_tasks)   </p>
+<h1 id="所有process-task完成后，汇总结果"><a href="#所有process-task完成后，汇总结果" class="headerlink" title="所有process_task完成后，汇总结果"></a>所有process_task完成后，汇总结果</h1><p>graph.add_edge(“process_task”, “reduce_results”)</p>
+<p>**2、Command：**不仅可以指定下一个节点，还支持更新状态、处理中断恢复，以及在嵌套图之间导航。常用于复杂的人机交互（Human-in-the-loop）和多智能体协同工作中智能体与智能体之间交接执行权（handoffs）</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxJE7Tmf5DId7svLG0wO4VPmQiaJibibThOb90u82Q2Z5P7xKGby7GtrKbA/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=10"
+                        alt="图片"
+                 ></p>
+<h1 id="在节点函数中返回-Command-来实现动态路由"><a href="#在节点函数中返回-Command-来实现动态路由" class="headerlink" title="在节点函数中返回 Command 来实现动态路由"></a>在节点函数中返回 Command 来实现动态路由</h1><p>def agent_node(state: State) -&gt; Command:<br>    if need_help(state):<br>        # 决定将任务移交给另一个node，并更新状态<br>        return Command(<br>            goto&#x3D;”expert_agent”,<br>            update&#x3D;{“messages”: state[“messages”] + [new_message]}<br>        )<br>    else:<br>        return Command(goto&#x3D;”END”)</p>
+<p>Command与条件边的区别是：**条件边只会路由下一个node节点，而Command不仅路由下一个node节点，还支持状态更新，**如果需要同时更新状态和路由到不同的节点时，则使用 Command。</p>
+<p><strong>2.6 状态持久化</strong></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRx3EZUCaWduMsFFgArOd3fAxTzZP08z0dcg54HW5mOdTpwnPiaWQCLYxA/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=11"
+                        alt="图片"
+                 ></p>
+<p>状态持久化指的是在程序运行时将瞬间的状态保存下来，以便后续需要的时候能够重新恢复执行，用于解决因为程序退出、重启等事件而丢失任务。<strong>在 LangGraph 如果使用了持久化，工作流执行的每个步骤结束后，系统会自动将当前整个图的状态（包括所有变量、历史消息、下一步要执行的节点等信息）完整地保存下来，这份存档就是一个检查点（Checkpoint）</strong>，LangGraph支持存储在内存、Redis、DB等存储介质中。检查点通过thread_id（会话id，不是操作系统中的线程id）区分不同的会话，后续重新执行时会使用。</p>
+<p>memory &#x3D; MemorySaver()<br>app &#x3D; graph.compile(checkpointer&#x3D;memory)   # 使用内存保存检查点<br>config &#x3D; {“configurable”: {“thread_id”: “recovery_thread”}}  # 必须配置会话ID<br>result &#x3D; app.invoke({“value”: 5, “operations”: []}, config&#x3D;config)  </p>
+<h1 id="获取所有的检查点"><a href="#获取所有的检查点" class="headerlink" title="获取所有的检查点"></a>获取所有的检查点</h1><p>checkpoints &#x3D; list(app.get_state_history(config))  </p>
+<h1 id="恢复：从指定检查点继续执行"><a href="#恢复：从指定检查点继续执行" class="headerlink" title="恢复：从指定检查点继续执行"></a>恢复：从指定检查点继续执行</h1><p>recovery_config &#x3D; checkpoints[2].config<br>recovered_result &#x3D; app.invoke(None, config&#x3D;recovery_config)</p>
+<p>检查点是由一个StateSnapshot对象表示，具有以下关键属性：</p>
+<ol>
+<li><p>config: 与此检查点关联的配置，如检查点id、线程id等。</p>
+</li>
+<li><p>metadata: 与此检查点关联的元数据。</p>
+</li>
+<li><p>values: 在此时间点的状态值。</p>
+</li>
+<li><p>next: 一个元组，包含图中接下来要执行的节点名称。</p>
+</li>
+<li><p>tasks: 一个PregelTask对象的元组，包含有关接下来要执行的任务的信息。如果该步骤之前执行过，将包含错误信息。如果图在节点内部被动态中断，任务将包含与中断相关的其他数据。</p>
+</li>
+</ol>
+<p>class StateSnapshot(NamedTuple):<br>    “””Snapshot of the state of the graph at the beginning of a step.”””  </p>
+<pre><code>values: dict[str, Any] | Any  
+&quot;&quot;&quot;Current values of channels.&quot;&quot;&quot;  
+next: tuple[str, ...]  
+&quot;&quot;&quot;The name of the node to execute in each task for this step.&quot;&quot;&quot;  
+config: RunnableConfig  
+&quot;&quot;&quot;Config used to fetch this snapshot.&quot;&quot;&quot;  
+metadata: CheckpointMetadata | None  
+&quot;&quot;&quot;Metadata associated with this snapshot.&quot;&quot;&quot;  
+created_at: str | None  
+&quot;&quot;&quot;Timestamp of snapshot creation.&quot;&quot;&quot;  
+parent_config: RunnableConfig | None  
+&quot;&quot;&quot;Config used to fetch the parent snapshot, if any.&quot;&quot;&quot;  
+tasks: tuple[PregelTask, ...]  
+&quot;&quot;&quot;Tasks to execute in this step. If already attempted, may contain an error.&quot;&quot;&quot;  
+interrupts: tuple[Interrupt, ...]  
+&quot;&quot;&quot;Interrupts that occurred in this step that are pending resolution.&quot;&quot;&quot;
+</code></pre>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe94aibQ031YG2lGtvdA6k1XfIwM2FYsoHOGZGHRqE0tT0kdN2gAGZnlibYzDhhicIZ1A6Zx72iaztsgQGA/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=12"
+                        alt="图片"
+                 ></p>
+<p><strong>2.7 时间旅行</strong></p>
+<p>如果使用状态持久化，则LangGraph在执行每一个节点的时候都会将整个图的状态及相关信息保存下来，包括所有变量、消息历史、下一步要执行的节点等，因此在任何一个节点都可以重新恢复当前的执行流程。**LangGraph的时间旅行就是用来回溯、检查、修改一个工作流执行过程中的历史状态，并从某个历史节点重新执行，**从而实现对智能体决策过程的调试、分析和路径探索。常用在以下场景：</p>
+<ol>
+<li><p>调试场景：当系统出现问题时，可以回溯到之前的状态，重新执行以定位问题</p>
+</li>
+<li><p>审计需求：需要验证某个历史时刻的系统状态和执行结果</p>
+</li>
+<li><p>分支探索：在某个状态点尝试不同的执行路径，比较结果差异</p>
+</li>
+</ol>
+<p>checkpoints &#x3D; list(app.get_state_history(config))  </p>
+<h1 id="查看所有的步骤，注意，checkpoints的第一个值是Graph执行的最后一个节点（顺序是反的）"><a href="#查看所有的步骤，注意，checkpoints的第一个值是Graph执行的最后一个节点（顺序是反的）" class="headerlink" title="查看所有的步骤，注意，checkpoints的第一个值是Graph执行的最后一个节点（顺序是反的）"></a>查看所有的步骤，注意，checkpoints的第一个值是Graph执行的最后一个节点（顺序是反的）</h1><p>for i, checkpoint in enumerate(checkpoints):<br>    print(f”步骤 {i}: 下一节点 {checkpoint.next}, 状态值 {checkpoint.values}”)  </p>
+<h1 id="获取一个检查点"><a href="#获取一个检查点" class="headerlink" title="获取一个检查点"></a>获取一个检查点</h1><p>checkpoint &#x3D; checkpoints[2]  </p>
+<h1 id="更新状态，这会替换整个data-list"><a href="#更新状态，这会替换整个data-list" class="headerlink" title="更新状态，这会替换整个data_list"></a>更新状态，这会替换整个data_list</h1><p>app.update_state(<br>    checkpoint.config,<br>    {“data_list”: [“updated_value”]}  # 完全替换状态<br>)  </p>
+<h1 id="从更新后的检查点继续执行"><a href="#从更新后的检查点继续执行" class="headerlink" title="从更新后的检查点继续执行"></a>从更新后的检查点继续执行</h1><p>result &#x3D; app.invoke(None, config&#x3D;checkpoint.config)</p>
+<p><strong>2.8 人机协作（Human-in-the-Loop）</strong></p>
+<p>在一个多Agent架构中，有时并非全自动化处理，可能需要人工参与才能继续后续的操作（比如我们在使用CodeBuddy编程或执行某个命令前，都需要人工确认是否采纳或执行）。HIL就是通过<strong>在关键节点引入人类干预，实现 AI 系统的可控性和准确性。人机协作能弥补 AI 的 “能力盲区” 和人类的 “效率瓶颈”，在保证处理速度的同时，大幅提升结果的准确性、安全性和适用性。</strong></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxgJekiaIIJXFYaqfnpWBTpYvgazqQKjicVicLJKwWbVqtKQYPgNPWJMDqQ/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=13"
+                        alt="图片"
+                 ></p>
+<p>LangGraph通过中断机制、状态持久化、恢复执行机制在Agent自动化工作流中嵌入人工干预，实现人机协同。</p>
+<p>def human_feedback_node(state: HumanInLoopState) -&gt; dict:<br>    # 定义中断信息，告诉外界为何中断以及需要什么样的输入来恢复<br>    interrupt_data &#x3D; {<br>        “type”: “human_review”,<br>        “request”: state[‘request’],<br>        “analysis”: state[‘analysis’],<br>        “prompt”: “请输入: 同意 &#x2F; 拒绝”<br>    }<br>    # 使用interrupt()函数暂停工作流，等待人工输入<br>    human_response &#x3D; interrupt(interrupt_data)<br>    print(f”收到用户输入: {human_response}”)<br>    # 解析人工输入，其他业务逻辑<br>    # …  </p>
+<pre><code>return {  
+    &quot;human_feedback&quot;: human_response.get(&quot;feedback&quot;),  
+    &quot;approved&quot;: human_response.get(&quot;decision&quot;),  
+    &quot;messages&quot;: [f&quot;人工反馈: {human_response.get(&#39;feedback&#39;)}&quot;]  
+}  
+</code></pre>
+<h1 id="添加人工反馈节点，其他节点省略"><a href="#添加人工反馈节点，其他节点省略" class="headerlink" title="添加人工反馈节点，其他节点省略"></a>添加人工反馈节点，其他节点省略</h1><p>graph.add_node(“human_feedback”, human_feedback_node)  </p>
+<h1 id="添加人工反馈边，其他节点省略"><a href="#添加人工反馈边，其他节点省略" class="headerlink" title="添加人工反馈边，其他节点省略"></a>添加人工反馈边，其他节点省略</h1><p>graph.add_edge(“analyze”, “human_feedback”)  </p>
+<h1 id="添加条件边，根据用户反馈来选择调用后续的节点"><a href="#添加条件边，根据用户反馈来选择调用后续的节点" class="headerlink" title="添加条件边，根据用户反馈来选择调用后续的节点"></a>添加条件边，根据用户反馈来选择调用后续的节点</h1><p>builder.add_conditional_edges(<br>    “human_feedback”,<br>    route_by_human_decision,<br>    {<br>        “process_approval”: “process_approval”,<br>        “process_rejection”: “process_rejection”<br>    }<br>)  </p>
+<p>memory &#x3D; MemorySaver()  </p>
+<h1 id="编译图并启用检查点"><a href="#编译图并启用检查点" class="headerlink" title="编译图并启用检查点"></a>编译图并启用检查点</h1><p>app &#x3D; graph.compile(checkpointer&#x3D;memory)  </p>
+<h1 id="配置会话id，用于区分不同的会话"><a href="#配置会话id，用于区分不同的会话" class="headerlink" title="配置会话id，用于区分不同的会话"></a>配置会话id，用于区分不同的会话</h1><p>config &#x3D; {“configurable”: {“thread_id”: str(uuid.uuid4())}}  </p>
+<h1 id="首次执行图，执行到human-feedback节点会中断，invoke立即返回-返回的结果会包含中断信息，result-get-interrupt"><a href="#首次执行图，执行到human-feedback节点会中断，invoke立即返回-返回的结果会包含中断信息，result-get-interrupt" class="headerlink" title="首次执行图，执行到human_feedback节点会中断，invoke立即返回# 返回的结果会包含中断信息，result.get(interrupt)"></a>首次执行图，执行到human_feedback节点会中断，invoke立即返回# 返回的结果会包含中断信息，result.get(<strong>interrupt</strong>)</h1><p>result &#x3D; graph.invoke(initial_input, config)  </p>
+<h1 id="模拟人工输入（实际应用中来自用户界面）"><a href="#模拟人工输入（实际应用中来自用户界面）" class="headerlink" title="模拟人工输入（实际应用中来自用户界面）"></a>模拟人工输入（实际应用中来自用户界面）</h1><p>human_decision &#x3D; {<br>    “decision”: “同意”,<br>    “feedback”: “用户反馈”<br>}  </p>
+<h1 id="重新恢复工作流，继续执行后续节点"><a href="#重新恢复工作流，继续执行后续节点" class="headerlink" title="重新恢复工作流，继续执行后续节点"></a>重新恢复工作流，继续执行后续节点</h1><p>resume_command &#x3D; Command(resume&#x3D;human_decision)<br>final_result &#x3D; graph.invoke(resume_command, config)</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRx6VfFhOWgSoSfVDjxzqkK1Lv2AZf8TXOEWZO7IZ1BAgk0JAnjF0QEAw/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=14"
+                        alt="图片"
+                 ></p>
+<p><strong>注意：调用interrupt()函数后，不会阻塞，当次的invoke调用会正常结束，并将一个包含中断信息的结果返回给调用方，并执行后续的代码，等重新调用graph.invoke(resume_command, config)时，会从调用interrupt()函数的入口处重新执行（注意：如果函数的interrupt调用之前有一些接口、db访问或其他业务逻辑，则会被重复调用），且执行到interrupt()处返回的值即是用户输入的值(Command(resume&#x3D;human_decision)中指的的值)，具体流程如下：</strong></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRx0KOyaxmmtLtQSuTkq1sHPK6ribcaPq0wJqHMDNVcs1siaAianlpybd0Bg/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=15"
+                        alt="图片"
+                 ></p>
+<p><strong>2.9 记忆</strong></p>
+<p>记忆是智能体运行中记住先前交互信息的组件，是能够连贯对话的核心能力，LangGraph中提供了<strong>短期记忆和长期记忆。</strong></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxicMxMxWf9aV2L8D0xFdicsRLBpVMUzz7IQFpIXZHE12v9r41sllS84Og/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=16"
+                        alt="图片"
+                 ></p>
+<p>**1、短期记忆：**存储当前对话上下文的信息，作用于单次会话或线程，通过thread_id（会话id）区分，通过图状态（State）和检查点（Checkpoint）实现。</p>
+<h1 id="1-初始化一个内存检查点"><a href="#1-初始化一个内存检查点" class="headerlink" title="1. 初始化一个内存检查点"></a>1. 初始化一个内存检查点</h1><p>checkpointer &#x3D; InMemorySaver()  </p>
+<h1 id="2-在编译图时传入检查点"><a href="#2-在编译图时传入检查点" class="headerlink" title="2. 在编译图时传入检查点"></a>2. 在编译图时传入检查点</h1><p>graph &#x3D; builder.compile(checkpointer&#x3D;checkpointer)  </p>
+<h1 id="3-调用时通过-thread-id-指定会话线程"><a href="#3-调用时通过-thread-id-指定会话线程" class="headerlink" title="3. 调用时通过 thread_id 指定会话线程"></a>3. 调用时通过 thread_id 指定会话线程</h1><p>config &#x3D; {“configurable”: {“thread_id”: “thread_123”}}<br>result &#x3D; graph.invoke({“messages”: [{“role”: “user”, “content”: “你好”}]}, config&#x3D;config)</p>
+<p>**2、长期记忆：**长期记忆用于存储那些需要在不同会话间保留的信息。它通过 <strong>存储库（Store）</strong> 接口实现，类似于一个键值数据库，并支持基于向量嵌入的语义检索。与线程范围的短期记忆不同，长期记忆保存在自定义的“命名空间”中。</p>
+<p>def write_node(state: dict) -&gt; dict:<br>    # 获取全局存储实例<br>    store &#x3D; get_store()<br>    # 存储数据到指定命名空间<br>    store.put(namespace, “user_123”, {“name”: “张三”, “age”: “20”})<br>    return {}  </p>
+<p>def read_node(state: dict) -&gt; dict:<br>    # 获取全局存储实例<br>    store &#x3D; get_store()<br>    # 根据键获取指定用户数据<br>    user_info &#x3D; store.get(namespace, “user_123”)<br>    print(user_info)  </p>
+<pre><code># 在命名空间中搜索包含&quot;张三&quot;的数据  
+# query: 搜索关键词  
+# limit: 返回结果的最大数量限制  
+user_info = store.search(namespace, query=&quot;张三&quot;, limit=10)  
+print(user_info)  
+return {}  
+</code></pre>
+<h1 id="初始化一个内存存储"><a href="#初始化一个内存存储" class="headerlink" title="初始化一个内存存储"></a>初始化一个内存存储</h1><p>store &#x3D; InMemoryStore()  </p>
+<h1 id="定义命名空间，命名空间元组，用于数据分类和隔离"><a href="#定义命名空间，命名空间元组，用于数据分类和隔离" class="headerlink" title="定义命名空间，命名空间元组，用于数据分类和隔离"></a>定义命名空间，命名空间元组，用于数据分类和隔离</h1><p>namespace &#x3D; (“users”, “profile”)  </p>
+<h1 id="创建图"><a href="#创建图" class="headerlink" title="创建图"></a>创建图</h1><p>graph &#x3D; StateGraph(dict)<br>graph.add_node(“write_node”, write_node)<br>graph.add_node(“read_node”, read_node)<br>graph.add_edge(START, “write_node”)<br>graph.add_edge(“write_node”, “read_node”)<br>graph.add_edge(“read_node”, END)  </p>
+<h1 id="编译图，并指定存储"><a href="#编译图，并指定存储" class="headerlink" title="编译图，并指定存储"></a>编译图，并指定存储</h1><p>app &#x3D; graph.compile(store&#x3D;store)<br>app.invoke({})</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe94aibQ031YG2lGtvdA6k1XfI8uU4tcPYwDK1I4kq2vno0fzRzZlO8xGaOdibDVEsFXR0XGv1mbIDHkg/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=17"
+                        alt="图片"
+                 ></p>
+<p><strong>2.10 子图</strong></p>
+<p>在LangGraph中允许将一个完整的图作为另一个图的节点，适用于将复杂的任务拆解为多个专业智能体协同完成，每个子图都可以独立开发、测试并且可以复用。每个子图都可以拥有自己的私有数据，也可以与父图共享数据。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxD7s1ljaapAicoxCoia2IN65LJlK3Z6iabZbjYib45ib2cY0CFDCwiaaDcaIA/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=18"
+                        alt="图片"
+                 ></p>
+<h1 id="定义父图状态"><a href="#定义父图状态" class="headerlink" title="定义父图状态"></a>定义父图状态</h1><p>class ParentState(TypedDict):<br>    parent_messages: list  # 与子图共享数据  </p>
+<h1 id="定义子图状态"><a href="#定义子图状态" class="headerlink" title="定义子图状态"></a>定义子图状态</h1><p>class SubgraphState(TypedDict):<br>    parent_messages: list  # 与父图共享的数据<br>    sub_message: str  # 子图私有数据  </p>
+<h1 id="创建子图，添加node、edge等"><a href="#创建子图，添加node、edge等" class="headerlink" title="创建子图，添加node、edge等"></a>创建子图，添加node、edge等</h1><p>sub_builder &#x3D; StateGraph(SubgraphState)<br>sub_builder.add_node(“sub_node”, subgraph_node)<br>sub_builder.add_edge(START, “sub_node”)<br>compiled_subgraph &#x3D; sub_builder.compile()  </p>
+<h1 id="创建父图"><a href="#创建父图" class="headerlink" title="创建父图"></a>创建父图</h1><p>builder &#x3D; StateGraph(ParentState)  </p>
+<h1 id="添加子图添加为父图的节点"><a href="#添加子图添加为父图的节点" class="headerlink" title="添加子图添加为父图的节点"></a>添加子图添加为父图的节点</h1><p>builder.add_node(“subgraph_node”, compiled_subgraph)  </p>
+<h1 id="将子图连接起来"><a href="#将子图连接起来" class="headerlink" title="将子图连接起来"></a>将子图连接起来</h1><p>builder.add_edge(“parent_node”, “subgraph_node”)  </p>
+<h1 id="编译父图并执行"><a href="#编译父图并执行" class="headerlink" title="编译父图并执行"></a>编译父图并执行</h1><p>parent_graph &#x3D; builder.compile()<br>parent_graph.invoke({“messages”: [“init message”]})</p>
+<p><strong>这里共享数据指的是如果父图状态与子图状态定义名一样，则状态是共享的 。</strong></p>
+<p>如果当父子图状态结构不同时，需要在父图中创建一个专门的节点函数，手动调用图并处理状态数据。</p>
+<h1 id="在父图中创建代理节点处理状态转换"><a href="#在父图中创建代理节点处理状态转换" class="headerlink" title="在父图中创建代理节点处理状态转换"></a>在父图中创建代理节点处理状态转换</h1><p>def call_subgraph(state: ParentState):<br>    # 将父图状态转换为子图的输入<br>    subgraph_input &#x3D; {“analysis_input”: state[“user_query”]}<br>    # 调用子图<br>    subgraph_response &#x3D; compiled_subgraph.invoke(subgraph_input)<br>    # 将子图的输出映射回父图状态<br>    return {“final_answer”: subgraph_response[“analysis_result”]}  </p>
+<p>builder &#x3D; StateGraph(ParentState)  </p>
+<h1 id="父图中添加的是代理节点，而不是直接添加子图"><a href="#父图中添加的是代理节点，而不是直接添加子图" class="headerlink" title="父图中添加的是代理节点，而不是直接添加子图"></a>父图中添加的是代理节点，而不是直接添加子图</h1><p>builder.add_node(“call_subgraph_node”, call_subgraph)<br>builder.add_edge(START, “call_subgraph_node”)<br>parent_graph &#x3D; builder.compile()</p>
+<p><strong>2.11 集成MCP</strong></p>
+<p>模型上下文协议（MCP）是一个开放协议，它标准化了应用程序如何向大模型提供工具和上下文。LangGraph中Agent可以通过 langchain-mcp-adapters 库使用在 MCP 服务器上定义的工具。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>pip install langchain-mcp-adapters</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRx03MQwycWd2Sm4uLQTbiaPpibEog54kVpfTxXh7AibnZlFj9Oxygqia7Qibg/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=19"
+                        alt="图片"
+                 ></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxMn9G4NDWnyvdfmTV0DCF0MUe7nLvwbp8rMETHIhPia9bpk3C4S92T1w/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=20"
+                        alt="图片"
+                 ></p>
+<p><em><em><strong>1、自定义MCP工具</strong></em></em></p>
+<h1 id="创建名为”MCP-Tools”的MCP服务器"><a href="#创建名为”MCP-Tools”的MCP服务器" class="headerlink" title="创建名为”MCP_Tools”的MCP服务器"></a>创建名为”MCP_Tools”的MCP服务器</h1><p>mcp &#x3D; FastMCP(“MCP_Tools”)  </p>
+<p>@mcp.tool()<br>def get_weather(location: str) -&gt; str:<br>    “””获取指定位置的天气信息”””<br>    return “晴天”<br>@mcp.tool()<br>def get_time() -&gt; str:<br>    “””获取当前时间”””<br>    return datetime.now().strftime(‘%Y-%m-%d %H:%M:%S’)<br>@mcp.tool()<br>def add(a: int, b: int) -&gt; int:<br>    “””对两个整数相加”””<br>    return a + b<br>@mcp.tool()<br>def multiply(a: int, b: int) -&gt; int:<br>    “””对两个整数相乘”””<br>    return a * b<br>@mcp.tool()<br>def subtract(a: int, b: int) -&gt; int:<br>    “””对两个整数相减”””<br>    return a - b  </p>
+<p>if <strong>name</strong> &#x3D;&#x3D; “<strong>main</strong>“:<br>    # 使用HTTP协议传输<br>    mcp.run(transport&#x3D;”streamable-http”)</p>
+<p><strong>2、创建ReAct类型的Agent</strong></p>
+<p>async def get_agent():<br>    # 初始化MCP客户端，可以连接多个服务器<br>    client &#x3D; MultiServerMCPClient(<br>        {<br>            “weather”: {<br>                “url”: “<a class="link"   target="_blank" rel="noopener" href="http://localhost:8000/mcp" >http://localhost:8000/mcp<i class="fas fa-external-link-alt"></i></a>“,<br>                “transport”: “streamable_http”,<br>            }<br>        }<br>    )<br>    # 获取所有可用的工具<br>    tools &#x3D; await client.get_tools()<br>    print(f”已加载工具: {[tool.name for tool in tools]}”)  </p>
+<pre><code># 初始化聊天模型  
+model = ChatOpenAI(  
+    model_name=model_name,  
+    base_url=base_url,  
+    api_key=api_key  
+)  
+# 创建React智能体  
+return create_react_agent(model, tools)
+</code></pre>
+<p><em><em><strong>3、构建测试用例</strong></em></em></p>
+<p>async def test_agent():<br>    # 获取智能体<br>    agent &#x3D; await get_agent()  </p>
+<pre><code># 测试用例  
+test_cases = [  
+    &quot;计算 (15 + 7) × 3 等于多少？&quot;,  
+    &quot;先计算 20 减 8，然后乘以 2 是多少？&quot;,  
+    &quot;现在几点了？深圳的天气如何？&quot;  
+]  
+
+for i, question in enumerate(test_cases, 1):  
+    print(f&quot;\n{&#39;=&#39; * 50}&quot;)  
+    print(f&quot;测试 {i}: {question}&quot;)  
+    print(f&quot;{&#39;=&#39; * 50}&quot;)  
+
+    # 调用智能体  
+    response = await agent.ainvoke(  
+        {&quot;messages&quot;: [HumanMessage(content=question)]}  
+    )  
+
+    # 获取最后一条消息（智能体的回复）  
+    last_message = response[&quot;messages&quot;][-1]  
+    print(f&quot;智能体回复: {last_message.content}&quot;)  
+</code></pre>
+<p>if <strong>name</strong> &#x3D;&#x3D; “<strong>main</strong>“:<br>    asyncio.run(test_agent())</p>
+<p><strong>运行结果：</strong></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe94aibQ031YG2lGtvdA6k1XfI2Shkbrsy6mF9CgOPEwbZs9AHDFkQgxrkBCbaZwVedLcGnQ4YRQd9nw/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=21"
+                        alt="图片"
+                 ></p>
+<p><strong>2.12 运行时上下文</strong></p>
+<p>创建图时，可以指定运行时上下文，将上下文信息（不属于图状态的信息）传递给节点，以便节点中使用，例如模型名称或数据库连接等。</p>
+<p>@dataclass<br>class ContextSchema:    # 定义上下文schema<br>    llm_provider: str &#x3D; “openai”<br>def node_a(state: State, runtime: Runtime[ContextSchema]):<br>    # 获取上下文信息<br>    llm &#x3D; get_llm(runtime.context.llm_provider)<br>    return state  </p>
+<p>graph &#x3D; StateGraph(State, context_schema&#x3D;ContextSchema)  </p>
+<h1 id="执行时指定上下文信息"><a href="#执行时指定上下文信息" class="headerlink" title="执行时指定上下文信息"></a>执行时指定上下文信息</h1><p>graph.invoke(inputs, context&#x3D;{“llm_provider”: “DeepSeek-R1-Online-0120”})</p>
+<p><strong>2.13 递归限制</strong></p>
+<p>递归限制指的是图在单次执行过程中的最大次数，由 recursion_limit 参数控制，默认值为25步，一旦超过限制，会抛出 GraphRecursionError错误，用于防止工作流陷入死循环，确保系统的稳定性和可预测性。</p>
+<p>try:<br>    result &#x3D; graph.invoke(<br>        {“input”: “开始执行”},<br>        config&#x3D;{“recursion_limit”: 50}  # 设置递归限制为50次<br>    )<br>except GraphRecursionError:<br>    print(“执行步数超过限制，抛出异常”)<br>    # 异常处理…</p>
+<h1 id="03-Multi-Agent架构"><a href="#03-Multi-Agent架构" class="headerlink" title="03 Multi-Agent架构"></a>03 Multi-Agent架构</h1><p><strong>3.1 多智能体架构概述</strong></p>
+<p>对于普通的业务系统，随着需求的迭代，系统的复杂度会变得越来越高，使得维护性和扩展性变得越来越高，经常需要花费大量是时间去定位问题，因此在项目初始阶段架构选择很重要。单智能体应用也是如此，比如：</p>
+<ol>
+<li><p>智能体有太多工具可供使用，导致在决定下一步调用哪个工具时做出错误的决定</p>
+</li>
+<li><p>上下文变得过于复杂，单个智能体难以跟踪</p>
+</li>
+<li><p>系统中需要多个专业领域的智能体协同工作</p>
+</li>
+</ol>
+<p>为了解决这些问题，可以将应用程序分解为多个更小、独立的智能体，并将它们组合成一个多智能体系统。使用多智能体的好处是：</p>
+<ol>
+<li><p>模块化：独立的智能体使得开发、测试和维护智能体系统更加容易。</p>
+</li>
+<li><p>专业化：可以创建专注于特定领域的专家智能体，这有助于提高整个系统的性能。</p>
+</li>
+<li><p>可控性：可以明确控制智能体之间的通信方式（而不是依赖于函数调用）。</p>
+</li>
+</ol>
+<p><strong>多智能体架构：</strong></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxxjXcFLian4iaP2rA94Yj96FDy1al7jvYgmTvhRDtU1hg1SA47nzRxBvg/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=22"
+                        alt="图片"
+                 ></p>
+<p>在多智能体系统中，有几种常见的连接智能体的方式：</p>
+<ol>
+<li><p>**Network（网络）：**每个智能体都可以与其他任何智能体进行通信。任何智能体都可以决定下一步调用哪个其他智能体。</p>
+</li>
+<li><p>**Supervisor（主管）：**包含一个主管智能体，每个智能体都与一个主管智能体进行通信。主管智能体决定下一步应该调用哪个智能体。</p>
+</li>
+<li><p>**Supervisor as tools（主管as工具调用）：**主管架构的一种特殊情况。单个智能体可以被表示为工具。主管智能体使用一个支持工具调用的 LLM 来决定调用哪个智能体工具，以及传递给这些智能体的参数。</p>
+</li>
+<li><p>**Hierarchical（层级式）：**包含多层的Supervisor架构，每一层都有自己的主管，类似于公司的组织架构（GM-总监-组长-员工）</p>
+</li>
+<li><p>**Custom（自定义）：**使用LangGraph提供的灵活的图结构和条件边，可以自定义各种执行流，比较灵活，使用的也最多。</p>
+</li>
+</ol>
+<p><strong>3.2 Agent之间通信和状态管理</strong></p>
+<p>在构建多智能体应用时，需要考虑智能体与智能体之间如何进行交互，以及数据应该如何共享。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxrPVAhYHm18Cia9Ux27rGDkL9sibPFJml9rBfucucYiakCSbPuvpuR5xlA/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=23"
+                        alt="图片"
+                 ></p>
+<p>**1、通信模式：**常见的两种通讯模式是通过移交（handoffs）和工具调用</p>
+<ul>
+<li><p>**移交：**一个智能体将其执行上下文和执行权传递给另一个智能体。</p>
+</li>
+<li><p>**工具调用：**一个智能体（如主管）将另一个智能体作为工具进行调用。</p>
+</li>
+</ul>
+<p>移交更适用于自主协作的场景，而工具调用则提供了更明确的层级控制和接口约束。</p>
+<p>**2、消息传递：**Agent与Agent之间应该传递所有的消息还是部分消息，需要根据具体的业务场景权衡。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxtVpaY8CVYPmywZa6nnfH9piaLXe8gSiaTRmRN91FHxe5PItesDd0ESlQ/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=24"
+                        alt="图片"
+                 ></p>
+<ul>
+<li><p>**共享完整推理数据：**智能体将其所有中间步骤（如链式思考、工具调用）写入共享通道。相当于提供了一个共享区，用于其他智能体理解其推理过程，可以提升系统的整体协作与推理能力。但是这种方式的缺点是会导致状态空间快速膨胀，给上下文窗口和内存管理带来挑战。</p>
+</li>
+<li><p>**仅共享最终结果：**智能体在私有空间内完成其计算，仅将最终结果写入到共享区。它能有效控制状态的复杂度，实现此策略需要为每个智能体定义独立的状态模式。</p>
+</li>
+</ul>
+<p><strong>3.3 supervisor（主管）</strong></p>
+<p>每个子智能体由一个中央主管智能体协调。主管控制所有的通信流和任务委派，根据当前上下文和任务需求决定调用哪个智能体。</p>
+<p>Supervisor 架构模仿了企业中“项目经理”的角色。它采用经典的“管理者-工作者”结构，由一个中心的主管代理（Supervisor）负责接收用户任务，并将其分解、委派给各个专业的工作者代理（Worker Agents），并最终整合结果。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxMUSwruYkDZCrUkJjfa68FRTJIYPEWquZiaSE3t46XVScECNtNfQBseQ/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=25"
+                        alt="图片"
+                 ></p>
+<p>LangGraph提供了专门的Supervisor Python库：</p>
+<p>pip install langgraph-supervisor</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxMZ9Oic4jwC42fRj79DEImTGYNzEqeXwaNu4HJK0sEaGMkT2cUmfR2Yw/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=26"
+                        alt="图片"
+                 ></p>
+<p>def book_hotel(hotel_name: str):<br>    “””预订酒店”””<br>    print(f”✅ 成功预订了 {hotel_name} 的住宿”)<br>    return f”成功预订了 {hotel_name} 的住宿。”<br>def book_flight(from_airport: str, to_airport: str):<br>    “””预订航班”””<br>    print(f”✅ 成功预订了从 {from_airport} 到 {to_airport} 的航班”)<br>    return f”成功预订了从 {from_airport} 到 {to_airport} 的航班。”<br>flight_assistant &#x3D; create_react_agent(<br>    model&#x3D;model,<br>    tools&#x3D;[book_flight],<br>    prompt&#x3D;(<br>        “你是专业的航班预订助手，专注于帮助用户预订机票。\n”<br>        “工作流程：\n”<br>        “1. 从用户需求中提取出发地和目的地信息\n”<br>        “2. 调用book_flight工具完成预订\n”<br>        “3. 收到预订成功的确认后，向主管汇报结果并结束\n”<br>        “注意：每次只处理一个预订请求，完成后立即结束，不要重复调用工具。”<br>    ),<br>    name&#x3D;”flight_assistant”<br>)<br>hotel_assistant &#x3D; create_react_agent(<br>    model&#x3D;model,<br>    tools&#x3D;[book_hotel],<br>    prompt&#x3D;(<br>        “你是专业的酒店预订助手，专注于帮助用户预订酒店。\n”<br>        “工作流程：\n”<br>        “1. 从用户需求中提取酒店信息（如果未指定，选择经济型酒店）\n”<br>        “2. 调用book_hotel工具完成预订\n”<br>        “3. 收到预订成功的确认后，向主管汇报结果并结束\n”<br>        “注意：每次只处理一个预订请求，完成后立即结束，不要重复调用工具。”<br>    ),<br>    name&#x3D;”hotel_assistant”<br>)<br>supervisor &#x3D; create_supervisor(<br>    agents&#x3D;[flight_assistant, hotel_assistant],<br>    model&#x3D;model,<br>    prompt&#x3D;(<br>        “你是一个智能任务调度主管，负责协调航班预订助手(flight_assistant)和酒店预订助手(hotel_assistant)。\n\n”<br>        “工作流程：\n”<br>        “1. 分析用户需求，确定需要哪些服务（航班、酒店或两者）\n”<br>        “2. 如果需要预订航班，调用flight_assistant一次\n”<br>        “3. 如果需要预订酒店，调用hotel_assistant一次\n”<br>        “4. 收到助手的预订确认后，记录结果\n”<br>        “5. 当所有任务都完成后，向用户汇总所有预订结果，然后立即结束\n\n”<br>        “关键规则：\n”<br>        “- 每个助手只能调用一次，不要重复调用\n”<br>        “- 看到’成功预订’的消息后，该任务就已完成\n”<br>        “- 所有任务完成后，必须直接结束，不要再调用任何助手\n”<br>        “- 如果已经看到航班和酒店的预订确认，立即汇总并结束”<br>    )<br>).compile()<br>for chunk in supervisor.stream(<br>    {<br>        “messages”: [<br>            {<br>                “role”: “user”,<br>                “content”: “帮我预定一个北京到深圳的机票，并且预定一个酒店”<br>            }<br>        ]<br>    }<br>):<br>    print(chunk)<br>    print(“\n”)</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxBSpaZricAAZXtW665EztMTlSTK7IrHAdShqicwRUJo6GMRyH07tGia5Rg/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=27"
+                        alt="图片"
+                 ></p>
+<p><strong>supervisor支持可以将每个工作Agent的全部消息或最后一条消息添加到整个消息列表中</strong></p>
+<h1 id="添加所有消息"><a href="#添加所有消息" class="headerlink" title="添加所有消息"></a>添加所有消息</h1><p>workflow &#x3D; create_supervisor(<br>    agents&#x3D;[agent1, agent2],<br>    output_mode&#x3D;”full_history”<br>)  </p>
+<h1 id="添加最后一条消息"><a href="#添加最后一条消息" class="headerlink" title="添加最后一条消息"></a>添加最后一条消息</h1><p>workflow &#x3D; create_supervisor(<br>    agents&#x3D;[agent1, agent2],<br>    output_mode&#x3D;”last_message”<br>)</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxmYQZHpzZrEOQdEMNYPYz6cKYicqWRPpox8iaIc0xMz0LSFrrVSPAprhQ/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=28"
+                        alt="图片"
+                 ></p>
+<p><strong>每一个主管Agent也可以是一个工作Agent，由一个更顶层的主管Agent管理：</strong></p>
+<p>research_team &#x3D; create_supervisor(<br>    [research_agent, math_agent],<br>    model&#x3D;model,<br>    supervisor_name&#x3D;”research_supervisor”<br>).compile(name&#x3D;”research_team”)<br>writing_team &#x3D; create_supervisor(<br>    [writing_agent, publishing_agent],<br>    model&#x3D;model,<br>    supervisor_name&#x3D;”writing_supervisor”<br>).compile(name&#x3D;”writing_team”)<br>top_level_supervisor &#x3D; create_supervisor(<br>    [research_team, writing_team],<br>    model&#x3D;model,<br>    supervisor_name&#x3D;”top_level_supervisor”<br>).compile(name&#x3D;”top_level_supervisor”)</p>
+<p><strong>supervisor添加长期记忆和短期记忆：</strong></p>
+<h1 id="短期记忆"><a href="#短期记忆" class="headerlink" title="短期记忆"></a>短期记忆</h1><p>checkpointer &#x3D; InMemorySaver()  </p>
+<h1 id="长期记忆"><a href="#长期记忆" class="headerlink" title="长期记忆"></a>长期记忆</h1><p>store &#x3D; InMemoryStore()<br>swarm &#x3D; create_supervisor(<br>    agents&#x3D;[flight_assistant, hotel_assistant],<br>    model&#x3D;model,<br>).compile(checkpointer&#x3D;checkpointer, store&#x3D;store)</p>
+<p><strong>3.4 swarm（群组）</strong></p>
+<p>智能体根据各自的专长动态地将控制权移交给其他智能体。Swarm 架构则更像一个开放的“专家社区”。它没有中心指挥，每个专业智能体都具备自主判断能力，可以根据当前任务上下文，决定是否以及将控制权“移交”给另一个智能体，形成一种自然的协作流水线。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRx0DbnFY0QiaanufBCibaYZ6GchqXFn95QiasgDJictQ7QSsOiaDT7xrwT2Sg/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=29"
+                        alt="图片"
+                 ></p>
+<p>**安装Swarm库：**Swarm库是一种多智能体架构的Python库</p>
+<p>pip install langgraph-swarm</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxicgoeuaaibHXM3zdL7lxb43IafdBTib1dXYXQlpHYT5q6uHlp4PWez03A/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=30"
+                        alt="图片"
+                 ></p>
+<p>def book_hotel(hotel_name: str):<br>    “””预订酒店”””<br>    print(f”✅ 成功预订了 {hotel_name} 的住宿”)<br>    return f”成功预订了 {hotel_name} 的住宿。”<br>def book_flight(from_airport: str, to_airport: str):<br>    “””预订航班”””<br>    print(f”✅ 成功预订了从 {from_airport} 到 {to_airport} 的航班”)<br>    return f”成功预订了从 {from_airport} 到 {to_airport} 的航班。”<br>transfer_to_hotel_assistant &#x3D; create_handoff_tool(<br>    agent_name&#x3D;”hotel_assistant”,<br>    description&#x3D;”将用户转接给酒店预订助手。当用户需要预订酒店时使用此工具。”,<br>)<br>transfer_to_flight_assistant &#x3D; create_handoff_tool(<br>    agent_name&#x3D;”flight_assistant”,<br>    description&#x3D;”将用户转接给航班预订助手。当用户需要预订航班时使用此工具。”,<br>)<br>flight_assistant &#x3D; create_react_agent(<br>    model&#x3D;flight_assistant_model,<br>    tools&#x3D;[book_flight, transfer_to_hotel_assistant],<br>    prompt&#x3D;(<br>        “你是一个航班预订助手，负责帮助用户预订航班。”<br>        “当用户需要预订航班时，使用 book_flight 工具完成预订。”<br>        “如果用户还需要预订酒店，完成航班预订后，必须使用 transfer_to_hotel_assistant 工具将用户转接给酒店预订助手。”<br>        “重要：不要直接结束对话，确保所有用户需求都得到处理。”<br>    ),<br>    name&#x3D;”flight_assistant”<br>)<br>hotel_assistant &#x3D; create_react_agent(<br>    model&#x3D;hotel_assistant_model,<br>    tools&#x3D;[book_hotel, transfer_to_flight_assistant],<br>    prompt&#x3D;(<br>        “你是一个酒店预订助手，负责帮助用户预订酒店。”<br>        “当用户需要预订酒店时，使用 book_hotel 工具完成预订。”<br>        “如果用户还需要预订航班，完成酒店预订后，必须使用 transfer_to_flight_assistant 工具将用户转接给航班预订助手。”<br>        “完成所有预订后，向用户确认所有任务已完成。”<br>    ),<br>    name&#x3D;”hotel_assistant”<br>)<br>swarm &#x3D; create_swarm(<br>    agents&#x3D;[flight_assistant, hotel_assistant],<br>    default_active_agent&#x3D;”flight_assistant”<br>).compile()<br>for chunk in swarm.stream(<br>    {<br>        “messages”: [<br>            HumanMessage(content&#x3D;”帮我预订从北京到上海的航班，并预订如家酒店”)<br>        ]<br>    }<br>):<br>    print(chunk)<br>    print(“\n”)</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxotXsibHtmZQRJzEjnpqewoMLeporE4FGzGWvgEKHx6DpUtR9ibWKicPxg/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=31"
+                        alt="图片"
+                 ></p>
+<p><strong>swarm支持添加长期记忆和短期记忆。</strong></p>
+<h1 id="短期记忆-1"><a href="#短期记忆-1" class="headerlink" title="短期记忆"></a>短期记忆</h1><p>checkpointer &#x3D; InMemorySaver()  </p>
+<h1 id="长期记忆-1"><a href="#长期记忆-1" class="headerlink" title="长期记忆"></a>长期记忆</h1><p>store &#x3D; InMemoryStore()<br>swarm &#x3D; create_swarm(<br>    agents&#x3D;[flight_assistant, hotel_assistant],<br>    default_active_agent&#x3D;”flight_assistant”<br>).compile(checkpointer&#x3D;checkpointer, store&#x3D;store)</p>
+<p>Supervisor 和 Swarm 代表了两种截然不同但同样强大的协作思想。Supervisor 通过集中控制带来可预测性和可靠性，而 Swarm 通过去中心化设计带来灵活性和韧性。在实际应用中，架构选择没有绝对的优劣，关键在于与业务场景的深度契合。甚至，在复杂的系统中，可以混合使用两种模式，例如核心流程用 Supervisor 严格管控，非核心探索环节用 Swarm 激发灵活性。</p>
+<p><strong>3.5 handoffs（交接）</strong></p>
+<p>handoffs 指的是一个智能体将控制权交接给另一个智能体，上述的Supervisor 和 Swarm都是使用handoffs来交接执行权的。handoffs需要包含两个最基本的要素：</p>
+<ol>
+<li><p>目的地：下一个智能体</p>
+</li>
+<li><p>State：传递给下一个智能体的信息</p>
+</li>
+</ol>
+<p>Supervisor 和 Swarm都默认使用了create_handoff_tool移交工具，我们也可以自己实现交接函数</p>
+<p>def create_task_description_handoff_tool(*, agent_name: str, description: str | None &#x3D; None):<br>    name &#x3D; f”transfer_to_{agent_name}”<br>    description &#x3D; description or f”移交给 {agent_name}”<br>    @tool(name, description&#x3D;description)<br>    def handoff_tool(<br>        task_description: Annotated[str, “描述下一个Agent应该做什么，包括所有相关信息。”],<br>        state: Annotated[MessagesState, InjectedState],<br>    ) -&gt; Command:<br>        task_description_message &#x3D; {“role”: “user”, “content”: task_description}<br>        agent_input &#x3D; {**state, “messages”: [task_description_message]}<br>        return Command(<br>            goto&#x3D;[Send(agent_name, agent_input)],<br>            graph&#x3D;Command.PARENT,<br>        )<br>    return handoff_tool  </p>
+<h1 id="自定义移交工具"><a href="#自定义移交工具" class="headerlink" title="自定义移交工具"></a>自定义移交工具</h1><p>transfer_to_hotel_assistant &#x3D; create_task_description_handoff_tool(<br>    agent_name&#x3D;”hotel_assistant”,<br>    description&#x3D;”将执行权移交给酒店预订助手”,<br>)<br>transfer_to_flight_assistant &#x3D; create_task_description_handoff_tool(<br>    agent_name&#x3D;”flight_assistant”,<br>    description&#x3D;”将执行权移交给航班预订助手”,<br>)<br>@tool(“book_hotel”)<br>def book_hotel(hotel_name: str):<br>    “””预订酒店 - 当用户需要预订酒店时必须调用此工具”””<br>    print(f”✅ 成功预订了 {hotel_name} 的住宿”)<br>    return f”成功预订了 {hotel_name} 的住宿。”<br>@tool(“book_flight”)<br>def book_flight(from_airport: str, to_airport: str):<br>    “””预订航班”””<br>    print(f”✅ 成功预订了从 {from_airport} 到 {to_airport} 的航班”)<br>    return f”成功预订了从 {from_airport} 到 {to_airport} 的航班。”  </p>
+<h1 id="定义智能体"><a href="#定义智能体" class="headerlink" title="定义智能体"></a>定义智能体</h1><p>flight_assistant &#x3D; create_react_agent(<br>    model&#x3D;model,<br>    tools&#x3D;[book_flight, transfer_to_hotel_assistant],<br>    prompt&#x3D;”你是一个航班预订助手，专门负责帮助用户预订航班。”,<br>    name&#x3D;”flight_assistant”<br>)<br>hotel_assistant &#x3D; create_react_agent(<br>    model&#x3D;model,<br>    tools&#x3D;[book_hotel, transfer_to_flight_assistant],<br>    prompt&#x3D;”你是酒店预订助手，专门负责帮助用户预订酒店。”,<br>    name&#x3D;”hotel_assistant”<br>)  </p>
+<h1 id="定义多智能体图"><a href="#定义多智能体图" class="headerlink" title="定义多智能体图"></a>定义多智能体图</h1><p>multi_agent_graph &#x3D; (<br>    StateGraph(MessagesState)<br>    .add_node(flight_assistant)<br>    .add_node(hotel_assistant)<br>    .add_edge(START, “flight_assistant”)<br>    .compile()<br>)<br>multi_agent_graph.invoke(<br>    {<br>        “messages”: [<br>            HumanMessage(content&#x3D;”帮我预订从北京到上海的航班，并预订如家酒店”)<br>        ]<br>    }<br>)</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://mmbiz.qpic.cn/mmbiz_png/VY8SELNGe95y4F4O80UVRyQkVhqeYSRxAWdTk6QVlzdGlSso0v5caibOsWKGlWPt1MqCzFwiawVL9dMtsZpskibfA/640?wx_fmt=png&from=appmsg&tp=webp&wxfrom=5&wx_lazy=1#imgIndex=32"
+                        alt="图片"
+                 ></p>
+<p><strong>上述例子（supervisor、swarm、handoffs）在实际测试中运行并不稳定，有时并非按照预期执行相应的工具，或者循环执行工具。可以通过更换模型或者修改提示词尝试解决。</strong></p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/LnagGraph/">LnagGraph</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2026/07/17/LLM%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/"
+                                   title="LLM基本原理"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">LLM基本原理</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2026/07/17/Agent%E7%9A%84%E8%AE%B0%E5%BF%86%E5%8A%9F%E8%83%BD/"
+                                   title="Agent的记忆功能"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Agent的记忆功能</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LangChain-%E6%98%AF%E6%9E%84%E5%BB%BA-LLM-%E5%BA%94%E7%94%A8%E7%9A%84%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7%E7%AE%B1%EF%BC%8C%E8%80%8C-LangGraph-%E6%98%AF%E5%9C%A8%E5%85%B6%E5%9F%BA%E7%A1%80%E4%B8%8A%E6%9E%84%E5%BB%BA%E5%A4%8D%E6%9D%82%E3%80%81%E6%9C%89%E7%8A%B6%E6%80%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%9A%84%E5%9B%BE%E5%BD%A2%E5%8C%96%E6%A1%86%E6%9E%B6%E3%80%82"><span class="nav-text">LangChain 是构建 LLM 应用的基础工具箱，而 LangGraph 是在其基础上构建复杂、有状态工作流的图形化框架。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%AE%9A%E4%BD%8D"><span class="nav-text">核心定位</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="nav-text">创建模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8LangGraph%E6%8F%90%E4%BE%9B%E7%9A%84API%E5%88%9B%E5%BB%BAAgent"><span class="nav-text">使用LangGraph提供的API创建Agent</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-LangGraph%E6%A0%B8%E5%BF%83"><span class="nav-text">02 LangGraph核心</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81"><span class="nav-text">定义状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%8A%B6%E6%80%81%E5%9B%BE%EF%BC%8C%E5%B9%B6%E6%8C%87%E5%AE%9A%E7%8A%B6%E6%80%81"><span class="nav-text">创建一个状态图，并指定状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E5%85%A5%E5%8F%82%E4%B8%BAstate"><span class="nav-text">定义一个节点，入参为state</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84node%E8%8A%82%E7%82%B9"><span class="nav-text">定义带参数的node节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0inpu%E8%8A%82%E7%82%B9"><span class="nav-text">添加inpu节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%99process-node%E8%8A%82%E7%82%B9%E7%BB%91%E5%AE%9A%E5%8F%82%E6%95%B0"><span class="nav-text">给process_node节点绑定参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84node%E8%8A%82%E7%82%B9"><span class="nav-text">添加带参数的node节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%89%A7%E8%A1%8C%E7%9A%84%E8%8A%82%E7%82%B9%E6%98%AF-node-start"><span class="nav-text">第一个执行的节点是 node_start</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#node-end-%E8%8A%82%E7%82%B9%E6%89%A7%E8%A1%8C%E5%90%8E%EF%BC%8C%E6%B2%A1%E6%9C%89%E5%90%8E%E7%BB%AD%E8%8A%82%E7%82%B9%E4%BA%86"><span class="nav-text">node_end 节点执行后，没有后续节点了</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E8%AF%95%E7%AD%96%E7%95%A5"><span class="nav-text">重试策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%9B%BA%E5%AE%9A%E8%BE%B9%EF%BC%8C%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%9Astart-input-process-output-end"><span class="nav-text">添加固定边，执行顺序：start -&gt; input -&gt; process -&gt; output -&gt; end</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%9B%BE%EF%BC%8C%E4%BF%9D%E8%AF%81%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E6%98%AF%E6%AD%A3%E7%A1%AE%E7%9A%84%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%B7%BB%E5%8A%A0%E4%BA%86%E8%BE%B9%EF%BC%8C%E6%B2%A1%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9%EF%BC%8C%E4%BC%9A%E6%8A%A5%E9%94%99"><span class="nav-text">编译图，保证生成的图是正确的，如果添加了边，没添加节点，会报错</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81-1"><span class="nav-text">定义状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%8A%B6%E6%80%81%E5%9B%BE%EF%BC%8C%E5%B9%B6%E6%8C%87%E5%AE%9A%E7%8A%B6%E6%80%81-1"><span class="nav-text">创建一个状态图，并指定状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0input%E3%80%81process%E3%80%81output%E8%8A%82%E7%82%B9"><span class="nav-text">添加input、process、output节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%9B%BA%E5%AE%9A%E8%BE%B9%EF%BC%8C%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%9Astart-input-process-output-end-1"><span class="nav-text">添加固定边，执行顺序：start -&gt; input -&gt; process -&gt; output -&gt; end</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%9B%BE%EF%BC%8C%E4%BF%9D%E8%AF%81%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E6%98%AF%E6%AD%A3%E7%A1%AE%E7%9A%84%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%B7%BB%E5%8A%A0%E4%BA%86%E8%BE%B9%EF%BC%8C%E6%B2%A1%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9%EF%BC%8C%E4%BC%9A%E6%8A%A5%E9%94%99-1"><span class="nav-text">编译图，保证生成的图是正确的，如果添加了边，没添加节点，会报错</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E5%8F%82%E6%95%B0%EF%BC%9A%E5%BD%93%E5%89%8D%E8%8A%82%E7%82%B9%EF%BC%8C%E8%B7%AF%E7%94%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E8%B7%AF%E7%94%B1%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E7%9A%84%E6%9D%A1%E4%BB%B6%E4%B8%8Enode%E7%9A%84%E6%98%A0%E5%B0%84"><span class="nav-text">添加路由函数，参数：当前节点，路由函数，路由函数返回的条件与node的映射</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%A4%84%E7%90%86%E8%8A%82%E7%82%B9%E9%83%BD%E8%BF%9E%E6%8E%A5%E5%88%B0END"><span class="nav-text">所有处理节点都连接到END</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E8%BF%94%E5%9B%9E-Send-%E5%88%97%E8%A1%A8"><span class="nav-text">路由函数，返回 Send 列表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%80%E6%9C%89process-task%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8C%E6%B1%87%E6%80%BB%E7%BB%93%E6%9E%9C"><span class="nav-text">所有process_task完成后，汇总结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E8%8A%82%E7%82%B9%E5%87%BD%E6%95%B0%E4%B8%AD%E8%BF%94%E5%9B%9E-Command-%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="nav-text">在节点函数中返回 Command 来实现动态路由</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E7%9A%84%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="nav-text">获取所有的检查点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%EF%BC%9A%E4%BB%8E%E6%8C%87%E5%AE%9A%E6%A3%80%E6%9F%A5%E7%82%B9%E7%BB%A7%E7%BB%AD%E6%89%A7%E8%A1%8C"><span class="nav-text">恢复：从指定检查点继续执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E7%9A%84%E6%AD%A5%E9%AA%A4%EF%BC%8C%E6%B3%A8%E6%84%8F%EF%BC%8Ccheckpoints%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%80%BC%E6%98%AFGraph%E6%89%A7%E8%A1%8C%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%88%E9%A1%BA%E5%BA%8F%E6%98%AF%E5%8F%8D%E7%9A%84%EF%BC%89"><span class="nav-text">查看所有的步骤，注意，checkpoints的第一个值是Graph执行的最后一个节点（顺序是反的）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="nav-text">获取一个检查点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E7%8A%B6%E6%80%81%EF%BC%8C%E8%BF%99%E4%BC%9A%E6%9B%BF%E6%8D%A2%E6%95%B4%E4%B8%AAdata-list"><span class="nav-text">更新状态，这会替换整个data_list</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E6%9B%B4%E6%96%B0%E5%90%8E%E7%9A%84%E6%A3%80%E6%9F%A5%E7%82%B9%E7%BB%A7%E7%BB%AD%E6%89%A7%E8%A1%8C"><span class="nav-text">从更新后的检查点继续执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E4%BA%BA%E5%B7%A5%E5%8F%8D%E9%A6%88%E8%8A%82%E7%82%B9%EF%BC%8C%E5%85%B6%E4%BB%96%E8%8A%82%E7%82%B9%E7%9C%81%E7%95%A5"><span class="nav-text">添加人工反馈节点，其他节点省略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E4%BA%BA%E5%B7%A5%E5%8F%8D%E9%A6%88%E8%BE%B9%EF%BC%8C%E5%85%B6%E4%BB%96%E8%8A%82%E7%82%B9%E7%9C%81%E7%95%A5"><span class="nav-text">添加人工反馈边，其他节点省略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%9D%A1%E4%BB%B6%E8%BE%B9%EF%BC%8C%E6%A0%B9%E6%8D%AE%E7%94%A8%E6%88%B7%E5%8F%8D%E9%A6%88%E6%9D%A5%E9%80%89%E6%8B%A9%E8%B0%83%E7%94%A8%E5%90%8E%E7%BB%AD%E7%9A%84%E8%8A%82%E7%82%B9"><span class="nav-text">添加条件边，根据用户反馈来选择调用后续的节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%9B%BE%E5%B9%B6%E5%90%AF%E7%94%A8%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="nav-text">编译图并启用检查点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BC%9A%E8%AF%9Did%EF%BC%8C%E7%94%A8%E4%BA%8E%E5%8C%BA%E5%88%86%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BC%9A%E8%AF%9D"><span class="nav-text">配置会话id，用于区分不同的会话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A6%96%E6%AC%A1%E6%89%A7%E8%A1%8C%E5%9B%BE%EF%BC%8C%E6%89%A7%E8%A1%8C%E5%88%B0human-feedback%E8%8A%82%E7%82%B9%E4%BC%9A%E4%B8%AD%E6%96%AD%EF%BC%8Cinvoke%E7%AB%8B%E5%8D%B3%E8%BF%94%E5%9B%9E-%E8%BF%94%E5%9B%9E%E7%9A%84%E7%BB%93%E6%9E%9C%E4%BC%9A%E5%8C%85%E5%90%AB%E4%B8%AD%E6%96%AD%E4%BF%A1%E6%81%AF%EF%BC%8Cresult-get-interrupt"><span class="nav-text">首次执行图，执行到human_feedback节点会中断，invoke立即返回# 返回的结果会包含中断信息，result.get(interrupt)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E4%BA%BA%E5%B7%A5%E8%BE%93%E5%85%A5%EF%BC%88%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E4%B8%AD%E6%9D%A5%E8%87%AA%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%EF%BC%89"><span class="nav-text">模拟人工输入（实际应用中来自用户界面）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E6%81%A2%E5%A4%8D%E5%B7%A5%E4%BD%9C%E6%B5%81%EF%BC%8C%E7%BB%A7%E7%BB%AD%E6%89%A7%E8%A1%8C%E5%90%8E%E7%BB%AD%E8%8A%82%E7%82%B9"><span class="nav-text">重新恢复工作流，继续执行后续节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E5%86%85%E5%AD%98%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="nav-text">1. 初始化一个内存检查点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%9C%A8%E7%BC%96%E8%AF%91%E5%9B%BE%E6%97%B6%E4%BC%A0%E5%85%A5%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="nav-text">2. 在编译图时传入检查点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%B0%83%E7%94%A8%E6%97%B6%E9%80%9A%E8%BF%87-thread-id-%E6%8C%87%E5%AE%9A%E4%BC%9A%E8%AF%9D%E7%BA%BF%E7%A8%8B"><span class="nav-text">3. 调用时通过 thread_id 指定会话线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E5%86%85%E5%AD%98%E5%AD%98%E5%82%A8"><span class="nav-text">初始化一个内存存储</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%EF%BC%8C%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E5%85%83%E7%BB%84%EF%BC%8C%E7%94%A8%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%88%86%E7%B1%BB%E5%92%8C%E9%9A%94%E7%A6%BB"><span class="nav-text">定义命名空间，命名空间元组，用于数据分类和隔离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%9B%BE"><span class="nav-text">创建图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%9B%BE%EF%BC%8C%E5%B9%B6%E6%8C%87%E5%AE%9A%E5%AD%98%E5%82%A8"><span class="nav-text">编译图，并指定存储</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%88%B6%E5%9B%BE%E7%8A%B6%E6%80%81"><span class="nav-text">定义父图状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%AD%90%E5%9B%BE%E7%8A%B6%E6%80%81"><span class="nav-text">定义子图状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AD%90%E5%9B%BE%EF%BC%8C%E6%B7%BB%E5%8A%A0node%E3%80%81edge%E7%AD%89"><span class="nav-text">创建子图，添加node、edge等</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%88%B6%E5%9B%BE"><span class="nav-text">创建父图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%AD%90%E5%9B%BE%E6%B7%BB%E5%8A%A0%E4%B8%BA%E7%88%B6%E5%9B%BE%E7%9A%84%E8%8A%82%E7%82%B9"><span class="nav-text">添加子图添加为父图的节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%86%E5%AD%90%E5%9B%BE%E8%BF%9E%E6%8E%A5%E8%B5%B7%E6%9D%A5"><span class="nav-text">将子图连接起来</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E7%88%B6%E5%9B%BE%E5%B9%B6%E6%89%A7%E8%A1%8C"><span class="nav-text">编译父图并执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E7%88%B6%E5%9B%BE%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%BB%A3%E7%90%86%E8%8A%82%E7%82%B9%E5%A4%84%E7%90%86%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2"><span class="nav-text">在父图中创建代理节点处理状态转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%88%B6%E5%9B%BE%E4%B8%AD%E6%B7%BB%E5%8A%A0%E7%9A%84%E6%98%AF%E4%BB%A3%E7%90%86%E8%8A%82%E7%82%B9%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E7%9B%B4%E6%8E%A5%E6%B7%BB%E5%8A%A0%E5%AD%90%E5%9B%BE"><span class="nav-text">父图中添加的是代理节点，而不是直接添加子图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%90%8D%E4%B8%BA%E2%80%9DMCP-Tools%E2%80%9D%E7%9A%84MCP%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">创建名为”MCP_Tools”的MCP服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%97%B6%E6%8C%87%E5%AE%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%A1%E6%81%AF"><span class="nav-text">执行时指定上下文信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-Multi-Agent%E6%9E%B6%E6%9E%84"><span class="nav-text">03 Multi-Agent架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%89%80%E6%9C%89%E6%B6%88%E6%81%AF"><span class="nav-text">添加所有消息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%9C%80%E5%90%8E%E4%B8%80%E6%9D%A1%E6%B6%88%E6%81%AF"><span class="nav-text">添加最后一条消息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86"><span class="nav-text">短期记忆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86"><span class="nav-text">长期记忆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86-1"><span class="nav-text">短期记忆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86-1"><span class="nav-text">长期记忆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%A7%BB%E4%BA%A4%E5%B7%A5%E5%85%B7"><span class="nav-text">自定义移交工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E4%BD%93"><span class="nav-text">定义智能体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%9B%BE"><span class="nav-text">定义多智能体图</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">xiaowo435</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            This site is deployed on <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span>
+            
+        </div>
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#LangChain-%E6%98%AF%E6%9E%84%E5%BB%BA-LLM-%E5%BA%94%E7%94%A8%E7%9A%84%E5%9F%BA%E7%A1%80%E5%B7%A5%E5%85%B7%E7%AE%B1%EF%BC%8C%E8%80%8C-LangGraph-%E6%98%AF%E5%9C%A8%E5%85%B6%E5%9F%BA%E7%A1%80%E4%B8%8A%E6%9E%84%E5%BB%BA%E5%A4%8D%E6%9D%82%E3%80%81%E6%9C%89%E7%8A%B6%E6%80%81%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%9A%84%E5%9B%BE%E5%BD%A2%E5%8C%96%E6%A1%86%E6%9E%B6%E3%80%82"><span class="nav-text">LangChain 是构建 LLM 应用的基础工具箱，而 LangGraph 是在其基础上构建复杂、有状态工作流的图形化框架。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E5%AE%9A%E4%BD%8D"><span class="nav-text">核心定位</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9E%8B"><span class="nav-text">创建模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8LangGraph%E6%8F%90%E4%BE%9B%E7%9A%84API%E5%88%9B%E5%BB%BAAgent"><span class="nav-text">使用LangGraph提供的API创建Agent</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-LangGraph%E6%A0%B8%E5%BF%83"><span class="nav-text">02 LangGraph核心</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81"><span class="nav-text">定义状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%8A%B6%E6%80%81%E5%9B%BE%EF%BC%8C%E5%B9%B6%E6%8C%87%E5%AE%9A%E7%8A%B6%E6%80%81"><span class="nav-text">创建一个状态图，并指定状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%8C%E5%85%A5%E5%8F%82%E4%B8%BAstate"><span class="nav-text">定义一个节点，入参为state</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84node%E8%8A%82%E7%82%B9"><span class="nav-text">定义带参数的node节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0inpu%E8%8A%82%E7%82%B9"><span class="nav-text">添加inpu节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%99process-node%E8%8A%82%E7%82%B9%E7%BB%91%E5%AE%9A%E5%8F%82%E6%95%B0"><span class="nav-text">给process_node节点绑定参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%B8%A6%E5%8F%82%E6%95%B0%E7%9A%84node%E8%8A%82%E7%82%B9"><span class="nav-text">添加带参数的node节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%89%A7%E8%A1%8C%E7%9A%84%E8%8A%82%E7%82%B9%E6%98%AF-node-start"><span class="nav-text">第一个执行的节点是 node_start</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#node-end-%E8%8A%82%E7%82%B9%E6%89%A7%E8%A1%8C%E5%90%8E%EF%BC%8C%E6%B2%A1%E6%9C%89%E5%90%8E%E7%BB%AD%E8%8A%82%E7%82%B9%E4%BA%86"><span class="nav-text">node_end 节点执行后，没有后续节点了</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E8%AF%95%E7%AD%96%E7%95%A5"><span class="nav-text">重试策略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%9B%BA%E5%AE%9A%E8%BE%B9%EF%BC%8C%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%9Astart-input-process-output-end"><span class="nav-text">添加固定边，执行顺序：start -&gt; input -&gt; process -&gt; output -&gt; end</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%9B%BE%EF%BC%8C%E4%BF%9D%E8%AF%81%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E6%98%AF%E6%AD%A3%E7%A1%AE%E7%9A%84%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%B7%BB%E5%8A%A0%E4%BA%86%E8%BE%B9%EF%BC%8C%E6%B2%A1%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9%EF%BC%8C%E4%BC%9A%E6%8A%A5%E9%94%99"><span class="nav-text">编译图，保证生成的图是正确的，如果添加了边，没添加节点，会报错</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%8A%B6%E6%80%81-1"><span class="nav-text">定义状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%8A%B6%E6%80%81%E5%9B%BE%EF%BC%8C%E5%B9%B6%E6%8C%87%E5%AE%9A%E7%8A%B6%E6%80%81-1"><span class="nav-text">创建一个状态图，并指定状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0input%E3%80%81process%E3%80%81output%E8%8A%82%E7%82%B9"><span class="nav-text">添加input、process、output节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%9B%BA%E5%AE%9A%E8%BE%B9%EF%BC%8C%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F%EF%BC%9Astart-input-process-output-end-1"><span class="nav-text">添加固定边，执行顺序：start -&gt; input -&gt; process -&gt; output -&gt; end</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%9B%BE%EF%BC%8C%E4%BF%9D%E8%AF%81%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E6%98%AF%E6%AD%A3%E7%A1%AE%E7%9A%84%EF%BC%8C%E5%A6%82%E6%9E%9C%E6%B7%BB%E5%8A%A0%E4%BA%86%E8%BE%B9%EF%BC%8C%E6%B2%A1%E6%B7%BB%E5%8A%A0%E8%8A%82%E7%82%B9%EF%BC%8C%E4%BC%9A%E6%8A%A5%E9%94%99-1"><span class="nav-text">编译图，保证生成的图是正确的，如果添加了边，没添加节点，会报错</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E5%8F%82%E6%95%B0%EF%BC%9A%E5%BD%93%E5%89%8D%E8%8A%82%E7%82%B9%EF%BC%8C%E8%B7%AF%E7%94%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E8%B7%AF%E7%94%B1%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E7%9A%84%E6%9D%A1%E4%BB%B6%E4%B8%8Enode%E7%9A%84%E6%98%A0%E5%B0%84"><span class="nav-text">添加路由函数，参数：当前节点，路由函数，路由函数返回的条件与node的映射</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%80%E6%9C%89%E5%A4%84%E7%90%86%E8%8A%82%E7%82%B9%E9%83%BD%E8%BF%9E%E6%8E%A5%E5%88%B0END"><span class="nav-text">所有处理节点都连接到END</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E5%87%BD%E6%95%B0%EF%BC%8C%E8%BF%94%E5%9B%9E-Send-%E5%88%97%E8%A1%A8"><span class="nav-text">路由函数，返回 Send 列表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%80%E6%9C%89process-task%E5%AE%8C%E6%88%90%E5%90%8E%EF%BC%8C%E6%B1%87%E6%80%BB%E7%BB%93%E6%9E%9C"><span class="nav-text">所有process_task完成后，汇总结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E8%8A%82%E7%82%B9%E5%87%BD%E6%95%B0%E4%B8%AD%E8%BF%94%E5%9B%9E-Command-%E6%9D%A5%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="nav-text">在节点函数中返回 Command 来实现动态路由</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%89%80%E6%9C%89%E7%9A%84%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="nav-text">获取所有的检查点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%EF%BC%9A%E4%BB%8E%E6%8C%87%E5%AE%9A%E6%A3%80%E6%9F%A5%E7%82%B9%E7%BB%A7%E7%BB%AD%E6%89%A7%E8%A1%8C"><span class="nav-text">恢复：从指定检查点继续执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E6%89%80%E6%9C%89%E7%9A%84%E6%AD%A5%E9%AA%A4%EF%BC%8C%E6%B3%A8%E6%84%8F%EF%BC%8Ccheckpoints%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%80%BC%E6%98%AFGraph%E6%89%A7%E8%A1%8C%E7%9A%84%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E8%8A%82%E7%82%B9%EF%BC%88%E9%A1%BA%E5%BA%8F%E6%98%AF%E5%8F%8D%E7%9A%84%EF%BC%89"><span class="nav-text">查看所有的步骤，注意，checkpoints的第一个值是Graph执行的最后一个节点（顺序是反的）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%B8%80%E4%B8%AA%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="nav-text">获取一个检查点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E7%8A%B6%E6%80%81%EF%BC%8C%E8%BF%99%E4%BC%9A%E6%9B%BF%E6%8D%A2%E6%95%B4%E4%B8%AAdata-list"><span class="nav-text">更新状态，这会替换整个data_list</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BB%8E%E6%9B%B4%E6%96%B0%E5%90%8E%E7%9A%84%E6%A3%80%E6%9F%A5%E7%82%B9%E7%BB%A7%E7%BB%AD%E6%89%A7%E8%A1%8C"><span class="nav-text">从更新后的检查点继续执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E4%BA%BA%E5%B7%A5%E5%8F%8D%E9%A6%88%E8%8A%82%E7%82%B9%EF%BC%8C%E5%85%B6%E4%BB%96%E8%8A%82%E7%82%B9%E7%9C%81%E7%95%A5"><span class="nav-text">添加人工反馈节点，其他节点省略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E4%BA%BA%E5%B7%A5%E5%8F%8D%E9%A6%88%E8%BE%B9%EF%BC%8C%E5%85%B6%E4%BB%96%E8%8A%82%E7%82%B9%E7%9C%81%E7%95%A5"><span class="nav-text">添加人工反馈边，其他节点省略</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%9D%A1%E4%BB%B6%E8%BE%B9%EF%BC%8C%E6%A0%B9%E6%8D%AE%E7%94%A8%E6%88%B7%E5%8F%8D%E9%A6%88%E6%9D%A5%E9%80%89%E6%8B%A9%E8%B0%83%E7%94%A8%E5%90%8E%E7%BB%AD%E7%9A%84%E8%8A%82%E7%82%B9"><span class="nav-text">添加条件边，根据用户反馈来选择调用后续的节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%9B%BE%E5%B9%B6%E5%90%AF%E7%94%A8%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="nav-text">编译图并启用检查点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E4%BC%9A%E8%AF%9Did%EF%BC%8C%E7%94%A8%E4%BA%8E%E5%8C%BA%E5%88%86%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BC%9A%E8%AF%9D"><span class="nav-text">配置会话id，用于区分不同的会话</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%A6%96%E6%AC%A1%E6%89%A7%E8%A1%8C%E5%9B%BE%EF%BC%8C%E6%89%A7%E8%A1%8C%E5%88%B0human-feedback%E8%8A%82%E7%82%B9%E4%BC%9A%E4%B8%AD%E6%96%AD%EF%BC%8Cinvoke%E7%AB%8B%E5%8D%B3%E8%BF%94%E5%9B%9E-%E8%BF%94%E5%9B%9E%E7%9A%84%E7%BB%93%E6%9E%9C%E4%BC%9A%E5%8C%85%E5%90%AB%E4%B8%AD%E6%96%AD%E4%BF%A1%E6%81%AF%EF%BC%8Cresult-get-interrupt"><span class="nav-text">首次执行图，执行到human_feedback节点会中断，invoke立即返回# 返回的结果会包含中断信息，result.get(interrupt)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E4%BA%BA%E5%B7%A5%E8%BE%93%E5%85%A5%EF%BC%88%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E4%B8%AD%E6%9D%A5%E8%87%AA%E7%94%A8%E6%88%B7%E7%95%8C%E9%9D%A2%EF%BC%89"><span class="nav-text">模拟人工输入（实际应用中来自用户界面）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%87%8D%E6%96%B0%E6%81%A2%E5%A4%8D%E5%B7%A5%E4%BD%9C%E6%B5%81%EF%BC%8C%E7%BB%A7%E7%BB%AD%E6%89%A7%E8%A1%8C%E5%90%8E%E7%BB%AD%E8%8A%82%E7%82%B9"><span class="nav-text">重新恢复工作流，继续执行后续节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E5%86%85%E5%AD%98%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="nav-text">1. 初始化一个内存检查点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-%E5%9C%A8%E7%BC%96%E8%AF%91%E5%9B%BE%E6%97%B6%E4%BC%A0%E5%85%A5%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="nav-text">2. 在编译图时传入检查点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-%E8%B0%83%E7%94%A8%E6%97%B6%E9%80%9A%E8%BF%87-thread-id-%E6%8C%87%E5%AE%9A%E4%BC%9A%E8%AF%9D%E7%BA%BF%E7%A8%8B"><span class="nav-text">3. 调用时通过 thread_id 指定会话线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E4%B8%80%E4%B8%AA%E5%86%85%E5%AD%98%E5%AD%98%E5%82%A8"><span class="nav-text">初始化一个内存存储</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%EF%BC%8C%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E5%85%83%E7%BB%84%EF%BC%8C%E7%94%A8%E4%BA%8E%E6%95%B0%E6%8D%AE%E5%88%86%E7%B1%BB%E5%92%8C%E9%9A%94%E7%A6%BB"><span class="nav-text">定义命名空间，命名空间元组，用于数据分类和隔离</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%9B%BE"><span class="nav-text">创建图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E5%9B%BE%EF%BC%8C%E5%B9%B6%E6%8C%87%E5%AE%9A%E5%AD%98%E5%82%A8"><span class="nav-text">编译图，并指定存储</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E7%88%B6%E5%9B%BE%E7%8A%B6%E6%80%81"><span class="nav-text">定义父图状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%AD%90%E5%9B%BE%E7%8A%B6%E6%80%81"><span class="nav-text">定义子图状态</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%AD%90%E5%9B%BE%EF%BC%8C%E6%B7%BB%E5%8A%A0node%E3%80%81edge%E7%AD%89"><span class="nav-text">创建子图，添加node、edge等</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%88%B6%E5%9B%BE"><span class="nav-text">创建父图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%AD%90%E5%9B%BE%E6%B7%BB%E5%8A%A0%E4%B8%BA%E7%88%B6%E5%9B%BE%E7%9A%84%E8%8A%82%E7%82%B9"><span class="nav-text">添加子图添加为父图的节点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%B0%86%E5%AD%90%E5%9B%BE%E8%BF%9E%E6%8E%A5%E8%B5%B7%E6%9D%A5"><span class="nav-text">将子图连接起来</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E7%88%B6%E5%9B%BE%E5%B9%B6%E6%89%A7%E8%A1%8C"><span class="nav-text">编译父图并执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9C%A8%E7%88%B6%E5%9B%BE%E4%B8%AD%E5%88%9B%E5%BB%BA%E4%BB%A3%E7%90%86%E8%8A%82%E7%82%B9%E5%A4%84%E7%90%86%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2"><span class="nav-text">在父图中创建代理节点处理状态转换</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%88%B6%E5%9B%BE%E4%B8%AD%E6%B7%BB%E5%8A%A0%E7%9A%84%E6%98%AF%E4%BB%A3%E7%90%86%E8%8A%82%E7%82%B9%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E7%9B%B4%E6%8E%A5%E6%B7%BB%E5%8A%A0%E5%AD%90%E5%9B%BE"><span class="nav-text">父图中添加的是代理节点，而不是直接添加子图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-text">安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E5%90%8D%E4%B8%BA%E2%80%9DMCP-Tools%E2%80%9D%E7%9A%84MCP%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">创建名为”MCP_Tools”的MCP服务器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E6%97%B6%E6%8C%87%E5%AE%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%A1%E6%81%AF"><span class="nav-text">执行时指定上下文信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-Multi-Agent%E6%9E%B6%E6%9E%84"><span class="nav-text">03 Multi-Agent架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%89%80%E6%9C%89%E6%B6%88%E6%81%AF"><span class="nav-text">添加所有消息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%9C%80%E5%90%8E%E4%B8%80%E6%9D%A1%E6%B6%88%E6%81%AF"><span class="nav-text">添加最后一条消息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86"><span class="nav-text">短期记忆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86"><span class="nav-text">长期记忆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86-1"><span class="nav-text">短期记忆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86-1"><span class="nav-text">长期记忆</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%A7%BB%E4%BA%A4%E5%B7%A5%E5%85%B7"><span class="nav-text">自定义移交工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E6%99%BA%E8%83%BD%E4%BD%93"><span class="nav-text">定义智能体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E5%A4%9A%E6%99%BA%E8%83%BD%E4%BD%93%E5%9B%BE"><span class="nav-text">定义多智能体图</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

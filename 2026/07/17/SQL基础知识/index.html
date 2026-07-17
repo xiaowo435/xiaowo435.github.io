@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="xiaowo435">
+    
+    <title>
+        
+            SQL基础知识 |
+        
+        さしぶりだね
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0099FF","title":"さしぶりだね","author":"xiaowo435","avatar":"/images/OIP-C.webp","logo":"/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg","favicon":"/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg","mode":"light"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"悟已往之不谏,知来者之可追.实迷途其未远,觉今是而昨非.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/xiaowo435","weixin":"H_K_Y_435","qq":"190789158@QQ.com","weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":"1907689158@qq.com"}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated created || fa-solid fa-star"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["炼气","筑基","结丹","元婴","化神"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":true,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               さしぶりだね
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        SQL基础知识
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/OIP-C.webp">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">xiaowo435</span>
+                                
+                                    <span class="author-badge">Lv3</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2026-07-17 17:16:58</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Jul 17 2026 17:17:07 GMT+0800">2026-07-17 17:17:07</span>
+                </span>
+            
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <h4 id="SELECT-基本语法"><a href="#SELECT-基本语法" class="headerlink" title="SELECT 基本语法"></a>SELECT 基本语法</h4><p>SELECT 是 SQL 最基础的语句，用于从表中查询数据：</p>
+<p>SELECT 列1, 列2, … FROM 库名.表名 WHERE 条件;</p>
+<p>数仓规范：禁止使用 SELECT *，必须明确列出字段名。</p>
+<h4 id="示例1：基础-SELECT"><a href="#示例1：基础-SELECT" class="headerlink" title="示例1：基础 SELECT"></a>示例1：基础 SELECT</h4><p>查询用户表中的用户名和城市：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT user_name, </span><br><span class="line">	   city </span><br><span class="line">FROM dim.dim_user_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">LIMIT 10;</span><br></pre></td></tr></table></figure>
+
+<h4 id="AS-别名"><a href="#AS-别名" class="headerlink" title="AS 别名"></a>AS 别名</h4><p>使用 AS 给列或表起别名，让结果更易读：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT user_name AS 用户名, </span><br><span class="line">       city AS 城市, </span><br><span class="line">       age AS 年龄 </span><br><span class="line">FROM dim.dim_user_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">LIMIT 5;</span><br></pre></td></tr></table></figure>
+<h4 id="DISTINCT-去重"><a href="#DISTINCT-去重" class="headerlink" title="DISTINCT 去重"></a>DISTINCT 去重</h4><p>去除结果中的重复行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT DISTINCT </span><br><span class="line">       city </span><br><span class="line">FROM dim.dim_user_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27;;</span><br></pre></td></tr></table></figure>
+<h4 id="LIMIT-限制行数"><a href="#LIMIT-限制行数" class="headerlink" title="LIMIT 限制行数"></a>LIMIT 限制行数</h4><p>LIMIT 用于限制返回的行数，常用于预览数据或取 TopN。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT user_id, </span><br><span class="line">       user_name, </span><br><span class="line">       vip_level </span><br><span class="line">FROM dim.dim_user_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">ORDER BY vip_level DESC </span><br><span class="line">LIMIT 5;</span><br></pre></td></tr></table></figure>
+<h4 id="SQL-执行顺序"><a href="#SQL-执行顺序" class="headerlink" title="SQL 执行顺序"></a>SQL 执行顺序</h4><p>SQL 的书写顺序与执行顺序不同：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">执行顺序： </span><br><span class="line">1. FROM — 确定数据来源 </span><br><span class="line">2. WHERE — 行级过滤 </span><br><span class="line">3. GROUP BY — 分组 </span><br><span class="line">4. HAVING — 分组后过滤 </span><br><span class="line">5. SELECT — 选择输出列 </span><br><span class="line">6. DISTINCT — 去重 </span><br><span class="line">7. ORDER BY — 排序 </span><br><span class="line">8. LIMIT — 限制行数</span><br></pre></td></tr></table></figure>
+<h4 id="WHERE-条件过滤"><a href="#WHERE-条件过滤" class="headerlink" title="WHERE 条件过滤"></a>WHERE 条件过滤</h4><p>WHERE 子句用于筛选满足条件的行。常用运算符：</p>
+<ul>
+<li><strong>比较：</strong> &#x3D;, !&#x3D;, &gt;, &lt;, &gt;&#x3D;, &lt;&#x3D;</li>
+<li><strong>逻辑：</strong> AND, OR, NOT</li>
+<li><strong>范围：</strong> IN, BETWEEN … AND</li>
+<li><strong>模糊：</strong> LIKE（% 任意字符，_ 单字符）</li>
+<li><strong>空值：</strong> IS NULL, IS NOT NULL</li>
+</ul>
+<h4 id="示例1：IN-操作符"><a href="#示例1：IN-操作符" class="headerlink" title="示例1：IN 操作符"></a>示例1：IN 操作符</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT user_name, </span><br><span class="line">       city, </span><br><span class="line">       age </span><br><span class="line">FROM dim.dim_user_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">    AND city IN (&#x27;北京&#x27;, &#x27;上海&#x27;, &#x27;广州&#x27;) </span><br><span class="line">ORDER BY age;</span><br></pre></td></tr></table></figure>
+<h4 id="示例2：BETWEEN-范围"><a href="#示例2：BETWEEN-范围" class="headerlink" title="示例2：BETWEEN 范围"></a>示例2：BETWEEN 范围</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT user_name, </span><br><span class="line">       age, </span><br><span class="line">       city </span><br><span class="line">FROM dim.dim_user_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">    AND age BETWEEN 25 AND 35;</span><br></pre></td></tr></table></figure>
+<h4 id="示例3：LIKE-模糊匹配"><a href="#示例3：LIKE-模糊匹配" class="headerlink" title="示例3：LIKE 模糊匹配"></a>示例3：LIKE 模糊匹配</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT product_name, </span><br><span class="line">       category, </span><br><span class="line">       unit_price </span><br><span class="line">FROM dim.dim_product_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">    AND product_name LIKE &#x27;%蓝牙%&#x27;;</span><br></pre></td></tr></table></figure>
+<h4 id="示例4：IS-NULL-判断"><a href="#示例4：IS-NULL-判断" class="headerlink" title="示例4：IS NULL 判断"></a>示例4：IS NULL 判断</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-- 查看哪些城市有用户 city 为空的情况 </span><br><span class="line">SELECT user_id, </span><br><span class="line">       user_name, </span><br><span class="line">       NVL(city, &#x27;未知&#x27;) AS city </span><br><span class="line">FROM dim.dim_user_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">LIMIT 10;</span><br></pre></td></tr></table></figure>
+<h4 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h4><p>聚合函数对一组值计算后返回单个值：</p>
+<ul>
+<li><strong>COUNT()</strong> — 计数</li>
+<li><strong>SUM()</strong> — 求和</li>
+<li><strong>AVG()</strong> — 平均值</li>
+<li><strong>MAX() &#x2F; MIN()</strong> — 最大&#x2F;最小值</li>
+</ul>
+<h4 id="示例5：GROUP-BY-分组聚合"><a href="#示例5：GROUP-BY-分组聚合" class="headerlink" title="示例5：GROUP BY 分组聚合"></a>示例5：GROUP BY 分组聚合</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT city, </span><br><span class="line">       COUNT(1) AS user_cnt, </span><br><span class="line">       ROUND(AVG(age), 1) AS avg_age </span><br><span class="line">FROM dim.dim_user_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">GROUP BY city </span><br><span class="line">ORDER BY user_cnt DESC;</span><br></pre></td></tr></table></figure>
+<h4 id="示例6：HAVING-过滤分组"><a href="#示例6：HAVING-过滤分组" class="headerlink" title="示例6：HAVING 过滤分组"></a>示例6：HAVING 过滤分组</h4><p>HAVING 是对 GROUP BY 后的分组结果进行过滤（WHERE 过滤行，HAVING 过滤组）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT city, </span><br><span class="line">       COUNT(1) AS user_cnt </span><br><span class="line">FROM dim.dim_user_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">GROUP BY city </span><br><span class="line">HAVING COUNT(1) &gt;= 5 </span><br><span class="line">ORDER BY user_cnt DESC;</span><br></pre></td></tr></table></figure>
+<h4 id="示例7：ORDER-BY-排序"><a href="#示例7：ORDER-BY-排序" class="headerlink" title="示例7：ORDER BY 排序"></a>示例7：ORDER BY 排序</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT order_id, </span><br><span class="line">       order_amount, </span><br><span class="line">       pay_time </span><br><span class="line">FROM dwd.dwd_trade_order_detail_di </span><br><span class="line">WHERE dt &gt;= &#x27;20250101&#x27; </span><br><span class="line">    AND dt &lt;= &#x27;20250130&#x27; AND order_status = &#x27;paid&#x27; </span><br><span class="line">ORDER BY order_amount DESC </span><br><span class="line">LIMIT 10;</span><br></pre></td></tr></table></figure>
+<h4 id="示例8：多字段聚合"><a href="#示例8：多字段聚合" class="headerlink" title="示例8：多字段聚合"></a>示例8：多字段聚合</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT order_status, </span><br><span class="line">       COUNT(1) AS order_cnt, </span><br><span class="line">       ROUND(SUM(order_amount), 2) AS total_amount, </span><br><span class="line">       ROUND(AVG(order_amount), 2) AS avg_amount </span><br><span class="line">FROM dwd.dwd_trade_order_detail_di </span><br><span class="line">WHERE dt &gt;= &#x27;20250101&#x27; </span><br><span class="line">    AND dt &lt;= &#x27;20250130&#x27; </span><br><span class="line">GROUP BY order_status </span><br><span class="line">ORDER BY total_amount DESC;</span><br></pre></td></tr></table></figure>
+<h4 id="为什么需要-JOIN？"><a href="#为什么需要-JOIN？" class="headerlink" title="为什么需要 JOIN？"></a>为什么需要 JOIN？</h4><p>数据仓库中数据分布在不同的表中。比如订单表只有 user_id，要获取用户名就需要 JOIN 用户维度表。</p>
+<h4 id="JOIN-类型"><a href="#JOIN-类型" class="headerlink" title="JOIN 类型"></a>JOIN 类型</h4><ul>
+<li><strong>INNER JOIN</strong>：只返回两表都匹配的行</li>
+<li><strong>LEFT JOIN</strong>：返回左表所有行，右表无匹配填 NULL</li>
+<li><strong>RIGHT JOIN</strong>：返回右表所有行（较少使用）</li>
+<li><strong>FULL JOIN</strong>：返回两表所有行</li>
+<li><strong>CROSS JOIN</strong>：笛卡尔积（慎用）<br>数仓规范：事实表(大表)的 dt 放 WHERE，维度表(小表)的 dt 放 JOIN ON 子句！</li>
+</ul>
+<h4 id="示例1：INNER-JOIN"><a href="#示例1：INNER-JOIN" class="headerlink" title="示例1：INNER JOIN"></a>示例1：INNER JOIN</h4><p>查询已支付订单及对应的用户名：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.order_id, </span><br><span class="line">       b.user_name, </span><br><span class="line">       a.order_amount, </span><br><span class="line">       a.pay_time </span><br><span class="line">FROM dwd.dwd_trade_order_detail_di a </span><br><span class="line">INNER JOIN dim.dim_user_info_df b </span><br><span class="line">    ON a.user_id = b.user_id </span><br><span class="line">    AND b.dt = &#x27;20250101&#x27; </span><br><span class="line">WHERE a.dt &gt;= &#x27;20250101&#x27; </span><br><span class="line">    AND a.dt &lt;= &#x27;20250130&#x27; </span><br><span class="line">    AND a.order_status = &#x27;paid&#x27; </span><br><span class="line">LIMIT 10;</span><br></pre></td></tr></table></figure>
+<h4 id="示例2：LEFT-JOIN"><a href="#示例2：LEFT-JOIN" class="headerlink" title="示例2：LEFT JOIN"></a>示例2：LEFT JOIN</h4><p>LEFT JOIN 保留左表所有行，即使右表没有匹配。适合统计”有没有下过单”的场景：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.user_name, </span><br><span class="line">       COUNT(b.order_id) AS order_cnt </span><br><span class="line">FROM dim.dim_user_info_df a </span><br><span class="line">LEFT JOIN dwd.dwd_trade_order_detail_di b </span><br><span class="line">    ON a.user_id = b.user_id AND b.dt &gt;= &#x27;20250101&#x27; </span><br><span class="line">    AND b.dt &lt;= &#x27;20250130&#x27; </span><br><span class="line">    AND b.order_status = &#x27;paid&#x27; </span><br><span class="line">WHERE a.dt = &#x27;20250101&#x27; </span><br><span class="line">GROUP BY a.user_name </span><br><span class="line">ORDER BY order_cnt DESC </span><br><span class="line">LIMIT 10;</span><br></pre></td></tr></table></figure>
+<h4 id="示例3：多表-JOIN"><a href="#示例3：多表-JOIN" class="headerlink" title="示例3：多表 JOIN"></a>示例3：多表 JOIN</h4><p>JOIN 三张表，获取订单的完整信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">SELECT a.order_id, b.user_name, c.product_name, c.category, a.order_amount FROM dwd.dwd_trade_order_detail_di a </span><br><span class="line">LEFT JOIN dim.dim_user_info_df b </span><br><span class="line">    ON a.user_id = b.user_id </span><br><span class="line">    AND b.dt = &#x27;20250101&#x27; </span><br><span class="line">LEFT JOIN dim.dim_product_info_df c </span><br><span class="line">    ON a.product_id = c.product_id </span><br><span class="line">    AND c.dt = &#x27;20250101&#x27; </span><br><span class="line">WHERE a.dt &gt;= &#x27;20250101&#x27; </span><br><span class="line">    AND a.dt &lt;= &#x27;20250130&#x27; </span><br><span class="line">    AND a.order_status = &#x27;paid&#x27; </span><br><span class="line">LIMIT 10;</span><br></pre></td></tr></table></figure>
+<h4 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h4><p>子查询是嵌套在其他 SQL 语句中的 SELECT 语句。常见用法：</p>
+<ul>
+<li><strong>WHERE … IN (子查询)</strong>：过滤条件中使用</li>
+<li><strong>FROM (子查询) t</strong>：作为临时表</li>
+<li><strong>标量子查询</strong>：返回单个值</li>
+</ul>
+<h4 id="示例1：IN-子查询"><a href="#示例1：IN-子查询" class="headerlink" title="示例1：IN 子查询"></a>示例1：IN 子查询</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">-- 查询购买过&quot;数码&quot;类商品的用户 </span><br><span class="line">SELECT user_name, </span><br><span class="line">       city </span><br><span class="line">FROM dim.dim_user_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">    AND user_id IN ( </span><br><span class="line">	    SELECT DISTINCT </span><br><span class="line">	        user_id </span><br><span class="line">	    FROM dwd.dwd_trade_order_detail_di </span><br><span class="line">	    WHERE dt &gt;= &#x27;20250101&#x27; </span><br><span class="line">	        AND dt &lt;= &#x27;20250130&#x27; </span><br><span class="line">	        AND order_status = &#x27;paid&#x27; </span><br><span class="line">	        AND product_id IN ( </span><br><span class="line">	            SELECT product_id </span><br><span class="line">	            FROM dim.dim_product_info_df </span><br><span class="line">	            WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">	                AND category = &#x27;数码&#x27; </span><br><span class="line">	        ) </span><br><span class="line">	);</span><br></pre></td></tr></table></figure>
+
+<h4 id="WITH-CTE（公用表表达式）"><a href="#WITH-CTE（公用表表达式）" class="headerlink" title="WITH CTE（公用表表达式）"></a>WITH CTE（公用表表达式）</h4><p>CTE 可以把复杂查询拆分为多个步骤，可读性更好：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WITH user_spend AS ( SELECT user_id, SUM(order_amount) AS total_amount FROM dwd.dwd_trade_order_detail_di WHERE dt &gt;= &#x27;20250101&#x27; AND dt &lt;= &#x27;20250130&#x27; AND order_status = &#x27;paid&#x27; GROUP BY user_id ) SELECT b.user_name, a.total_amount FROM user_spend a INNER JOIN dim.dim_user_info_df b ON a.user_id = b.user_id AND b.dt = &#x27;20250101&#x27; ORDER BY a.total_amount DESC LIMIT 5;</span><br></pre></td></tr></table></figure>
+<h4 id="CASE-WHEN-条件表达式"><a href="#CASE-WHEN-条件表达式" class="headerlink" title="CASE WHEN 条件表达式"></a>CASE WHEN 条件表达式</h4><p>类似编程中的 if-else，用于在 SQL 中做条件判断：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">SELECT user_name, </span><br><span class="line">       age, </span><br><span class="line">       CASE </span><br><span class="line">           WHEN age &lt; 25 THEN &#x27;青年&#x27; </span><br><span class="line">           WHEN age &lt; 35 THEN &#x27;中青年&#x27; </span><br><span class="line">           ELSE &#x27;中年&#x27; </span><br><span class="line">       END AS age_group, </span><br><span class="line">       CASE vip_level </span><br><span class="line">           WHEN 0 THEN &#x27;普通&#x27; </span><br><span class="line">           WHEN 1 THEN &#x27;银卡&#x27; </span><br><span class="line">           WHEN 2 THEN &#x27;金卡&#x27; </span><br><span class="line">           WHEN 3 THEN &#x27;钻石&#x27; </span><br><span class="line">       END AS vip_label </span><br><span class="line">FROM dim.dim_user_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">LIMIT 10;</span><br></pre></td></tr></table></figure>
+<h4 id="常用字符串函数"><a href="#常用字符串函数" class="headerlink" title="常用字符串函数"></a>常用字符串函数</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT user_name, </span><br><span class="line">       LENGTH(user_name) AS name_len, </span><br><span class="line">       SUBSTR(reg_date, 1, 7) AS reg_month, </span><br><span class="line">       CONCAT_WS(&#x27;-&#x27;, NVL(city, &#x27;未知&#x27;), gender) AS info, </span><br><span class="line">       REPLACE(reg_date, &#x27;-&#x27;, &#x27;&#x27;) AS reg_compact </span><br><span class="line">FROM dim.dim_user_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">LIMIT 8;</span><br></pre></td></tr></table></figure>
+
+<h4 id="日期函数与-NULL-处理"><a href="#日期函数与-NULL-处理" class="headerlink" title="日期函数与 NULL 处理"></a>日期函数与 NULL 处理</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">SELECT user_name, </span><br><span class="line">       reg_date, </span><br><span class="line">       DATEDIFF(&#x27;2025-01-30&#x27;, reg_date) AS days_registered, </span><br><span class="line">       DATE_ADD(reg_date, 365) AS one_year_later, </span><br><span class="line">       YEAR(reg_date) AS reg_year, MONTH(reg_date) AS reg_month </span><br><span class="line">FROM dim.dim_user_info_df </span><br><span class="line">WHERE dt = &#x27;20250101&#x27; </span><br><span class="line">LIMIT 8;</span><br></pre></td></tr></table></figure>
+<h4 id="什么是窗口函数？"><a href="#什么是窗口函数？" class="headerlink" title="什么是窗口函数？"></a>什么是窗口函数？</h4><p>窗口函数在不减少行数的情况下，对”窗口”内的数据进行计算。语法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">函数名() OVER ( </span><br><span class="line">    [PARTITION BY 分组列] </span><br><span class="line">    [ORDER BY 排序列] </span><br><span class="line">    [ROWS/RANGE 窗口范围] </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h4 id="常用窗口函数"><a href="#常用窗口函数" class="headerlink" title="常用窗口函数"></a>常用窗口函数</h4><ul>
+<li><strong>ROW_NUMBER()</strong>：行号（不并列：1,2,3,4）</li>
+<li><strong>RANK()</strong>：排名（并列跳号：1,1,3）</li>
+<li><strong>DENSE_RANK()</strong>：排名（并列不跳：1,1,2）</li>
+<li><strong>LAG(col, n)</strong>：取前 n 行的值</li>
+<li><strong>LEAD(col, n)</strong>：取后 n 行的值</li>
+<li><strong>SUM&#x2F;AVG&#x2F;COUNT OVER()</strong>：窗口内聚合</li>
+</ul>
+<h4 id="示例1：ROW-NUMBER-RANK"><a href="#示例1：ROW-NUMBER-RANK" class="headerlink" title="示例1：ROW_NUMBER &#x2F; RANK"></a>示例1：ROW_NUMBER &#x2F; RANK</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">SELECT user_id, </span><br><span class="line">       order_id, </span><br><span class="line">       order_amount, </span><br><span class="line">       ROW_NUMBER() OVER ( </span><br><span class="line">           PARTITION BY user_id </span><br><span class="line">           ORDER BY order_amount DESC </span><br><span class="line">        ) AS rn, </span><br><span class="line">        RANK() OVER ( </span><br><span class="line">            PARTITION BY user_id </span><br><span class="line">            ORDER BY order_amount DESC </span><br><span class="line">        ) AS rnk </span><br><span class="line">FROM dwd.dwd_trade_order_detail_di </span><br><span class="line">WHERE dt &gt;= &#x27;20250101&#x27; </span><br><span class="line">    AND dt &lt;= &#x27;20250130&#x27; </span><br><span class="line">    AND order_status = &#x27;paid&#x27; </span><br><span class="line">    AND user_id IN (1, 2, 3) </span><br><span class="line">ORDER BY user_id, rn;</span><br></pre></td></tr></table></figure>
+<h4 id="示例2：LAG-LEAD"><a href="#示例2：LAG-LEAD" class="headerlink" title="示例2：LAG &#x2F; LEAD"></a>示例2：LAG &#x2F; LEAD</h4><p>获取每个用户上一次和下一次的购买时间：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">SELECT user_id, </span><br><span class="line">       order_id, </span><br><span class="line">       pay_time, </span><br><span class="line">       LAG(pay_time, 1) OVER ( </span><br><span class="line">           PARTITION BY user_id ORDER BY pay_time </span><br><span class="line">        ) AS prev_pay, </span><br><span class="line">       LEAD(pay_time, 1) OVER ( </span><br><span class="line">           PARTITION BY user_id ORDER BY pay_time </span><br><span class="line">        ) AS next_pay </span><br><span class="line">FROM dwd.dwd_trade_order_detail_di </span><br><span class="line">WHERE dt &gt;= &#x27;20250101&#x27; </span><br><span class="line">    AND dt &lt;= &#x27;20250130&#x27; </span><br><span class="line">    AND order_status = &#x27;paid&#x27; </span><br><span class="line">    AND user_id &lt;= 5 </span><br><span class="line">ORDER BY user_id, pay_time;</span><br></pre></td></tr></table></figure>
+<h4 id="示例3：累计求和"><a href="#示例3：累计求和" class="headerlink" title="示例3：累计求和"></a>示例3：累计求和</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SELECT order_id, </span><br><span class="line">       pay_time, </span><br><span class="line">       order_amount, </span><br><span class="line">       SUM(order_amount) OVER ( </span><br><span class="line">           ORDER BY pay_time ROWS UNBOUNDED PRECEDING </span><br><span class="line">        ) AS running_total </span><br><span class="line">FROM dwd.dwd_trade_order_detail_di </span><br><span class="line">WHERE dt &gt;= &#x27;20250101&#x27; </span><br><span class="line">    AND dt &lt;= &#x27;20250130&#x27; </span><br><span class="line">    AND order_status = &#x27;paid&#x27; </span><br><span class="line">ORDER BY pay_time </span><br><span class="line">LIMIT 15;</span><br></pre></td></tr></table></figure>
+<h4 id="示例4：移动平均"><a href="#示例4：移动平均" class="headerlink" title="示例4：移动平均"></a>示例4：移动平均</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">SELECT order_id, </span><br><span class="line">       pay_time, </span><br><span class="line">       order_amount, </span><br><span class="line">       ROUND(AVG(order_amount) OVER ( </span><br><span class="line">           ORDER BY pay_time ROWS BETWEEN 2 PRECEDING AND CURRENT ROW </span><br><span class="line">        ), 2) AS moving_avg_3 </span><br><span class="line">FROM dwd.dwd_trade_order_detail_di </span><br><span class="line">WHERE dt &gt;= &#x27;20250101&#x27; </span><br><span class="line">    AND dt &lt;= &#x27;20250130&#x27; </span><br><span class="line">    AND order_status = &#x27;paid&#x27; </span><br><span class="line">ORDER BY pay_time </span><br><span class="line">LIMIT 15;</span><br></pre></td></tr></table></figure>
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2026/07/17/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/"
+                                   title="异步编程"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">异步编程</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2026/07/17/Redis/"
+                                   title="Redis"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Redis</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SELECT-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-text">SELECT 基本语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9A%E5%9F%BA%E7%A1%80-SELECT"><span class="nav-text">示例1：基础 SELECT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AS-%E5%88%AB%E5%90%8D"><span class="nav-text">AS 别名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DISTINCT-%E5%8E%BB%E9%87%8D"><span class="nav-text">DISTINCT 去重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LIMIT-%E9%99%90%E5%88%B6%E8%A1%8C%E6%95%B0"><span class="nav-text">LIMIT 限制行数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">SQL 执行顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WHERE-%E6%9D%A1%E4%BB%B6%E8%BF%87%E6%BB%A4"><span class="nav-text">WHERE 条件过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9AIN-%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-text">示例1：IN 操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B2%EF%BC%9ABETWEEN-%E8%8C%83%E5%9B%B4"><span class="nav-text">示例2：BETWEEN 范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B3%EF%BC%9ALIKE-%E6%A8%A1%E7%B3%8A%E5%8C%B9%E9%85%8D"><span class="nav-text">示例3：LIKE 模糊匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B4%EF%BC%9AIS-NULL-%E5%88%A4%E6%96%AD"><span class="nav-text">示例4：IS NULL 判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B5%EF%BC%9AGROUP-BY-%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88"><span class="nav-text">示例5：GROUP BY 分组聚合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B6%EF%BC%9AHAVING-%E8%BF%87%E6%BB%A4%E5%88%86%E7%BB%84"><span class="nav-text">示例6：HAVING 过滤分组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B7%EF%BC%9AORDER-BY-%E6%8E%92%E5%BA%8F"><span class="nav-text">示例7：ORDER BY 排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B8%EF%BC%9A%E5%A4%9A%E5%AD%97%E6%AE%B5%E8%81%9A%E5%90%88"><span class="nav-text">示例8：多字段聚合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-JOIN%EF%BC%9F"><span class="nav-text">为什么需要 JOIN？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JOIN-%E7%B1%BB%E5%9E%8B"><span class="nav-text">JOIN 类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9AINNER-JOIN"><span class="nav-text">示例1：INNER JOIN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B2%EF%BC%9ALEFT-JOIN"><span class="nav-text">示例2：LEFT JOIN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B3%EF%BC%9A%E5%A4%9A%E8%A1%A8-JOIN"><span class="nav-text">示例3：多表 JOIN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9AIN-%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">示例1：IN 子查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WITH-CTE%EF%BC%88%E5%85%AC%E7%94%A8%E8%A1%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%89"><span class="nav-text">WITH CTE（公用表表达式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CASE-WHEN-%E6%9D%A1%E4%BB%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-text">CASE WHEN 条件表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0"><span class="nav-text">常用字符串函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E5%87%BD%E6%95%B0%E4%B8%8E-NULL-%E5%A4%84%E7%90%86"><span class="nav-text">日期函数与 NULL 处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="nav-text">什么是窗口函数？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="nav-text">常用窗口函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9AROW-NUMBER-RANK"><span class="nav-text">示例1：ROW_NUMBER &#x2F; RANK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B2%EF%BC%9ALAG-LEAD"><span class="nav-text">示例2：LAG &#x2F; LEAD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B3%EF%BC%9A%E7%B4%AF%E8%AE%A1%E6%B1%82%E5%92%8C"><span class="nav-text">示例3：累计求和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B4%EF%BC%9A%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%9D%87"><span class="nav-text">示例4：移动平均</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">xiaowo435</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            This site is deployed on <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span>
+            
+        </div>
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#SELECT-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-text">SELECT 基本语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9A%E5%9F%BA%E7%A1%80-SELECT"><span class="nav-text">示例1：基础 SELECT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AS-%E5%88%AB%E5%90%8D"><span class="nav-text">AS 别名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DISTINCT-%E5%8E%BB%E9%87%8D"><span class="nav-text">DISTINCT 去重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LIMIT-%E9%99%90%E5%88%B6%E8%A1%8C%E6%95%B0"><span class="nav-text">LIMIT 限制行数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL-%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F"><span class="nav-text">SQL 执行顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WHERE-%E6%9D%A1%E4%BB%B6%E8%BF%87%E6%BB%A4"><span class="nav-text">WHERE 条件过滤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9AIN-%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-text">示例1：IN 操作符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B2%EF%BC%9ABETWEEN-%E8%8C%83%E5%9B%B4"><span class="nav-text">示例2：BETWEEN 范围</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B3%EF%BC%9ALIKE-%E6%A8%A1%E7%B3%8A%E5%8C%B9%E9%85%8D"><span class="nav-text">示例3：LIKE 模糊匹配</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B4%EF%BC%9AIS-NULL-%E5%88%A4%E6%96%AD"><span class="nav-text">示例4：IS NULL 判断</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0"><span class="nav-text">聚合函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B5%EF%BC%9AGROUP-BY-%E5%88%86%E7%BB%84%E8%81%9A%E5%90%88"><span class="nav-text">示例5：GROUP BY 分组聚合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B6%EF%BC%9AHAVING-%E8%BF%87%E6%BB%A4%E5%88%86%E7%BB%84"><span class="nav-text">示例6：HAVING 过滤分组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B7%EF%BC%9AORDER-BY-%E6%8E%92%E5%BA%8F"><span class="nav-text">示例7：ORDER BY 排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B8%EF%BC%9A%E5%A4%9A%E5%AD%97%E6%AE%B5%E8%81%9A%E5%90%88"><span class="nav-text">示例8：多字段聚合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-JOIN%EF%BC%9F"><span class="nav-text">为什么需要 JOIN？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JOIN-%E7%B1%BB%E5%9E%8B"><span class="nav-text">JOIN 类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9AINNER-JOIN"><span class="nav-text">示例1：INNER JOIN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B2%EF%BC%9ALEFT-JOIN"><span class="nav-text">示例2：LEFT JOIN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B3%EF%BC%9A%E5%A4%9A%E8%A1%A8-JOIN"><span class="nav-text">示例3：多表 JOIN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9AIN-%E5%AD%90%E6%9F%A5%E8%AF%A2"><span class="nav-text">示例1：IN 子查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WITH-CTE%EF%BC%88%E5%85%AC%E7%94%A8%E8%A1%A8%E8%A1%A8%E8%BE%BE%E5%BC%8F%EF%BC%89"><span class="nav-text">WITH CTE（公用表表达式）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CASE-WHEN-%E6%9D%A1%E4%BB%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-text">CASE WHEN 条件表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0"><span class="nav-text">常用字符串函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%A5%E6%9C%9F%E5%87%BD%E6%95%B0%E4%B8%8E-NULL-%E5%A4%84%E7%90%86"><span class="nav-text">日期函数与 NULL 处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0%EF%BC%9F"><span class="nav-text">什么是窗口函数？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E7%AA%97%E5%8F%A3%E5%87%BD%E6%95%B0"><span class="nav-text">常用窗口函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B1%EF%BC%9AROW-NUMBER-RANK"><span class="nav-text">示例1：ROW_NUMBER &#x2F; RANK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B2%EF%BC%9ALAG-LEAD"><span class="nav-text">示例2：LAG &#x2F; LEAD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B3%EF%BC%9A%E7%B4%AF%E8%AE%A1%E6%B1%82%E5%92%8C"><span class="nav-text">示例3：累计求和</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B4%EF%BC%9A%E7%A7%BB%E5%8A%A8%E5%B9%B3%E5%9D%87"><span class="nav-text">示例4：移动平均</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

@@ -9,7 +9,7 @@
     
     <title>
         
-            RAG入门篇 |
+            Function Calling实战 |
         
         さしぶりだね
     </title>
@@ -179,7 +179,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        RAG入门篇
+                        Function Calling实战
                     </div>
                 
 
@@ -207,28 +207,19 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2026-03-09 16:04:28</span>
+                <span class="datetime">2026-07-17 17:10:18</span>
             </span>
 
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Mon Mar 09 2026 23:12:48 GMT+0800">2026-03-09 23:12:48</span>
+                    <span class="datetime" data-updated="Fri Jul 17 2026 17:14:07 GMT+0800">2026-07-17 17:14:07</span>
                 </span>
             
         
 
         
 
-        
-            <span class="post-tag meta-info-item border-box">
-                <ul class="post-tag-ul">
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/RAG/">RAG</a></li>
-                        
-                    
-                </ul>
-            </span>
         
 
         
@@ -249,75 +240,38 @@
                     
 
                     
-                         <h2 id="什么是RAG"><a href="#什么是RAG" class="headerlink" title="什么是RAG"></a>什么是RAG</h2><p>RAG，Retrieval-Augmented Generation，也被称作检索增强生成技术，最早在 Facebook AI（Meta AI）在 2020 年发表的论文《Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks》（ <a class="link"   target="_blank" rel="noopener" href="https://arxiv.org/abs/2005.11401" >https://arxiv.org/abs/2005.11401<i class="fas fa-external-link-alt"></i></a> ）中正式提出，这种方法的核心思想是借助一些文本检索策略，让大模型每次问答前都带入相关文本，以此来改善大模型回答时的准确性。</p>
-<h2 id="为什么需要RAG"><a href="#为什么需要RAG" class="headerlink" title="为什么需要RAG"></a>为什么需要RAG</h2><h3 id="问题一：大模型幻觉"><a href="#问题一：大模型幻觉" class="headerlink" title="问题一：大模型幻觉"></a>问题一：大模型幻觉</h3><p>在使用大模型的时候，都会遇到大模型无中生有胡编乱造答案的情况，例如胡乱生成一些概念、一些论文甚至是一些实时等，这就是所谓的大模型幻觉。<br>大型语言模型之所以会产生幻觉，主要是因为它们的训练方式和内在机制决定了它们并不具备真正理解和验证事实的能力。模型在训练过程中，通过分析大规模文本数据来学习不同词语和句子之间的概率关系，也就是在某种程度上掌握“在什么上下文中，什么样的回答听起来更合理”。然而，模型并没有接入实时的知识库或事实核查工具，当它遇到陌生的问题、模糊的描述或者上下文不完整的输入时，就会基于概率和语料库中似是而非的关联去“编造”一个看似正确的答案。由于这些输出往往语法流畅、逻辑连贯，人类读者很容易误以为它是真实可信的内容，这就是我们通常说的“模型幻觉”。</p>
-<h3 id="问题二：有限的最大上下文"><a href="#问题二：有限的最大上下文" class="headerlink" title="问题二：有限的最大上下文"></a>问题二：有限的最大上下文</h3><p>由于大模型的本质其实是一个算法，不管是让大模型“知道”有哪些外部工具，还是要给大模型进行“背景设置”，或者是要给模型添加历史对话消息，以及本次对话的输出，都需要占用这个上下文窗口。这就使得我们在一次对话中能够给大模型灌输的知识（文本）其实是有限的。</p>
-<p>大型语言模型还存在最大上下文限制，这是由它们的架构和计算方式决定的。每次生成回答时，模型需要把输入文本转换成固定长度的数字序列（称为token），并在内部一次性加载到模型的“上下文窗口”中进行处理。这个窗口的大小是有限的，不同模型一般在几千到几万token之间。如果输入内容超出这个长度，模型要么截断最前面的部分，要么丢弃部分信息，这就会造成对话历史、长文档或先前提到的重要细节的遗失。因为它无法跨越上下文窗口无限地保留信息，所以在面对长对话或者大量背景知识时，模型常常出现上下文断裂、回答不连贯或者忽略先前条件的情况。</p>
-<h3 id="问题三：模型专业知识与时效性知识不足"><a href="#问题三：模型专业知识与时效性知识不足" class="headerlink" title="问题三：模型专业知识与时效性知识不足"></a>问题三：模型专业知识与时效性知识不足</h3><p>大型语言模型虽然在通用领域展现出令人瞩目的语言理解和生成能力，但其在特定领域的专业知识掌握往往存在明显局限。其根本原因在于，模型的训练依赖于预先收集的大规模语料，这些语料覆盖面虽广，却很难保证在所有专业领域中具有足够的深度和准确性。某些领域，如医学、法律或前沿科技，知识更新速度快且门槛较高，公开可获取的高质量数据本身就有限，模型难以在此基础上形成系统性和权威性的认知。此外，模型训练通常在固定的时间点结束，因此其所掌握的知识具有天然的时效性，无法实时反映新近出现的研究成果、政策变化或行业动态。这种静态的知识存储模式，决定了大模型在面对最新或高度专业化的问题时，往往难以提供全面、精确的解答。</p>
-<h1 id="RAG技术实现流程"><a href="#RAG技术实现流程" class="headerlink" title="RAG技术实现流程"></a>RAG技术实现流程</h1><p>RAG技术的落地主要由以下几个步骤组成：</p>
-<p>（1）文档的收集</p>
-<p>（2）文档处理</p>
-<p>（3）文档数据向量化</p>
-<p>（4）文档数据相似性检索</p>
-<p>（5）构建提示词</p>
-<p>（6）大语言模型生成结果</p>
-<p><img  
-                       lazyload
-                       alt="image"
-                       data-src="https://cdn.jsdelivr.net/gh/xiaowo435/blog-images@main/img/%E4%B8%8B%E8%BD%BD.jpg"
-                       
-                 ></p>
-<p>我们需要围绕给定的文档（往往是非常长的文档）先进行<strong>切分</strong>，然后将切分的文档转化为计算机能识别的形式，也就是将其转化为一个数值型向量（也被称为<strong>词向量</strong>），然后当用户询问问题的时候，我们再将用户的问题转化为词向量，并和段落文档的词向量进行<strong>相似度匹配</strong>，借此找出和当前用户问题最相关的原始文档片段，然后将用户的问题和匹配的到的原文片段都带入大模型，进行最终的问答。由此便可实现一次完整的文档检索增强执行流程。</p>
-<h2 id="GraphRAG"><a href="#GraphRAG" class="headerlink" title="GraphRAG"></a>GraphRAG</h2><p>GraphRAG（Graph-enhanced Retrieval-Augmented Generation） 是一种在经典 RAG 基础上引入知识图谱&#x2F;图结构的新型检索生成方法 。其核心思想是通过将文档或数据转换成图的形式，从而捕捉实体与实体之间的语义关系，并在检索阶段利用图遍历、关系推理等机制来辅助上下文构建，这种结构化信息能够提升语义理解和多跳推理能力。</p>
-<p>具体来说，GraphRAG 的流程包括：</p>
-<ol>
-<li>图谱构建：将文本拆分为多个单元（TextUnit），提取实体与关系，构造知识图，并进行图社区检测与摘要；</li>
-<li>混合检索：用户提问既可以进行向量检索定位实体，也可以通过图查询（如 Cypher&#x2F;SPARQL）沿关系边扩展信息；</li>
-<li>图增强生成：将检索到的节点、路径、社区摘要等信息拼接进 Prompt，引导 LLM 生成更准确、结构清晰、并基于事实推理的回答。</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>对比维度</th>
-<th>传统 RAG</th>
-<th>GraphRAG</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>检索方式</td>
-<td>基于向量语义相似度</td>
-<td>向量+知识图遍历&#x2F;查询</td>
-</tr>
-<tr>
-<td>关系理解能力</td>
-<td>弱：只能匹配语义相近片段</td>
-<td>强：能理解实体之间的多跳关系与结构</td>
-</tr>
-<tr>
-<td>多跳推理支持</td>
-<td>弱：难以综合跨文档信息</td>
-<td>强：图结构天然支持推理路径遍历</td>
-</tr>
-<tr>
-<td>语义上下文覆盖</td>
-<td>依赖检索片段</td>
-<td>可检索完整实体子图、社区摘要</td>
-</tr>
-<tr>
-<td>可解释性</td>
-<td>中：返回片段但缺关键信息结构</td>
-<td>高：能显示实体关系路径及社区结构</td>
-</tr>
-<tr>
-<td>性能&#x2F;复杂度</td>
-<td>低：直接使用向量库</td>
-<td>高：需要图构建、遍历、摘要等pipeline</td>
-</tr>
-</tbody></table>
-<p>传统 RAG 主要是“先检索语义近似片段，再生成回答”，适合简单查询与短对话。但当问题需要“连接多个事实”“推理关系链”和“洞察上下文结构”时，传统 RAG 会显得力不从心，而 GraphRAG 正是为复杂推理场景设计的增强机制。</p>
-<h2 id="Agentic-RAG"><a href="#Agentic-RAG" class="headerlink" title="Agentic RAG"></a>Agentic RAG</h2><p>Agentic RAG（Agentic Retrieval-Augmented Generation） 是一种在传统 RAG 基础上进一步扩展的增强范式，它将检索增强生成与Agent（智能体）能力有机结合，使大模型不仅能够基于外部知识库进行回答，还能够通过一系列自主决策和工具调用来完成复杂任务。与经典 RAG 的“检索+拼接+生成”线性流程不同，Agentic RAG 将 LLM 视为一个具备推理、规划和操作能力的智能体，它在对话过程中可以根据问题拆解子任务，先后执行多轮检索、知识整合、函数调用甚至外部API请求，再将结果动态组合成最终的答案。</p>
-<p>在这个模式下，大模型可以主动提出接下来的检索需求，或根据中间推理结果迭代获取更多信息，形成“循环式检索与生成”的闭环工作流。例如，当用户提出复杂查询时，Agentic RAG可以先调用检索工具定位候选内容，再使用工具对结果进行归纳或分类，必要时还会触发计算或外部查询操作，最后再汇总所有信息输出一个有依据的、分步骤的解答。</p>
-<p>相比传统RAG，Agentic RAG不仅提升了回答准确性和透明度，也为多轮推理和跨知识库整合提供了更强的灵活性，是近年来大模型产品中非常重要的能力演进方向。</p>
+                         <h2 id="Function-Calling-实现"><a href="#Function-Calling-实现" class="headerlink" title="Function Calling 实现"></a><strong>Function Calling 实现</strong></h2><p>这是一个 Python 项目，</p>
+<p>function_calling_project&#x2F;<br>│── src&#x2F;                <br>│   │── main.py         # 主程序入口<br>│   │── ai_client.py     # OpenAI API 客户端<br>│   │── function_tools.py     # 定义可供模型调用的函数<br>│   │── handlers.py     # 处理模型返回的函数调用</p>
+<h3 id="Step1：编写主程序"><a href="#Step1：编写主程序" class="headerlink" title="Step1：编写主程序"></a><strong>Step1：编写主程序</strong></h3><p><strong>示例代码： main.py(主程序入口)</strong></p>
+<p>from api_client import call_model<br>from handlers import handle_function_call<br>from tools import TOOLS<br>​<br>def main():<br>    input_messages &#x3D; [{<br>        “role”: “user”,<br>        “content”: “巴黎今天的天气如何？”<br>    }]<br>​<br>    response_output &#x3D; call_model(input_messages, TOOLS)<br>    function_result &#x3D; handle_function_call(response_output)<br>​<br>    if isinstance(function_result, dict):<br>        input_messages.append({<br>            “type”: “function_call_output”,<br>            “call_id”: function_result[“call_id”],<br>            “output”: function_result[“output”]<br>        })<br>        final_response &#x3D; call_model(input_messages, TOOLS)<br>        print(“最终响应:”, final_response.output_text)<br>    else:<br>        print(“处理失败:”, function_result)<br>​<br>if <strong>name</strong> &#x3D;&#x3D; “<strong>main</strong>“:<br>    main()</p>
+<h3 id="Step2：定义函数"><a href="#Step2：定义函数" class="headerlink" title="Step2：定义函数"></a><strong>Step2：定义函数</strong></h3><p>首先，需要定义要调用的函数，它告诉模型它可以做什么以及期望什么样的输入参数。</p>
+<p><strong>示例代码： function_tools.py(可提供给模型调用的函数)</strong></p>
+<p>import requests<br>​<br>def get_weather(latitude, longitude):<br>    “””获取指定坐标的天气数据”””<br>    response &#x3D; requests.get(f”<a class="link"   target="_blank" rel="noopener" href="https://api.open-meteo.com/v1/forecast?latitude=%7Blatitude%7D&longitude=%7Blongitude%7D&current=temperature_2m" >https://api.open-meteo.com/v1/forecast?latitude={latitude}&amp;longitude={longitude}&amp;current=temperature_2m<i class="fas fa-external-link-alt"></i></a>“)<br>    data &#x3D; response.json()<br>    return data[‘current’][‘temperature_2m’]<br>​<br>TOOLS &#x3D; [{<br>    “type”: “function”,<br>    “name”: “get_weather”,<br>    “description”: “获取指定经纬度的当前气温（摄氏）。”,<br>    “parameters”: {<br>        “type”: “object”,<br>        “properties”: {<br>            “latitude”: {“type”: “number”},<br>            “longitude”: {“type”: “number”}<br>        },<br>        “required”: [“latitude”, “longitude”],<br>        “additionalProperties”: False<br>    },<br>    “strict”: True<br>}]</p>
+<hr>
+<h3 id="Step3：函数定义传递给模型"><a href="#Step3：函数定义传递给模型" class="headerlink" title="Step3：函数定义传递给模型"></a><strong>Step3：函数定义传递给模型</strong></h3><p>调用模型时，需要将函数定义传递给模型。</p>
+<p><strong>示例代码： ai_client.py(调用模型客户端程序)</strong></p>
+<p>from openai import OpenAI<br>client &#x3D; OpenAI()<br>​<br>input_messages &#x3D; [{<br>    “role”: “user”,<br>    “content”: “巴黎今天的天气如何？”<br>}]<br>​<br>response &#x3D; client.responses.create(<br>    model&#x3D;”gpt-4.1”,<br>    input&#x3D;input_messages,<br>    tools&#x3D;tools<br>)</p>
+<hr>
+<h3 id="Step3：模型决定调用函数"><a href="#Step3：模型决定调用函数" class="headerlink" title="Step3：模型决定调用函数"></a><strong>Step3：模型决定调用函数</strong></h3><p>让模型来决定是否需要触发调用函数，如果模型认为需要调用函数，它会返回相应的函数名称和函数需要输入参数。</p>
+<p><strong>示例返回结果：</strong></p>
+<p>[<br>    {<br>        “type”: “function_call”,<br>        “id”: “fc_12345xyz”,<br>        “call_id”: “call_12345xyz”,<br>        “name”: “get_weather”,<br>        “arguments”: “{&quot;latitude&quot;:48.8566,&quot;longitude&quot;:2.3522}”<br>    }<br>]</p>
+<p><strong>示例代码： handlers.py(处理函数调用逻辑)</strong></p>
+<p>import json<br>from tools import get_weather<br>​<br>def handle_function_call(response_output):<br>    “””解析模型的函数调用请求并执行”””<br>    if not response_output:<br>        return “未返回可用数据。”<br>​<br>    tool_call &#x3D; response_output[0]  # 这里只处理第一个函数调用<br>    args &#x3D; json.loads(tool_call[‘arguments’])<br>​<br>    if tool_call[“name”] &#x3D;&#x3D; “get_weather”:<br>        result &#x3D; get_weather(args[“latitude”], args[“longitude”])<br>        return {“call_id”: tool_call[“call_id”], “output”: str(result)}<br>​<br>    return “无法识别的函数调用。”</p>
+<h3 id="Step4：执行函数"><a href="#Step4：执行函数" class="headerlink" title="Step4：执行函数"></a><strong>Step4：执行函数</strong></h3><p>执行用户自己开发的函数或第三方函数，程序解析模型的响应并执行对应的函数代码。</p>
+<p><strong>示例代码：handlers.py(处理函数调用逻辑)</strong></p>
+<p>result &#x3D; get_weather(args[“latitude”], args[“longitude”])<br>return {“call_id”: tool_call[“call_id”], “output”: str(result)}</p>
+<h3 id="Step5：返回函数执行结果"><a href="#Step5：返回函数执行结果" class="headerlink" title="Step5：返回函数执行结果"></a><strong>Step5：返回函数执行结果</strong></h3><p>将结果提供给模型，以便它可以将信息整合到最终响应中。</p>
+<p><strong>示例代码：</strong></p>
+<p>final_response &#x3D; call_model(input_messages, TOOLS)<br>print(“最终响应:”, final_response.output_text)</p>
+<p><strong>示例最终输出：</strong></p>
+<p>“巴黎当前的气温是 14°C。”</p>
+<hr>
+<p>这就是在大模型中实现函数调用的完整过程！</p>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p>那我们来总结一下，就是用户把自己的函数定义给到模型，用户提问题后，模型看看要不要调用函数，当模型决定要调用函数时就生成函数需要的参数及格式，再调用函数并把结果合并，最终返回给用户。</p>
+<p>那么这里有个比较关键的东西就是函数定义：</p>
+<p>{<br>    “type”: “function”,<br>    “name”: “get_weather”,<br>    “description”: “获取指定经纬度的当前气温（摄氏）。”,<br>    “parameters”: {<br>        “type”: “object”,<br>        “properties”: {<br>            “latitude”: {“type”: “number”},<br>            “longitude”: {“type”: “number”}<br>        }<br>    }<br>}</p>
+<p>它会最模型决定是否要调用函数的关键， 每个函数都带有一个 <code>description</code>，用来告诉模型它的用途。 如果 <code>description</code> 明确提到天气查询，且匹配用户请求的意图，模型就可能决定调用这个函数。当然<code>description</code> 并不是唯一判断的依据，它还会结合其他因素。</p>
+<p>虽然 Function Calling 实现了调取外部函数，但 Function Calling是OpenAI为自家模型设计的工具，最适合需要快速接入OpenAI生态的场景。虽然其核心思想（让大模型调用外部函数&#x2F;API）被其他厂商借鉴，但各家实现方式不同，缺乏统一标准，<strong>这也正是 Claude 推出 MCP的原因</strong>。</p>
 
                     
                 </div>
@@ -326,14 +280,6 @@
 
                 <div class="post-bottom-tags-and-share border-box">
                     <div>
-                        
-                            <ul class="post-tags-box border-box">
-                                
-                                    <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/RAG/">RAG</a>
-                                    </li>
-                                
-                            </ul>
                         
                     </div>
                     <div>
@@ -349,14 +295,14 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2026/03/19/%E9%9D%A2%E8%AF%95%E9%A2%98%E7%9B%AE-1/"
-                                   title="面试题目-1"
+                                   href="/2026/07/17/Agent%E7%9A%84%E8%AE%B0%E5%BF%86%E5%8A%9F%E8%83%BD/"
+                                   title="Agent的记忆功能"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">面试题目-1</span>
+                                        <span class="post-nav-title-item text-ellipsis">Agent的记忆功能</span>
                                         <span class="post-nav-item">Prev posts</span>
                                     </span>
                                 </a>
@@ -366,11 +312,11 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2026/03/09/Embedding%E7%AF%87/"
-                                   title="Embedding篇"
+                                   href="/2026/07/17/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"
+                                   title="nginx反向代理"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Embedding篇</span>
+                                        <span class="post-nav-title-item text-ellipsis">nginx反向代理</span>
                                         <span class="post-nav-item">Next posts</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -398,7 +344,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFRAG"><span class="nav-text">什么是RAG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81RAG"><span class="nav-text">为什么需要RAG</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B9%BB%E8%A7%89"><span class="nav-text">问题一：大模型幻觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%EF%BC%9A%E6%9C%89%E9%99%90%E7%9A%84%E6%9C%80%E5%A4%A7%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-text">问题二：有限的最大上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%89%EF%BC%9A%E6%A8%A1%E5%9E%8B%E4%B8%93%E4%B8%9A%E7%9F%A5%E8%AF%86%E4%B8%8E%E6%97%B6%E6%95%88%E6%80%A7%E7%9F%A5%E8%AF%86%E4%B8%8D%E8%B6%B3"><span class="nav-text">问题三：模型专业知识与时效性知识不足</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RAG%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B"><span class="nav-text">RAG技术实现流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GraphRAG"><span class="nav-text">GraphRAG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Agentic-RAG"><span class="nav-text">Agentic RAG</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Function-Calling-%E5%AE%9E%E7%8E%B0"><span class="nav-text">Function Calling 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step1%EF%BC%9A%E7%BC%96%E5%86%99%E4%B8%BB%E7%A8%8B%E5%BA%8F"><span class="nav-text">Step1：编写主程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step2%EF%BC%9A%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-text">Step2：定义函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step3%EF%BC%9A%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E4%BC%A0%E9%80%92%E7%BB%99%E6%A8%A1%E5%9E%8B"><span class="nav-text">Step3：函数定义传递给模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step3%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%86%B3%E5%AE%9A%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-text">Step3：模型决定调用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step4%EF%BC%9A%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0"><span class="nav-text">Step4：执行函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step5%EF%BC%9A%E8%BF%94%E5%9B%9E%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="nav-text">Step5：返回函数执行结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-text">三、总结</span></a></li></ol>
     </div>
 </div>
 
@@ -561,7 +507,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFRAG"><span class="nav-text">什么是RAG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81RAG"><span class="nav-text">为什么需要RAG</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%80%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%B9%BB%E8%A7%89"><span class="nav-text">问题一：大模型幻觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%BA%8C%EF%BC%9A%E6%9C%89%E9%99%90%E7%9A%84%E6%9C%80%E5%A4%A7%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="nav-text">问题二：有限的最大上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E4%B8%89%EF%BC%9A%E6%A8%A1%E5%9E%8B%E4%B8%93%E4%B8%9A%E7%9F%A5%E8%AF%86%E4%B8%8E%E6%97%B6%E6%95%88%E6%80%A7%E7%9F%A5%E8%AF%86%E4%B8%8D%E8%B6%B3"><span class="nav-text">问题三：模型专业知识与时效性知识不足</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RAG%E6%8A%80%E6%9C%AF%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B"><span class="nav-text">RAG技术实现流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GraphRAG"><span class="nav-text">GraphRAG</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Agentic-RAG"><span class="nav-text">Agentic RAG</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Function-Calling-%E5%AE%9E%E7%8E%B0"><span class="nav-text">Function Calling 实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step1%EF%BC%9A%E7%BC%96%E5%86%99%E4%B8%BB%E7%A8%8B%E5%BA%8F"><span class="nav-text">Step1：编写主程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step2%EF%BC%9A%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0"><span class="nav-text">Step2：定义函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step3%EF%BC%9A%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E4%BC%A0%E9%80%92%E7%BB%99%E6%A8%A1%E5%9E%8B"><span class="nav-text">Step3：函数定义传递给模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step3%EF%BC%9A%E6%A8%A1%E5%9E%8B%E5%86%B3%E5%AE%9A%E8%B0%83%E7%94%A8%E5%87%BD%E6%95%B0"><span class="nav-text">Step3：模型决定调用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step4%EF%BC%9A%E6%89%A7%E8%A1%8C%E5%87%BD%E6%95%B0"><span class="nav-text">Step4：执行函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step5%EF%BC%9A%E8%BF%94%E5%9B%9E%E5%87%BD%E6%95%B0%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C"><span class="nav-text">Step5：返回函数执行结果</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="nav-text">三、总结</span></a></li></ol>
     </div>
 </div>
 

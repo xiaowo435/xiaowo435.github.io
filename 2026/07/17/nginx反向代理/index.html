@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="xiaowo435">
+    
+    <title>
+        
+            nginx反向代理 |
+        
+        さしぶりだね
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"en","path":"search.json"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0099FF","title":"さしぶりだね","author":"xiaowo435","avatar":"/images/OIP-C.webp","logo":"/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg","favicon":"/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg","mode":"light"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-box-archive"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"悟已往之不谏,知来者之可追.实迷途其未远,觉今是而昨非.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/xiaowo435","weixin":"H_K_Y_435","qq":"190789158@QQ.com","weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":"1907689158@qq.com"}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated created || fa-solid fa-star"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["炼气","筑基","结丹","元婴","化神"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null,"icon":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.39"},"waline":{"server_url":null,"reaction":false,"version":"3.3.2"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"site_deploy":{"enable":true,"provider":"github","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/wgSJZZ5WH9oLmja.thumb.1000_0.jpeg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               さしぶりだね
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                HOME
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                ARCHIVES
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            HOME
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            ARCHIVES
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        nginx反向代理
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/OIP-C.webp">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">xiaowo435</span>
+                                
+                                    <span class="author-badge">Lv3</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2026-07-17 17:09:35</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                    <span class="datetime" data-updated="Fri Jul 17 2026 17:12:59 GMT+0800">2026-07-17 17:12:59</span>
+                </span>
+            
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+
+                    
+                         <p><strong>Nginx</strong>作为反向代理服务器有诸多重要的用处：</p>
+<h3 id="一、负载均衡"><a href="#一、负载均衡" class="headerlink" title="一、负载均衡"></a>一、负载均衡</h3><p>Nginx 可以将客户端的请求分发到多个后端服务器上。例如，当有多个相同服务的服务器时，Nginx 根据配置的负载均衡策略（如轮询、最少连接数、IP 哈希等），将请求合理地分配给不同的服务器。在电商网站场景下，当大量的用户同时访问商品展示页面时，Nginx 可以将这些请求均匀地分发到后端的多个应用服务器上，避免单个服务器因请求过多而出现性能瓶颈，从而提高整个系统的并发处理能力。</p>
+<h3 id="二、提高安全性"><a href="#二、提高安全性" class="headerlink" title="二、提高安全性"></a>二、提高安全性</h3><p>Nginx 反向代理可以隐藏后端服务器的真实 IP 地址。这意味着，客户端只能看到 Nginx 服务器的 IP，而后端服务器的 IP 被屏蔽起来。这增加了后端服务器的安全性，使得攻击者很难直接对后端服务器进行攻击。例如，对于企业内部的一些敏感服务服务器，通过反向代理可以有效防止外部非法访问。 它还可以在反向代理层面上进行安全检查。如对客户端请求进行过滤，阻止恶意请求（如包含 SQL 注入、XSS 攻击代码的请求）到达后端服务器。例如，Nginx 可以通过配置规则来识别并丢弃包含某些特殊关键字或不符合格式要求的请求，从而保护后端服务器免受安全威胁。</p>
+<h3 id="三、缓存"><a href="#三、缓存" class="headerlink" title="三、缓存"></a>三、缓存</h3><p>Nginx 可以缓存后端服务器的响应内容。对于一些经常访问且不经常更新的资源（如静态网页、图片、CSS 和 JavaScript 文件等），当第一个客户端请求这些资源时，Nginx 会从后端服务器获取并存储这些内容。后续的相同请求，Nginx 可以直接从缓存中提供这些资源，而无需再次向后端服务器请求。这可以减轻后端服务器的负担，同时加快客户端的访问速度。例如，在一个新闻网站中，文章页面的 HTML 和相关图片在短时间内被大量用户访问，Nginx 缓存这些内容后，后续的访问可以直接从缓存获取，提高用户体验。</p>
+<h3 id="四、SSL-TLS-加密终止"><a href="#四、SSL-TLS-加密终止" class="headerlink" title="四、SSL&#x2F;TLS 加密终止"></a>四、SSL&#x2F;TLS 加密终止</h3><p>Nginx 可以在反向代理服务器上处理 SSL&#x2F;TLS 加密和解密。这样，后端服务器就可以不用自己处理这些加密操作，减轻后端服务器的计算压力。例如，对于一个对外提供 HTTPS 服务的网站，Nginx 可以在客户端和 Nginx 之间建立加密连接，而 Nginx 和后端服务器之间可以使用更高效的非加密连接（前提是内部网络安全可靠的情况下），这样可以提高整个系统的性能。</p>
+<h3 id="五、URL-重写"><a href="#五、URL-重写" class="headerlink" title="五、URL 重写"></a>五、URL 重写</h3><p>Nginx 可以根据需要对客户端的请求 URL 进行重写，然后再将请求转发给后端服务器。例如，一个网站需要将旧的 URL 结构（如&#x2F;old-page.html）重写为新的 URL 结构（如&#x2F;new-page.html），Nginx 可以在反向代理过程中完成这个重写操作。这对于网站进行 URL 改造、优化搜索引擎排名或者进行页面整合等操作时非常有用。</p>
+<h3 id="六、访问控制"><a href="#六、访问控制" class="headerlink" title="六、访问控制"></a>六、访问控制</h3><p>Nginx 可以对客户端的访问进行控制。例如，可以根据客户端的 IP 地址、请求的用户代理等信息来允许或拒绝访问。在企业内部应用中，可以限制只有企业内部特定 IP 范围的客户端能够访问某些后端服务器提供的内部服务，从而实现访问权限的管理。</p>
+<h5 id="通过Nginx-反向代理功能和内置的负载均衡-算法来实现负载均衡"><a href="#通过Nginx-反向代理功能和内置的负载均衡-算法来实现负载均衡" class="headerlink" title="通过Nginx 反向代理功能和内置的负载均衡 算法来实现负载均衡"></a>通过Nginx 反向代理功能和内置的负载均衡 算法来实现负载均衡</h5><p><strong>一、配置 upstream 模块</strong></p>
+<ol>
+<li>在 Nginx 的配置文件（通常位于<code>/etc/nginx/nginx.conf</code>或<code>/etc/nginx/conf.d/</code>目录下的某个文件中）中，使用<code>upstream</code>指令来定义一组后端服务器。<br>     语法示例：<br>​<br>     upstream backend_servers {<br>       server backend1.example.com;<br>       server backend2.example.com;<br>       server backend3.example.com;<br>     }<br>​<br>   这里的backend_servers是一个自定义的组名，后续在服务器块中会引用它。<code>server</code>指令后面跟着的是后端服务器的地址，可以是域名或 IP 地址。<br>​  </li>
+<li>可以为每个后端服务器指定不同的参数，如权重（weight）、最大失败次数（max_fails）和失败后的暂停时间（fail_timeout）等。<br>   权重示例：<br>​<br>     upstream backend_servers {<br>       server backend1.example.com weight &#x3D; 2;<br>       server backend2.example.com weight &#x3D; 1;<br>       server backend3.example.com weight &#x3D; 1;<br>     }<br>​<br>     在这个例子中，backend1.example.com的权重是2，而其他两个服务器的权重是1。这意味着在负载均衡过程中，backend1.example.com会比其他两个服务器有更高的概率接收请求。例如，在轮询算法下，每3次请求中，backend1.example.com可能会接收2次请求，其他两个服务器各接收1次。<br>​<br>     最大失败次数和失败后的暂停时间示例：<br>​<br>      upstream backend_servers {<br>        server backend1.example.com max_fails &#x3D; 3 fail_timeout &#x3D; 30s;<br>        server backend2.example.com;<br>     }<br>​<br>   这表示如果backend1.example.com连续出现3次请求失败，那么在接下来的30秒内，Nginx不会再将请求发送给这台服务器，等待这个时间过后才会再次尝试。</li>
+</ol>
+<p><strong>二、负载均衡算法</strong></p>
+<ol>
+<li>轮询（Round - Robin）（默认算法）<br>     这是最简单的负载均衡算法。Nginx 按照顺序依次将客户端的请求分配给后端服务器组中的服务器。例如，对于有3台后端服务器的组，第一个请求分配给服务器1，第二个请求分配给服务器2，第三个请求分配给服务器3，第四个请求又回到服务器1，依此类推。<br>​  </li>
+<li>权重轮询（Weighted Round - Robin）<br>     这种算法考虑了服务器的性能差异。通过为每台服务器设置权重，权重值越高的服务器在分配请求时会被优先考虑。例如，如果服务器A的权重是2，服务器B的权重是1，那么在分配请求时，服务器A会接收到两倍于服务器B的请求量（相对比例）。这适合服务器性能不同的场景，能够让性能更好的服务器承担更多的负载。<br>​  </li>
+<li>最少连接数（Least Connections）<br>     Nginx 会将新的请求分配给当前连接数最少的后端服务器。这种算法适用于会话时间较长的场景，例如一些需要长时间建立连接的视频流服务。因为如果一个服务器已经有很多连接在处理，就说明它可能比较繁忙，此时将请求分配给连接数少的服务器可以更好地平衡负载。<br>​  </li>
+<li>IP 哈希（IP Hash）<br>     IP 哈希算法通过客户端的 IP 地址进行哈希计算，然后根据哈希结果将请求分配给后端服务器。这样可以确保同一个客户端的请求总是分配到同一台后端服务器上。这在一些需要保持会话状态的应用场景下很有用，比如购物车服务，因为如果客户端的请求总是被分配到同一台服务器，就可以在该服务器上保持用户的购物车状态，而不会因为请求被分配到不同的服务器而导致购物车信息丢失。</li>
+</ol>
+<h5 id="以下是一个包含-Nginx-作为反向代理服务器-一至六用处的配置示例："><a href="#以下是一个包含-Nginx-作为反向代理服务器-一至六用处的配置示例：" class="headerlink" title="以下是一个包含 Nginx 作为反向代理服务器 一至六用处的配置示例："></a>以下是一个包含 Nginx 作为反向代理服务器 一至六用处的配置示例：</h5><p>server {<br>    listen 80;<br>    server_name example.com;<br>    <br>    location &#x2F; {<br>        proxy_pass <a class="link"   target="_blank" rel="noopener" href="http://backend/" >http://backend<i class="fas fa-external-link-alt"></i></a>;<br>        proxy_set_header Host $host;<br>        proxy_set_header X-Real-IP $remote_addr;<br>        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>    }<br>}<br>​<br>​<br>upstream backend {<br>    server backend1.example.com weight&#x3D;2;<br>    server backend2.example.com weight&#x3D;1;<br>    server backend3.example.com weight&#x3D;1;<br>    server backend4.example.com max_fails&#x3D;3 fail_timeout&#x3D;30s;<br>}<br>​  </p>
+<h1 id="缓存配置"><a href="#缓存配置" class="headerlink" title="缓存配置"></a>缓存配置</h1><p>proxy_cache_path &#x2F;var&#x2F;cache&#x2F;nginx levels&#x3D;1:2 keys_zone&#x3D;my_cache:10m inactive&#x3D;60m use_temp_path&#x3D;off;<br>​<br>server {<br>    listen 80;<br>    server_name example.com;<br>​<br>    location &#x2F;static&#x2F; {<br>        # 静态资源缓存<br>        proxy_cache my_cache;<br>        proxy_cache_valid 200 302 60m;<br>        proxy_cache_valid 404 1m;<br>        proxy_pass <a class="link"   target="_blank" rel="noopener" href="http://backend/" >http://backend<i class="fas fa-external-link-alt"></i></a>;<br>    }<br>}<br>​  </p>
+<h1 id="SSL-TLS-加密终止"><a href="#SSL-TLS-加密终止" class="headerlink" title="SSL&#x2F;TLS 加密终止"></a>SSL&#x2F;TLS 加密终止</h1><p>server {<br>    listen 443 ssl;<br>    server_name example.com;<br>​<br>    ssl_certificate &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;example.crt;<br>    ssl_certificate_key &#x2F;etc&#x2F;nginx&#x2F;ssl&#x2F;example.key;<br>​<br>    location &#x2F; {<br>        proxy_pass <a class="link"   target="_blank" rel="noopener" href="http://backend/" >http://backend<i class="fas fa-external-link-alt"></i></a>;<br>        proxy_set_header Host $host;<br>        proxy_set_header X-Real-IP $remote_addr;<br>        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;<br>        proxy_set_header X-Forwarded-Proto $scheme;<br>    }<br>}<br>​  </p>
+<h1 id="URL-重写"><a href="#URL-重写" class="headerlink" title="URL 重写"></a>URL 重写</h1><p>server {<br>    listen 80;<br>    server_name example.com;<br>​<br>    location &#x2F;old-page.html {<br>        # 将旧 URL 重写为新 URL<br>        rewrite ^&#x2F;old-page.html$ &#x2F;new-page.html permanent;<br>    }<br>}<br>​  </p>
+<h1 id="访问控制"><a href="#访问控制" class="headerlink" title="访问控制"></a>访问控制</h1><p>server {<br>    listen 80;<br>    server_name example.com;<br>​<br>    location &#x2F;restricted&#x2F; {<br>        # 限制只有特定 IP 范围的客户端能够访问<br>        allow 192.168.1.0&#x2F;24;<br>        deny all;<br>        proxy_pass <a class="link"   target="_blank" rel="noopener" href="http://backend/" >http://backend<i class="fas fa-external-link-alt"></i></a>;<br>    }<br>}</p>
+
+                    
+                </div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2026/07/17/Function-Calling%E5%AE%9E%E7%8E%B0/"
+                                   title="Function Calling实战"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Function Calling实战</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2026/07/17/%E5%B8%B8%E7%94%A8shell%E8%84%9A%E6%9C%AC/"
+                                   title="常用shell脚本"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">常用shell脚本</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-text">一、负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%8F%90%E9%AB%98%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-text">二、提高安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BC%93%E5%AD%98"><span class="nav-text">三、缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81SSL-TLS-%E5%8A%A0%E5%AF%86%E7%BB%88%E6%AD%A2"><span class="nav-text">四、SSL&#x2F;TLS 加密终止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81URL-%E9%87%8D%E5%86%99"><span class="nav-text">五、URL 重写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-text">六、访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87Nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%8A%9F%E8%83%BD%E5%92%8C%E5%86%85%E7%BD%AE%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-%E7%AE%97%E6%B3%95%E6%9D%A5%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-text">通过Nginx 反向代理功能和内置的负载均衡 算法来实现负载均衡</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A5%E4%B8%8B%E6%98%AF%E4%B8%80%E4%B8%AA%E5%8C%85%E5%90%AB-Nginx-%E4%BD%9C%E4%B8%BA%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-%E4%B8%80%E8%87%B3%E5%85%AD%E7%94%A8%E5%A4%84%E7%9A%84%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-text">以下是一个包含 Nginx 作为反向代理服务器 一至六用处的配置示例：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%85%8D%E7%BD%AE"><span class="nav-text">缓存配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSL-TLS-%E5%8A%A0%E5%AF%86%E7%BB%88%E6%AD%A2"><span class="nav-text">SSL&#x2F;TLS 加密终止</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#URL-%E9%87%8D%E5%86%99"><span class="nav-text">URL 重写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-text">访问控制</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2026
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">xiaowo435</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            This site is deployed on <span class="tooltip" data-tooltip-content="GitHub Pages"><img src="/images/brands/github.png"></span>
+            
+        </div>
+    
+
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-text">一、负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%8F%90%E9%AB%98%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-text">二、提高安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BC%93%E5%AD%98"><span class="nav-text">三、缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81SSL-TLS-%E5%8A%A0%E5%AF%86%E7%BB%88%E6%AD%A2"><span class="nav-text">四、SSL&#x2F;TLS 加密终止</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%94%E3%80%81URL-%E9%87%8D%E5%86%99"><span class="nav-text">五、URL 重写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-text">六、访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E8%BF%87Nginx-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%8A%9F%E8%83%BD%E5%92%8C%E5%86%85%E7%BD%AE%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1-%E7%AE%97%E6%B3%95%E6%9D%A5%E5%AE%9E%E7%8E%B0%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-text">通过Nginx 反向代理功能和内置的负载均衡 算法来实现负载均衡</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%A5%E4%B8%8B%E6%98%AF%E4%B8%80%E4%B8%AA%E5%8C%85%E5%90%AB-Nginx-%E4%BD%9C%E4%B8%BA%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E6%9C%8D%E5%8A%A1%E5%99%A8-%E4%B8%80%E8%87%B3%E5%85%AD%E7%94%A8%E5%A4%84%E7%9A%84%E9%85%8D%E7%BD%AE%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="nav-text">以下是一个包含 Nginx 作为反向代理服务器 一至六用处的配置示例：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BC%93%E5%AD%98%E9%85%8D%E7%BD%AE"><span class="nav-text">缓存配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSL-TLS-%E5%8A%A0%E5%AF%86%E7%BB%88%E6%AD%A2"><span class="nav-text">SSL&#x2F;TLS 加密终止</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#URL-%E9%87%8D%E5%86%99"><span class="nav-text">URL 重写</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6"><span class="nav-text">访问控制</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>
