@@ -9,7 +9,7 @@
     
     <title>
         
-            hexo常用命令文档 |
+            Tag: LLM |
         
         さしぶりだね
     </title>
@@ -170,270 +170,39 @@
             <div class="main-content border-box">
                 
 
-                    
-<div class="fade-in-down-animation">
-    <div class="post-page-container border-box">
-        <div class="post-content-container border-box">
+                    <div class="fade-in-down-animation">
+    <div class="tag-archive-container border-box">
+        <div class="tag-name"><i class="fas fa-hashtag"></i>&nbsp;LLM
+        </div>
+        <div class="tag-post-list">
             
-
-            <div class="post-content-bottom border-box">
+<div class="archive-list-container border-box">
+    
+        <section class="archive-item border-box">
+            <div class="archive-item-header border-box">
+                <span class="archive-year">2026</span>
+            </div>
+            <ul class="archive-item-body border-box">
                 
-                    <div class="post-title">
-                        hexo常用命令文档
-                    </div>
+                    <li class="post-item border-box">
+                        <span class="starting-point border-box flex-center"></span>
+                        <span class="post-date border-box">07-17</span>
+                        <a class="post-title border-box text-ellipsis"
+                           href="/2026/07/17/LLM%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86/"
+                        >LLM基本原理</a>
+                    </li>
                 
-
-                
-                    <div class="post-header border-box">
-                        
-                            <div class="avatar-box border-box">
-                                <img src="/images/OIP-C.webp">
-                            </div>
-                        
-                        <div class="info-box">
-                            <div class="author border-box">
-                                <span class="name">xiaowo435</span>
-                                
-                                    <span class="author-badge">Lv3</span>
-                                
-                            </div>
-                            <div class="meta-info border-box">
-                                
-
-<div class="post-meta-info-container border-box post">
-    <div class="post-meta-info border-box">
-        
-
-        
-            <span class="meta-info-item post-create-date">
-                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2026-03-09 15:07:47</span>
-            </span>
-
-            
-                <span class="meta-info-item post-update-date">
-                    <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Fri Jul 17 2026 17:23:43 GMT+0800">2026-07-17 17:23:43</span>
-                </span>
-            
-        
-
-        
-
-        
-            <span class="post-tag meta-info-item border-box">
-                <ul class="post-tag-ul">
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Hexo/">Hexo</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-        
-        
-        
-    </div>
-
+            </ul>
+        </section>
     
 </div>
 
-                            </div>
-                        </div>
-                    </div>
-                
-
-                <div class="post-content keep-markdown-body ">
-                    
-
-                    
-                         <h1 id="Hexo-常用命令速查"><a href="#Hexo-常用命令速查" class="headerlink" title="Hexo 常用命令速查"></a>Hexo 常用命令速查</h1><h2 id="基础命令"><a href="#基础命令" class="headerlink" title="基础命令"></a>基础命令</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>hexo init &amp;lt;folder&amp;gt;</code></td>
-<td>初始化一个新的 Hexo 博客</td>
-</tr>
-<tr>
-<td><code>hexo new &quot;文章标题&quot;</code></td>
-<td>创建新文章</td>
-</tr>
-<tr>
-<td><code>hexo new page &quot;页面名称&quot;</code></td>
-<td>创建新页面（如 About、Tags 等）</td>
-</tr>
-<tr>
-<td><code>hexo generate</code> 或 <code>hexo g</code></td>
-<td>生成静态文件</td>
-</tr>
-<tr>
-<td><code>hexo server</code> 或 <code>hexo s</code></td>
-<td>启动本地服务器预览</td>
-</tr>
-<tr>
-<td><code>hexo deploy</code> 或 <code>hexo d</code></td>
-<td>部署网站</td>
-</tr>
-<tr>
-<td><code>hexo clean</code></td>
-<td>清除缓存和已生成的文件</td>
-</tr>
-</tbody></table>
-<h2 id="组合命令"><a href="#组合命令" class="headerlink" title="组合命令"></a>组合命令</h2><table>
-<thead>
-<tr>
-<th>命令</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>hexo s -g</code></td>
-<td>生成并启动本地服务器</td>
-</tr>
-<tr>
-<td><code>hexo d -g</code> 或 <code>hexo g -d</code></td>
-<td>生成并部署</td>
-</tr>
-<tr>
-<td><code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code></td>
-<td>清除缓存、生成、部署（最常用）</td>
-</tr>
-</tbody></table>
-<h2 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h2><table>
-<thead>
-<tr>
-<th>参数</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>-p, --port</code></td>
-<td>指定端口，如 <code>hexo s -p 5000</code></td>
-</tr>
-<tr>
-<td><code>-o, --open</code></td>
-<td>启动服务器后自动打开浏览器</td>
-</tr>
-<tr>
-<td><code>-w, --watch</code></td>
-<td>监视文件变化并自动重新生成</td>
-</tr>
-<tr>
-<td><code>--draft</code></td>
-<td>渲染草稿文章</td>
-</tr>
-<tr>
-<td><code>--silent</code></td>
-<td>静默模式</td>
-</tr>
-</tbody></table>
-<h2 id="文章管理"><a href="#文章管理" class="headerlink" title="文章管理"></a>文章管理</h2><pre><code class="language-bash"># 创建文章（默认在 source/_posts/）
-hexo new &quot;我的第一篇文章&quot;
-
-# 创建草稿（在 source/_drafts/）
-hexo new draft &quot;草稿标题&quot;
-
-# 发布草稿为正式文章
-hexo publish &quot;草稿标题&quot;
-
-# 创建带布局的文章
-hexo new post &quot;文章标题&quot;
-hexo new draft &quot;草稿标题&quot;
-hexo new page &quot;页面标题&quot;
-</code></pre>
-
-                    
-                </div>
-
-                
-
-                <div class="post-bottom-tags-and-share border-box">
-                    <div>
-                        
-                            <ul class="post-tags-box border-box">
-                                
-                                    <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Hexo/">Hexo</a>
-                                    </li>
-                                
-                            </ul>
-                        
-                    </div>
-                    <div>
-                        
-                    </div>
-                </div>
-
-                
-
-                
-                    <div class="post-nav border-box">
-                        
-                            <div class="prev-post">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/2026/03/09/Embedding%E7%AF%87/"
-                                   title="Embedding篇"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Embedding篇</span>
-                                        <span class="post-nav-item">Prev posts</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
-                        
-                            <div class="next-post">
-                                <a class="next"
-                                   rel="next"
-                                   href="/2026/03/08/hello-world/"
-                                   title="Hello World"
-                                >
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Hello World</span>
-                                        <span class="post-nav-item">Next posts</span>
-                                    </span>
-                                    <span class="right arrow-icon flex-center">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </span>
-                                </a>
-                            </div>
-                        
-                    </div>
-                
-
-                
-                    
-
-
-
-
-
-
-                
-            </div>
         </div>
-
-        
-            <div class="pc-post-toc right-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5"><span class="nav-text">Hexo 常用命令速查</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="nav-text">基础命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E5%91%BD%E4%BB%A4"><span class="nav-text">组合命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="nav-text">常用参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86"><span class="nav-text">文章管理</span></a></li></ol></li></ol>
     </div>
-</div>
+    
 
-            </div>
-        
-    </div>
+
+
 </div>
 
 
@@ -474,31 +243,6 @@ hexo new page &quot;页面标题&quot;
 
     <!-- post tools -->
     
-        <div class="post-tools right-toc">
-            <div class="post-tools-container border-box">
-    <ul class="post-tools-list border-box">
-        <!-- PC encrypt again -->
-        
-
-        <!-- PC TOC show toggle -->
-        
-            <li class="tools-item flex-center toggle-show-toc">
-                <i class="fas fa-list"></i>
-            </li>
-        
-
-        <!-- PC go comment -->
-        
-
-        <!-- PC full screen -->
-        <li class="tools-item flex-center full-screen">
-            <i class="fa-solid fa-expand"></i>
-        </li>
-    </ul>
-</div>
-
-        </div>
-    
 
     <!-- side tools -->
     <div class="side-tools">
@@ -525,10 +269,6 @@ hexo new page &quot;页面标题&quot;
     </ul>
 
     <ul class="exposed-tools-list border-box">
-        
-            <li class="tools-item toggle-show-toc-tablet flex-center">
-                <i class="fas fa-list"></i>
-            </li>
         
 
         
@@ -586,18 +326,8 @@ hexo new page &quot;页面标题&quot;
 
     <!-- tablet toc -->
     
-        <div class="tablet-post-toc-mask">
-            <div class="tablet-post-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Hexo-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E9%80%9F%E6%9F%A5"><span class="nav-text">Hexo 常用命令速查</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="nav-text">基础命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E5%91%BD%E4%BB%A4"><span class="nav-text">组合命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%8F%82%E6%95%B0"><span class="nav-text">常用参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%87%E7%AB%A0%E7%AE%A1%E7%90%86"><span class="nav-text">文章管理</span></a></li></ol></li></ol>
-    </div>
-</div>
-
-            </div>
-        </div>
-    
 </main>
+
 
 
 
@@ -639,24 +369,6 @@ hexo new page &quot;页面标题&quot;
     
 
     <!-- post page -->
-    
-        <!-- post-helper -->
-        
-<script src="/js/post/post-helper.js"></script>
-
-
-        <!-- toc -->
-        
-            
-<script src="/js/post/toc.js"></script>
-
-        
-
-        <!-- copyright-info -->
-        
-
-        <!-- share -->
-        
     
 
     <!-- categories page -->

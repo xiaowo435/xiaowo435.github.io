@@ -213,13 +213,22 @@
             
                 <span class="meta-info-item post-update-date">
                     <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                    <span class="datetime" data-updated="Fri Jul 17 2026 17:11:19 GMT+0800">2026-07-17 17:11:19</span>
+                    <span class="datetime" data-updated="Fri Jul 17 2026 17:25:35 GMT+0800">2026-07-17 17:25:35</span>
                 </span>
             
         
 
         
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/LLM/">LLM</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -240,7 +249,138 @@
                     
 
                     
-                         
+                         <h2 id="大模型训练全解析：预训练、微调、强化学习"><a href="#大模型训练全解析：预训练、微调、强化学习" class="headerlink" title="大模型训练全解析：预训练、微调、强化学习"></a>大模型训练全解析：预训练、微调、强化学习</h2><p><strong>训练大语言模型（LLM）主要分为两个核心阶段：预训练（Pre-training）和后训练（Post-training）。这两个阶段共同构成了LLM从零到一的学习过程。</strong></p>
+<h3 id="1-预训练（Pre-training）"><a href="#1-预训练（Pre-training）" class="headerlink" title="1. 预训练（Pre-training）"></a><strong>1. 预训练（Pre-training）</strong></h3><p>在LLM能够生成连贯文本之前，它需要先掌握语言的基本规律，这一过程称为预训练。预训练是一个计算密集型任务，涉及大量数据和复杂的模型优化。</p>
+<h4 id="步骤1：数据收集与预处理"><a href="#步骤1：数据收集与预处理" class="headerlink" title="步骤1：数据收集与预处理"></a><em><em><strong>步骤1：数据收集与预处理</strong></em></em></h4><p>训练LLM的第一步是收集海量高质量的文本数据。目标是构建一个多样化且覆盖面广的数据集，以便模型能够学习到丰富的语言知识和上下文关系。</p>
+<p>一个常见的数据来源是 Common Crawl，这是一个免费开放的网页爬取数据库，包含了过去18年间约2500亿个网页的数据。然而，原始网页数据通常包含大量噪声，如垃圾信息、重复内容和低质量文本，因此数据预处理是必不可少的环节。</p>
+<p>在完成文本数据的清理后，下一步是进行分词（Tokenization）处理。</p>
+<h3 id="步骤2：分词（Tokenization）"><a href="#步骤2：分词（Tokenization）" class="headerlink" title="步骤2：分词（Tokenization）"></a><strong>步骤2：分词（Tokenization）</strong></h3><p>在神经网络能够处理文本之前，文本需要被转换为数值形式。这一转换过程称为分词（Tokenization）。分词的作用是将单词、子词或字符映射为唯一的数值token。这些token是语言模型的基本构建单元，是模型理解和处理语言的核心组件。</p>
+<p>以GPT-4为例，其可能的token数量为100,277个。每个token对应一个唯一的数值ID，模型通过这些ID来识别和处理文本。</p>
+<p>通过分词，文本被转化为模型可以理解的数值序列，为后续的模型训练和推理奠定了基础。</p>
+<h3 id="步骤3：神经网络训练（Neural-Network-Training）"><a href="#步骤3：神经网络训练（Neural-Network-Training）" class="headerlink" title="步骤3：神经网络训练（Neural Network Training）"></a><strong>步骤3：神经网络训练（Neural Network Training）</strong></h3><p>在文本经过分词处理后，神经网络的任务是学习如何根据上下文预测下一个token。具体来说，模型会接收一串输入token（例如“我正在烹饪”），并通过其复杂的数学结构——即模型的架构——进行处理，最终输出对下一个token的预测。</p>
+<p>这一过程是LLM训练的核心。模型通过不断调整其内部参数，逐步学会从海量数据中捕捉语言规律，从而能够生成连贯且符合上下文的文本。这种基于上下文的学习能力，使得LLM能够在各种任务中表现出色。</p>
+<p>神经网络主要由两个关键部分构成：：</p>
+<ul>
+<li><p>1.参数（参数，Weights）：通过训练学习得到的数值，用于调整模型的行为。</p>
+</li>
+<li><p>2.架构（Architecture）：定义输入token如何被处理以生成输出的数学结构。</p>
+</li>
+</ul>
+<p>在训练初期，模型的预测几乎是随机的。但随着训练的推进，它逐渐学会为可能的下一个token分配概率。当模型正确预测了token（例如“食”）时，会通过**反向传播（Backpropagation）**调整其数十亿个参数。这一优化过程旨在提高正确预测的概率，同时降低错误预测的概率，从而不断强化模型的学习能力。</p>
+<p>这个过程会在海量数据集上重复数十亿次，直到模型能够高效地捕捉语言规律。</p>
+<h2 id="基础模型（Base-Model）：预训练的成果"><a href="#基础模型（Base-Model）：预训练的成果" class="headerlink" title="基础模型（Base Model）：预训练的成果"></a><strong>基础模型（Base Model）：预训练的成果</strong></h2><p>在这一阶段，基础模型已经学会了：</p>
+<ul>
+<li><p><strong>理解单词、短语和句子之间的关联。</strong></p>
+</li>
+<li><p><strong>识别训练数据中的统计模式。</strong></p>
+</li>
+</ul>
+<p>然而，基础模型并未针对具体任务进行优化。你可以将其视为一个高级的“自动补全系统”——它能够基于概率预测下一个token，但缺乏对指令的精确理解和执行能力。</p>
+<p>基础模型有时会逐字复述训练数据，并可以通过上下文学习（In-Context Learning）进行特定应用。例如，通过在提示（Prompt）中提供示例，引导模型生成符合预期的响应。但为了让模型在实际应用中更加可靠和有用，还需要进一步的训练和优化。</p>
+<h2 id="2-后训练（Post-Training）：让模型更实用"><a href="#2-后训练（Post-Training）：让模型更实用" class="headerlink" title="2. 后训练（Post-Training）：让模型更实用"></a><strong>2. 后训练（Post-Training）：让模型更实用</strong></h2><p>基础模型虽然具备了语言理解和生成能力，但尚未经过精细打磨。为了让模型在实际应用中更加实用、可靠和安全，需要进行后训练（Post-Training）。这一阶段通常在更小、更专业的数据集上进行微调，以优化模型的行为和性能。</p>
+<p>由于神经网络无法像传统软件那样通过显式编程来调整，我们只能通过训练来“编程”它。具体来说，就是让模型学习结构化的、带标注的数据集，这些数据集代表了理想的交互示例。</p>
+<h3 id="后训练的方式"><a href="#后训练的方式" class="headerlink" title="后训练的方式"></a><strong>后训练的方式</strong></h3><p>后训练阶段会创建专门的数据集，这些数据集包含结构化的示例，指导模型在不同情境下的回应方式。以下是两种常见的后训练方法：</p>
+<ol>
+<li><p>指令&#x2F;对话微调（Instruction&#x2F;Conversation Fine-Tuning）</p>
+<p> 目标是让模型学会遵循指令、执行任务、进行多轮对话、遵守安全规范以及拒绝恶意请求。例如，OpenAI的InstructGPT（2022）项目聘请了约40名人工标注者来创建高质量的数据集。这些标注者编写提示（Prompts）并提供符合安全指南的理想响应。如今，许多数据集由AI自动生成，再经过人工审核和编辑以确保质量。</p>
+</li>
+<li><p>领域特定微调（Domain-Specific Fine-Tuning）</p>
+<p> 目标是使模型适应特定领域的需求，例如医学、法律、编程等。通过在这些领域的高质量数据上进行微调，模型能够生成更专业、更准确的响应。</p>
+</li>
+</ol>
+<p><strong>特殊token的引入</strong></p>
+<p>在后训练阶段，还会引入一些特殊token，这些token在预训练阶段并未使用。它们的作用是帮助模型理解交互的结构。例如：</p>
+<ol>
+<li><p>标记用户输入的起始与结束。</p>
+</li>
+<li><p>标记AI响应的起始位置。</p>
+</li>
+</ol>
+<p>这些特殊token确保模型能够正确区分提示（Prompt）和回答（Reply），从而生成更符合上下文的响应。</p>
+<p>通过后训练，模型不仅能够更好地理解任务和指令，还能在特定领域和复杂交互中表现出色，最终成为一个实用且可靠的AI系统。</p>
+<h2 id="3-推理（Inference）——模型如何生成新文本"><a href="#3-推理（Inference）——模型如何生成新文本" class="headerlink" title="3. 推理（Inference）——模型如何生成新文本"></a><strong>3. 推理（Inference）——模型如何生成新文本</strong></h2><p>推理是模型生成新文本的过程，它可以在任何阶段进行，甚至可以在预训练中途执行，以评估模型的学习效果。当模型接收到一组输入token后，它会根据训练中学到的模式，为所有可能的下一个token分配概率。</p>
+<p>然而，模型并非总是选择概率最高的token，而是通过概率分布采样来决定下一个token。这类似于抛掷一个带偏向的硬币，高概率的token更有可能被选中，但低概率的token仍有机会被选择。</p>
+<p>这个过程是迭代进行的：每个新生成的token都会成为下一次预测的输入。由于token选择具有一定的随机性，即使输入相同，模型也可能生成不同的输出。通过这种方式，模型能够生成训练数据中未直接出现但符合统计规律的文本。</p>
+<h2 id="4-幻觉（Hallucinations）——当LLM生成错误信息"><a href="#4-幻觉（Hallucinations）——当LLM生成错误信息" class="headerlink" title="4. 幻觉（Hallucinations）——当LLM生成错误信息"></a><strong>4. 幻觉（Hallucinations）——当LLM生成错误信息</strong></h2><p>幻觉（Hallucination）是指LLM生成虚假或错误信息的情况。这种现象的根本原因在于，LLM并不“理解”事实——它只是根据训练数据预测最可能的单词序列。</p>
+<p>在早期，LLM的幻觉问题尤为严重。例如，如果训练数据中包含大量类似“谁是…”的问题，并且这些问题都有明确的答案，模型可能会学习到：这类查询应该总是有一个自信的回答，即使它实际上并不具备相关知识。</p>
+<p>这种倾向导致模型在缺乏准确信息时，仍然会生成看似合理但实际错误的回答。解决幻觉问题是LLM研究和开发中的重要挑战之一，需要通过更高质量的训练数据、更精细的后训练以及引入外部知识库等方法来缓解。</p>
+<p>因此，当模型被问及一个未知人物时，它不会自然地回答“我不知道”，因为在训练过程中，这种模式并未被充分强化。相反，模型会基于已有的统计模式生成一个看似合理的猜测，而这种行为往往会导致它编造出虚假或错误的信息。</p>
+<h3 id="如何减少幻觉？"><a href="#如何减少幻觉？" class="headerlink" title="如何减少幻觉？"></a><strong>如何减少幻觉？</strong></h3><h4 id="方法一：训练模型说“我不知道”"><a href="#方法一：训练模型说“我不知道”" class="headerlink" title="方法一：训练模型说“我不知道”"></a><strong>方法一：训练模型说“我不知道”</strong></h4><p>提高模型的事实准确性需要明确训练它识别自身知识的边界，并学会在不确定时回答“我不知道”。这一过程比表面看起来更复杂，通常通过自我询问（Self-Interrogation）来实现。</p>
+<p>自我询问可以通过另一个AI模型自动化完成。该模型生成问题以探测知识盲点。如果模型生成了错误的答案，系统会加入新的训练示例，其中正确的回应是：“我不确定。能否提供更多上下文？”</p>
+<p><strong>训练机制：</strong></p>
+<p>如果模型在训练中多次遇到某个问题，它会为正确答案分配较高的概率。</p>
+<p>如果模型从未遇到过某个问题，它会在多个可能的token之间均匀分配概率，从而使输出更加随机，没有单一token被认为是最可能的选择。</p>
+<p><strong>微调效果：</strong></p>
+<p>通过微调，模型被显式训练以处理低置信度的输出，并用预定义的回应（如“我不知道”）来应对。例如，当询问ChatGPT-4o一个无意义的问题时，它会正确回应：“我不确定那是谁。能否提供更多上下文？”</p>
+<h4 id=""><a href="#" class="headerlink" title=""></a></h4><h4 id="方法二：引入网络搜索"><a href="#方法二：引入网络搜索" class="headerlink" title="方法二：引入网络搜索"></a><strong>方法二：引入网络搜索</strong></h4><p>一种更先进的方法是赋予模型访问外部搜索工具的能力，从而扩展其知识范围，使其能够超越训练数据的限制。</p>
+<p><strong>工作原理：</strong></p>
+<p>当模型检测到不确定性时，可以触发一次网络搜索。搜索结果会被插入到模型的上下文窗口中，成为其“工作记忆”的一部分。模型在生成响应时会参考这些新信息。</p>
+<p><strong>优势：</strong></p>
+<p>这种方法不仅减少了幻觉，还显著提升了模型的实用性，使其能够提供更准确、实时的信息。</p>
+<p>通过结合这两种方法，模型能够在面对未知问题时表现得更加可靠，同时减少生成虚假信息的可能性。</p>
+<h2 id="5-模糊记忆与工作记忆"><a href="#5-模糊记忆与工作记忆" class="headerlink" title="5. 模糊记忆与工作记忆"></a><strong>5. 模糊记忆与工作记忆</strong></h2><p>LLM 通常通过两种方式访问知识：</p>
+<p><strong>模糊记忆</strong></p>
+<p>这是模型在预训练过程中存储的知识，基于从海量互联网数据中学到的统计模式。虽然这种记忆覆盖范围广泛，但它并不精确，也无法直接搜索。</p>
+<p><strong>工作记忆</strong></p>
+<p>这是模型在推理过程中可以直接访问的信息，存储在其上下文窗口中。任何提供的文本都会作为短期记忆，使模型能够在生成响应时回忆相关细节。通过在上下文窗口中添加相关事实，可以显著提高模型响应的质量。</p>
+<h2 id="6-自我认知"><a href="#6-自我认知" class="headerlink" title="6. 自我认知"></a><strong>6. 自我认知</strong></h2><p>当被问到“你是谁？”或“是什么构建了你？”等问题时，LLM 会根据其训练数据生成一个统计上最可能的回应，除非被显式编程以提供准确答案。LLM 并不具备真正的自我意识，它们的回应完全依赖于训练过程中学到的模式。</p>
+<p>为了让模型表现出一致的身份，可以使用系统提示（System Prompt）。通过预定义的指令，系统提示可以描述模型的身份、能力以及局限性，从而引导模型生成符合预期的回答。</p>
+<h3 id="在之前的部分中，我们讨论了训练LLM的两个主要阶段："><a href="#在之前的部分中，我们讨论了训练LLM的两个主要阶段：" class="headerlink" title="在之前的部分中，我们讨论了训练LLM的两个主要阶段："></a><strong>在之前的部分中，我们讨论了训练LLM的两个主要阶段：</strong></h3><ol>
+<li><h3 id="预训练：从海量数据集中学习，形成基础模型。"><a href="#预训练：从海量数据集中学习，形成基础模型。" class="headerlink" title="预训练：从海量数据集中学习，形成基础模型。"></a>预训练：从海量数据集中学习，形成基础模型。</h3></li>
+<li><h3 id="监督微调（SFT）：通过精心挑选的示例优化模型，使其更实用。"><a href="#监督微调（SFT）：通过精心挑选的示例优化模型，使其更实用。" class="headerlink" title="监督微调（SFT）：通过精心挑选的示例优化模型，使其更实用。"></a><strong>监督微调（SFT）：通过精心挑选的示例优化模型，使其更实用。</strong></h3></li>
+</ol>
+<p>现在，我们将深入探讨第三个关键阶段：强化学习（Reinforcement Learning，RL）。尽管预训练和SFT已经是成熟的方法，但RL仍在不断发展，并成为训练流程中不可或缺的一部分。</p>
+<h3 id="RL的目的是什么？"><a href="#RL的目的是什么？" class="headerlink" title="RL的目的是什么？"></a><strong>RL的目的是什么？</strong></h3><p>人类和LLM处理信息的方式存在显著差异。例如，对于人类来说，基本的算术是直观的，而LLM则将文本视为一串token序列，这对它们来说并不直观。然而，LLM能够在复杂主题上生成专家级回答，仅仅因为它们在训练过程中见过足够多的示例。</p>
+<p>这种认知差异使得人类注释者难以提供一组“完美”的标签来持续引导LLM找到正确答案。RL弥补了这一差距，它允许模型从自身的经验中学习。模型不再仅仅依赖显式标签，而是通过探索不同的token序列，并根据哪些输出最有用来获得反馈（奖励信号）。随着时间的推移，模型学会了更好地与人类意图对齐。</p>
+<h3 id="RL背后的直觉"><a href="#RL背后的直觉" class="headerlink" title="RL背后的直觉"></a><strong>RL背后的直觉</strong></h3><p>LLM本质上是随机的——即使是相同的提示，输出也可能不同，因为它是从概率分布中采样的。我们可以利用这种随机性，通过并行生成成千上万甚至数百万个可能的响应。这可以看作是模型在探索不同的路径——有些是好的，有些是差的。我们的目标是鼓励模型更多地选择较好的路径。</p>
+<p>为了实现这一点，我们让模型在那些导致更好结果的token序列上进行训练。与监督微调（SFT）不同，SFT依赖人类专家提供的标签数据，而RL则允许模型从自身的学习中进步。模型通过发现哪些响应最有效，并在每个训练步骤后更新其参数。随着时间的推移，这使得模型在未来收到相似提示时，更有可能生成高质量的答案。</p>
+<p>然而，如何确定哪些响应是最好的？应该进行多少RL训练？这些细节非常复杂，精准实现并不容易。</p>
+<h3 id="RL并不是“新”的——它能超越人类专业水平（AlphaGo，2016）"><a href="#RL并不是“新”的——它能超越人类专业水平（AlphaGo，2016）" class="headerlink" title="RL并不是“新”的——它能超越人类专业水平（AlphaGo，2016）"></a><strong>RL并不是“新”的——它能超越人类专业水平（AlphaGo，2016）</strong></h3><p>RL的强大力量的一个经典例子是DeepMind的AlphaGo，它是第一个击败职业围棋选手的AI，并最终超越了人类水平。</p>
+<p>在2016年《自然》杂志的论文中，当一个模型仅通过SFT训练（即给模型大量好的示例让其模仿）时，模型能够达到人类水平的表现，但永远无法超越它。虚线代表韩国围棋选手李世石的表现。这是因为SFT关注的是复制，而非创新——它无法让模型发现超越人类知识的新策略。然而，RL使AlphaGo能够与自己对弈，改进策略，并最终超越人类的专业水平（蓝线）。</p>
+<p>强化学习（RL）代表了人工智能领域的一个令人兴奋的前沿。通过将模型训练在一个多样化且充满挑战的问题池中，RL使模型能够探索超越人类想象的策略，从而优化其思维和决策能力。</p>
+<h3 id="RL基础回顾"><a href="#RL基础回顾" class="headerlink" title="RL基础回顾"></a><strong>RL基础回顾</strong></h3><p>让我们快速回顾一下典型RL设置的关键组成部分：</p>
+<ul>
+<li><h3 id="Agent（智能体）-这是学习的主体，负责在环境中采取行动。"><a href="#Agent（智能体）-这是学习的主体，负责在环境中采取行动。" class="headerlink" title="Agent（智能体） 这是学习的主体，负责在环境中采取行动。"></a><strong>Agent（智能体）</strong> 这是学习的主体，负责在环境中采取行动。</h3></li>
+<li><h3 id="Environment（环境）智能体与之交互的外部世界，它会根据智能体的行动给出反馈。"><a href="#Environment（环境）智能体与之交互的外部世界，它会根据智能体的行动给出反馈。" class="headerlink" title="Environment（环境）智能体与之交互的外部世界，它会根据智能体的行动给出反馈。"></a>Environment（环境）智能体与之交互的外部世界，它会根据智能体的行动给出反馈。</h3></li>
+<li><h3 id="State（状态）环境在某一时刻的具体情况，智能体根据状态决定行动。"><a href="#State（状态）环境在某一时刻的具体情况，智能体根据状态决定行动。" class="headerlink" title="State（状态）环境在某一时刻的具体情况，智能体根据状态决定行动。"></a>State（状态）环境在某一时刻的具体情况，智能体根据状态决定行动。</h3></li>
+</ul>
+<p>在每个时间点，智能体（Agent）会在环境（Environment）中执行一个动作（Action），这个动作会将环境从当前状态（State）转移到新的状态。同时，智能体会收到一个奖励（Reward），这是一个数值形式的反馈，用于评估动作的好坏。正奖励鼓励智能体重复该行为，而负奖励则起到抑制作用。</p>
+<p>通过不断从不同状态和动作中收集反馈，智能体逐渐学习出最佳策略（Policy），以在长期内最大化累积奖励。这种学习过程使智能体能够在复杂环境中做出更优的决策。</p>
+<h3 id="策略"><a href="#策略" class="headerlink" title="策略"></a><strong>策略</strong></h3><p>策略（Policy）是智能体的决策规则。如果智能体遵循一个好的策略，它将在每个状态下做出正确的决策，从而在多个步骤中累积更高的奖励。用数学术语来说，策略是一个函数（πθ(a|s)），它定义了在给定状态下选择不同动作的概率。</p>
+<h3 id="价值函数"><a href="#价值函数" class="headerlink" title="价值函数"></a><strong>价值函数</strong></h3><p>价值函数（Value Function）用于评估某个状态的好坏，考虑的是长期期望奖励。对于LLM（大语言模型）而言，奖励可能来自人类反馈或奖励模型。</p>
+<h3 id="Actor-Critic架构"><a href="#Actor-Critic架构" class="headerlink" title="Actor-Critic架构"></a><strong>Actor-Critic架构</strong></h3><p>Actor-Critic是一种流行的强化学习框架，结合了两个关键组件：</p>
+<ol>
+<li><p>Actor（演员）负责学习和更新策略（πθ），决定在每个状态下应该采取哪个动作。</p>
+</li>
+<li><p>Critic（评论者）评估价值函数（V(s)），为Actor提供反馈，告知其选择的动作是否带来了好的结果。</p>
+</li>
+</ol>
+<p><strong>工作原理：</strong></p>
+<ul>
+<li><p>Actor基于当前策略选择一个动作。</p>
+</li>
+<li><p>Critic评估结果（奖励 + 下一个状态）并更新其价值估计。</p>
+<ul>
+<li>Critic的反馈帮助Actor优化策略，使未来的动作能够获得更高的奖励。</li>
+</ul>
+</li>
+</ul>
+<h3 id="将其与LLM结合"><a href="#将其与LLM结合" class="headerlink" title="将其与LLM结合"></a><strong>将其与LLM结合</strong></h3><p>在LLM的上下文中：</p>
+<ul>
+<li><p>状态可以是当前的文本（提示或对话）。</p>
+<ul>
+<li>动作是生成的下一个token（词或子词）。</li>
+</ul>
+</li>
+<li><p>奖励模型（例如人类反馈）告诉模型生成的文本是好是坏。</p>
+</li>
+<li><p>策略是模型选择下一个token的规则。</p>
+<ul>
+<li>价值函数评估当前文本上下文对最终生成高质量响应的贡献程度。</li>
+</ul>
+</li>
+</ul>
+
                     
                 </div>
 
@@ -248,6 +388,14 @@
 
                 <div class="post-bottom-tags-and-share border-box">
                     <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/LLM/">LLM</a>
+                                    </li>
+                                
+                            </ul>
                         
                     </div>
                     <div>
@@ -312,7 +460,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%85%A8%E8%A7%A3%E6%9E%90%EF%BC%9A%E9%A2%84%E8%AE%AD%E7%BB%83%E3%80%81%E5%BE%AE%E8%B0%83%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="nav-text">大模型训练全解析：预训练、微调、强化学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%A2%84%E8%AE%AD%E7%BB%83%EF%BC%88Pre-training%EF%BC%89"><span class="nav-text">1. 预训练（Pre-training）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A41%EF%BC%9A%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86%E4%B8%8E%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-text">步骤1：数据收集与预处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A42%EF%BC%9A%E5%88%86%E8%AF%8D%EF%BC%88Tokenization%EF%BC%89"><span class="nav-text">步骤2：分词（Tokenization）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A43%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%EF%BC%88Neural-Network-Training%EF%BC%89"><span class="nav-text">步骤3：神经网络训练（Neural Network Training）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%EF%BC%88Base-Model%EF%BC%89%EF%BC%9A%E9%A2%84%E8%AE%AD%E7%BB%83%E7%9A%84%E6%88%90%E6%9E%9C"><span class="nav-text">基础模型（Base Model）：预训练的成果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%90%8E%E8%AE%AD%E7%BB%83%EF%BC%88Post-Training%EF%BC%89%EF%BC%9A%E8%AE%A9%E6%A8%A1%E5%9E%8B%E6%9B%B4%E5%AE%9E%E7%94%A8"><span class="nav-text">2. 后训练（Post-Training）：让模型更实用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E8%AE%AD%E7%BB%83%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-text">后训练的方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8E%A8%E7%90%86%EF%BC%88Inference%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E6%96%B0%E6%96%87%E6%9C%AC"><span class="nav-text">3. 推理（Inference）——模型如何生成新文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%B9%BB%E8%A7%89%EF%BC%88Hallucinations%EF%BC%89%E2%80%94%E2%80%94%E5%BD%93LLM%E7%94%9F%E6%88%90%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF"><span class="nav-text">4. 幻觉（Hallucinations）——当LLM生成错误信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E5%B9%BB%E8%A7%89%EF%BC%9F"><span class="nav-text">如何减少幻觉？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E8%AF%B4%E2%80%9C%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93%E2%80%9D"><span class="nav-text">方法一：训练模型说“我不知道”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-text"></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E5%BC%95%E5%85%A5%E7%BD%91%E7%BB%9C%E6%90%9C%E7%B4%A2"><span class="nav-text">方法二：引入网络搜索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%A8%A1%E7%B3%8A%E8%AE%B0%E5%BF%86%E4%B8%8E%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BF%86"><span class="nav-text">5. 模糊记忆与工作记忆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5"><span class="nav-text">6. 自我认知</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E4%B9%8B%E5%89%8D%E7%9A%84%E9%83%A8%E5%88%86%E4%B8%AD%EF%BC%8C%E6%88%91%E4%BB%AC%E8%AE%A8%E8%AE%BA%E4%BA%86%E8%AE%AD%E7%BB%83LLM%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%B8%BB%E8%A6%81%E9%98%B6%E6%AE%B5%EF%BC%9A"><span class="nav-text">在之前的部分中，我们讨论了训练LLM的两个主要阶段：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83%EF%BC%9A%E4%BB%8E%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%BD%A2%E6%88%90%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E3%80%82"><span class="nav-text">预训练：从海量数据集中学习，形成基础模型。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%91%E7%9D%A3%E5%BE%AE%E8%B0%83%EF%BC%88SFT%EF%BC%89%EF%BC%9A%E9%80%9A%E8%BF%87%E7%B2%BE%E5%BF%83%E6%8C%91%E9%80%89%E7%9A%84%E7%A4%BA%E4%BE%8B%E4%BC%98%E5%8C%96%E6%A8%A1%E5%9E%8B%EF%BC%8C%E4%BD%BF%E5%85%B6%E6%9B%B4%E5%AE%9E%E7%94%A8%E3%80%82"><span class="nav-text">监督微调（SFT）：通过精心挑选的示例优化模型，使其更实用。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RL%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">RL的目的是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RL%E8%83%8C%E5%90%8E%E7%9A%84%E7%9B%B4%E8%A7%89"><span class="nav-text">RL背后的直觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RL%E5%B9%B6%E4%B8%8D%E6%98%AF%E2%80%9C%E6%96%B0%E2%80%9D%E7%9A%84%E2%80%94%E2%80%94%E5%AE%83%E8%83%BD%E8%B6%85%E8%B6%8A%E4%BA%BA%E7%B1%BB%E4%B8%93%E4%B8%9A%E6%B0%B4%E5%B9%B3%EF%BC%88AlphaGo%EF%BC%8C2016%EF%BC%89"><span class="nav-text">RL并不是“新”的——它能超越人类专业水平（AlphaGo，2016）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RL%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE"><span class="nav-text">RL基础回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Agent%EF%BC%88%E6%99%BA%E8%83%BD%E4%BD%93%EF%BC%89-%E8%BF%99%E6%98%AF%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%BB%E4%BD%93%EF%BC%8C%E8%B4%9F%E8%B4%A3%E5%9C%A8%E7%8E%AF%E5%A2%83%E4%B8%AD%E9%87%87%E5%8F%96%E8%A1%8C%E5%8A%A8%E3%80%82"><span class="nav-text">Agent（智能体） 这是学习的主体，负责在环境中采取行动。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Environment%EF%BC%88%E7%8E%AF%E5%A2%83%EF%BC%89%E6%99%BA%E8%83%BD%E4%BD%93%E4%B8%8E%E4%B9%8B%E4%BA%A4%E4%BA%92%E7%9A%84%E5%A4%96%E9%83%A8%E4%B8%96%E7%95%8C%EF%BC%8C%E5%AE%83%E4%BC%9A%E6%A0%B9%E6%8D%AE%E6%99%BA%E8%83%BD%E4%BD%93%E7%9A%84%E8%A1%8C%E5%8A%A8%E7%BB%99%E5%87%BA%E5%8F%8D%E9%A6%88%E3%80%82"><span class="nav-text">Environment（环境）智能体与之交互的外部世界，它会根据智能体的行动给出反馈。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#State%EF%BC%88%E7%8A%B6%E6%80%81%EF%BC%89%E7%8E%AF%E5%A2%83%E5%9C%A8%E6%9F%90%E4%B8%80%E6%97%B6%E5%88%BB%E7%9A%84%E5%85%B7%E4%BD%93%E6%83%85%E5%86%B5%EF%BC%8C%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%B9%E6%8D%AE%E7%8A%B6%E6%80%81%E5%86%B3%E5%AE%9A%E8%A1%8C%E5%8A%A8%E3%80%82"><span class="nav-text">State（状态）环境在某一时刻的具体情况，智能体根据状态决定行动。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%96%E7%95%A5"><span class="nav-text">策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%B7%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-text">价值函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Actor-Critic%E6%9E%B6%E6%9E%84"><span class="nav-text">Actor-Critic架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E5%85%B6%E4%B8%8ELLM%E7%BB%93%E5%90%88"><span class="nav-text">将其与LLM结合</span></a></li></ol></li></ol>
     </div>
 </div>
 
@@ -475,7 +623,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%85%A8%E8%A7%A3%E6%9E%90%EF%BC%9A%E9%A2%84%E8%AE%AD%E7%BB%83%E3%80%81%E5%BE%AE%E8%B0%83%E3%80%81%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0"><span class="nav-text">大模型训练全解析：预训练、微调、强化学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E9%A2%84%E8%AE%AD%E7%BB%83%EF%BC%88Pre-training%EF%BC%89"><span class="nav-text">1. 预训练（Pre-training）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A41%EF%BC%9A%E6%95%B0%E6%8D%AE%E6%94%B6%E9%9B%86%E4%B8%8E%E9%A2%84%E5%A4%84%E7%90%86"><span class="nav-text">步骤1：数据收集与预处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A42%EF%BC%9A%E5%88%86%E8%AF%8D%EF%BC%88Tokenization%EF%BC%89"><span class="nav-text">步骤2：分词（Tokenization）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A43%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E8%AE%AD%E7%BB%83%EF%BC%88Neural-Network-Training%EF%BC%89"><span class="nav-text">步骤3：神经网络训练（Neural Network Training）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%EF%BC%88Base-Model%EF%BC%89%EF%BC%9A%E9%A2%84%E8%AE%AD%E7%BB%83%E7%9A%84%E6%88%90%E6%9E%9C"><span class="nav-text">基础模型（Base Model）：预训练的成果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%90%8E%E8%AE%AD%E7%BB%83%EF%BC%88Post-Training%EF%BC%89%EF%BC%9A%E8%AE%A9%E6%A8%A1%E5%9E%8B%E6%9B%B4%E5%AE%9E%E7%94%A8"><span class="nav-text">2. 后训练（Post-Training）：让模型更实用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E8%AE%AD%E7%BB%83%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-text">后训练的方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E6%8E%A8%E7%90%86%EF%BC%88Inference%EF%BC%89%E2%80%94%E2%80%94%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90%E6%96%B0%E6%96%87%E6%9C%AC"><span class="nav-text">3. 推理（Inference）——模型如何生成新文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%B9%BB%E8%A7%89%EF%BC%88Hallucinations%EF%BC%89%E2%80%94%E2%80%94%E5%BD%93LLM%E7%94%9F%E6%88%90%E9%94%99%E8%AF%AF%E4%BF%A1%E6%81%AF"><span class="nav-text">4. 幻觉（Hallucinations）——当LLM生成错误信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E5%B9%BB%E8%A7%89%EF%BC%9F"><span class="nav-text">如何减少幻觉？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E8%AF%B4%E2%80%9C%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93%E2%80%9D"><span class="nav-text">方法一：训练模型说“我不知道”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-text"></span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E5%BC%95%E5%85%A5%E7%BD%91%E7%BB%9C%E6%90%9C%E7%B4%A2"><span class="nav-text">方法二：引入网络搜索</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E6%A8%A1%E7%B3%8A%E8%AE%B0%E5%BF%86%E4%B8%8E%E5%B7%A5%E4%BD%9C%E8%AE%B0%E5%BF%86"><span class="nav-text">5. 模糊记忆与工作记忆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E8%87%AA%E6%88%91%E8%AE%A4%E7%9F%A5"><span class="nav-text">6. 自我认知</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E4%B9%8B%E5%89%8D%E7%9A%84%E9%83%A8%E5%88%86%E4%B8%AD%EF%BC%8C%E6%88%91%E4%BB%AC%E8%AE%A8%E8%AE%BA%E4%BA%86%E8%AE%AD%E7%BB%83LLM%E7%9A%84%E4%B8%A4%E4%B8%AA%E4%B8%BB%E8%A6%81%E9%98%B6%E6%AE%B5%EF%BC%9A"><span class="nav-text">在之前的部分中，我们讨论了训练LLM的两个主要阶段：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83%EF%BC%9A%E4%BB%8E%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%AD%E5%AD%A6%E4%B9%A0%EF%BC%8C%E5%BD%A2%E6%88%90%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9E%8B%E3%80%82"><span class="nav-text">预训练：从海量数据集中学习，形成基础模型。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%91%E7%9D%A3%E5%BE%AE%E8%B0%83%EF%BC%88SFT%EF%BC%89%EF%BC%9A%E9%80%9A%E8%BF%87%E7%B2%BE%E5%BF%83%E6%8C%91%E9%80%89%E7%9A%84%E7%A4%BA%E4%BE%8B%E4%BC%98%E5%8C%96%E6%A8%A1%E5%9E%8B%EF%BC%8C%E4%BD%BF%E5%85%B6%E6%9B%B4%E5%AE%9E%E7%94%A8%E3%80%82"><span class="nav-text">监督微调（SFT）：通过精心挑选的示例优化模型，使其更实用。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RL%E7%9A%84%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-text">RL的目的是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RL%E8%83%8C%E5%90%8E%E7%9A%84%E7%9B%B4%E8%A7%89"><span class="nav-text">RL背后的直觉</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RL%E5%B9%B6%E4%B8%8D%E6%98%AF%E2%80%9C%E6%96%B0%E2%80%9D%E7%9A%84%E2%80%94%E2%80%94%E5%AE%83%E8%83%BD%E8%B6%85%E8%B6%8A%E4%BA%BA%E7%B1%BB%E4%B8%93%E4%B8%9A%E6%B0%B4%E5%B9%B3%EF%BC%88AlphaGo%EF%BC%8C2016%EF%BC%89"><span class="nav-text">RL并不是“新”的——它能超越人类专业水平（AlphaGo，2016）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RL%E5%9F%BA%E7%A1%80%E5%9B%9E%E9%A1%BE"><span class="nav-text">RL基础回顾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Agent%EF%BC%88%E6%99%BA%E8%83%BD%E4%BD%93%EF%BC%89-%E8%BF%99%E6%98%AF%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%BB%E4%BD%93%EF%BC%8C%E8%B4%9F%E8%B4%A3%E5%9C%A8%E7%8E%AF%E5%A2%83%E4%B8%AD%E9%87%87%E5%8F%96%E8%A1%8C%E5%8A%A8%E3%80%82"><span class="nav-text">Agent（智能体） 这是学习的主体，负责在环境中采取行动。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Environment%EF%BC%88%E7%8E%AF%E5%A2%83%EF%BC%89%E6%99%BA%E8%83%BD%E4%BD%93%E4%B8%8E%E4%B9%8B%E4%BA%A4%E4%BA%92%E7%9A%84%E5%A4%96%E9%83%A8%E4%B8%96%E7%95%8C%EF%BC%8C%E5%AE%83%E4%BC%9A%E6%A0%B9%E6%8D%AE%E6%99%BA%E8%83%BD%E4%BD%93%E7%9A%84%E8%A1%8C%E5%8A%A8%E7%BB%99%E5%87%BA%E5%8F%8D%E9%A6%88%E3%80%82"><span class="nav-text">Environment（环境）智能体与之交互的外部世界，它会根据智能体的行动给出反馈。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#State%EF%BC%88%E7%8A%B6%E6%80%81%EF%BC%89%E7%8E%AF%E5%A2%83%E5%9C%A8%E6%9F%90%E4%B8%80%E6%97%B6%E5%88%BB%E7%9A%84%E5%85%B7%E4%BD%93%E6%83%85%E5%86%B5%EF%BC%8C%E6%99%BA%E8%83%BD%E4%BD%93%E6%A0%B9%E6%8D%AE%E7%8A%B6%E6%80%81%E5%86%B3%E5%AE%9A%E8%A1%8C%E5%8A%A8%E3%80%82"><span class="nav-text">State（状态）环境在某一时刻的具体情况，智能体根据状态决定行动。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AD%96%E7%95%A5"><span class="nav-text">策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%B7%E5%80%BC%E5%87%BD%E6%95%B0"><span class="nav-text">价值函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Actor-Critic%E6%9E%B6%E6%9E%84"><span class="nav-text">Actor-Critic架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%86%E5%85%B6%E4%B8%8ELLM%E7%BB%93%E5%90%88"><span class="nav-text">将其与LLM结合</span></a></li></ol></li></ol>
     </div>
 </div>
 
